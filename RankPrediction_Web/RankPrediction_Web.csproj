@@ -21,7 +21,4 @@
 	<ItemGroup>
 	  <None Remove="Views\Maintenance\" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Views\Maintenance\" />
-	</ItemGroup>
 </Project>
