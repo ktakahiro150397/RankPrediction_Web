@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Notice";
+
+}
+
+
+<h2>
+    Notice
+</h2>
+
+<ul>
+    @foreach( string msg in (IList<string>)ViewData["Message"]){
+        <li>@msg</li>
+    }
+</ul>
