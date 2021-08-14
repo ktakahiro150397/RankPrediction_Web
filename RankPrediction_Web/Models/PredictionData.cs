@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RankPrediction_Web.Models
 {
-    public partial class PlayerDatum
+    public partial class PredictionData
     {
         public int Id { get; set; }
         public int SeasonId { get; set; }
