@@ -13,17 +13,24 @@ namespace RankPrediction_Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly RankPredictionContext _dbContext;
+
+        //コントローラーのコンストラクタにDIコンテナからDBContextが注入される？
+        public HomeController(ILogger<HomeController> logger,RankPredictionContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
+
+            var rankList = _dbContext.Ranks.Select(item => item.RankName);
+
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Notice()
         {
             return View();
         }

@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RankPrediction_Web.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RankPrediction_Web
 {
@@ -24,6 +26,9 @@ namespace RankPrediction_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<RankPredictionContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("mldb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
