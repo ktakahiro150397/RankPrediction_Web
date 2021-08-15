@@ -22,6 +22,16 @@
 	  <None Remove="Views\Maintenance\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Views\Maintenance\" />
+	  <Compile Update="Language\I18n.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>I18n.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Language\I18n.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>I18n.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 </Project>

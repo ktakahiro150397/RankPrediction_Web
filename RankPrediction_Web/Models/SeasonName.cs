@@ -9,12 +9,12 @@ namespace RankPrediction_Web.Models
     {
         public SeasonName()
         {
-            PlayerData = new HashSet<PlayerDatum>();
+            PredictionData = new HashSet<PredictionDatum>();
         }
 
         public int SeasonId { get; set; }
         public string SeasonName1 { get; set; }
 
-        public virtual ICollection<PlayerDatum> PlayerData { get; set; }
+        public virtual ICollection<PredictionDatum> PredictionData { get; set; }
     }
 }

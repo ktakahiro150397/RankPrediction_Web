@@ -17,30 +17,33 @@ namespace RankPrediction_Web.Models
         {
         }
 
-        public virtual DbSet<PlayerDatum> PlayerData { get; set; }
+        public virtual DbSet<PredictionDatum> PredictionData { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<SeasonName> SeasonNames { get; set; }
         public virtual DbSet<SeasonSplit> SeasonSplits { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Name=ConnectionStrings:dbml");
-            }
+//            if (!optionsBuilder.IsConfigured)
+//            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Persist Security Info=False;User ID=owashota;Password=Kuwahara0808;Initial Catalog=RankPrediction;Server=20.89.57.179");
+//            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Japanese_CI_AS");
 
-            modelBuilder.Entity<PlayerDatum>(entity =>
+            modelBuilder.Entity<PredictionDatum>(entity =>
             {
-                entity.ToTable("player_data");
+                entity.ToTable("prediction_data", "ml_predict");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.AverageDamage).HasColumnName("average_damage");
+                entity.Property(e => e.AverageDamage)
+                    .HasColumnType("decimal(7, 2)")
+                    .HasColumnName("average_damage");
 
                 entity.Property(e => e.CreateDate)
                     .HasColumnType("datetime")
@@ -60,21 +63,21 @@ namespace RankPrediction_Web.Models
                 entity.Property(e => e.SeasonId).HasColumnName("season_id");
 
                 entity.HasOne(d => d.Rank)
-                    .WithMany(p => p.PlayerData)
+                    .WithMany(p => p.PredictionData)
                     .HasForeignKey(d => d.RankId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__INIT_DATA__rank___70DDC3D8");
+                    .HasConstraintName("FK__predictio__rank___2B3F6F97");
 
                 entity.HasOne(d => d.Season)
-                    .WithMany(p => p.PlayerData)
+                    .WithMany(p => p.PredictionData)
                     .HasForeignKey(d => d.SeasonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__INIT_DATA__seaso__6FE99F9F");
+                    .HasConstraintName("FK__predictio__seaso__2C3393D0");
             });
 
             modelBuilder.Entity<Rank>(entity =>
             {
-                entity.ToTable("ranks");
+                entity.ToTable("ranks", "ml_predict");
 
                 entity.Property(e => e.RankId)
                     .ValueGeneratedNever()
@@ -90,9 +93,9 @@ namespace RankPrediction_Web.Models
             modelBuilder.Entity<SeasonName>(entity =>
             {
                 entity.HasKey(e => e.SeasonId)
-                    .HasName("PK__season_n__0A99E331893E51B0");
+                    .HasName("PK__season_n__0A99E331CC2A21E0");
 
-                entity.ToTable("season_names");
+                entity.ToTable("season_names", "ml_predict");
 
                 entity.Property(e => e.SeasonId)
                     .ValueGeneratedNever()
@@ -108,9 +111,9 @@ namespace RankPrediction_Web.Models
             modelBuilder.Entity<SeasonSplit>(entity =>
             {
                 entity.HasKey(e => e.SplitNoId)
-                    .HasName("PK__season_s__3B93D96EB5EA8738");
+                    .HasName("PK__season_s__3B93D96ED14E868B");
 
-                entity.ToTable("season_splits");
+                entity.ToTable("season_splits", "ml_predict");
 
                 entity.Property(e => e.SplitNoId)
                     .ValueGeneratedNever()

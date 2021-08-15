@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RankPrediction_Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RankPrediction_Web.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RankPrediction_Web
 {
@@ -27,15 +27,8 @@ namespace RankPrediction_Web
         {
             services.AddControllersWithViews();
 
-            //DbContextConfigure
-            var conStr = Configuration["ConnectionStrings:mldb"];
             services.AddDbContext<RankPredictionContext>(
-                options => options.UseSqlServer(conStr)
-            );
-
-
-
-                
+                options => options.UseSqlServer(Configuration.GetConnectionString("mldb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +55,7 @@ namespace RankPrediction_Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=PlayerDatum}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
