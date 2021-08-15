@@ -56,13 +56,7 @@ namespace RankPrediction_Web.Controllers
                 RankOptions = _context.Ranks
             };
 
-
-            //ViewData["RankId"] = new SelectList(_context.Ranks, "RankId", "RankName");
-            //ViewData["SeasonId"] = new SelectList(_context.SeasonNames, "SeasonId", "SeasonName1");
             return View(vm);
-
-
-
 
         }
 
@@ -71,25 +65,34 @@ namespace RankPrediction_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SelectedSeasonId,SelectedRankId")] PredictionDataInputViewModel bindVm)
+        public async Task<IActionResult> Create([Bind("SelectedSeasonId,SelectedRankId,KillDeathRatio,AverageDamage,MatchCounts,IsParty")] PredictionDataInputViewModel bindVm)
         {
             if (ModelState.IsValid)
             {
+                //Obtain data from posted ViewModel
+                var addPrediction = new PredictionDatum();
+                addPrediction.SeasonId = bindVm.SelectedSeasonId.Value;
+                addPrediction.RankId = bindVm.SelectedRankId.Value;
+                addPrediction.KillDeathRatio = bindVm.KillDeathRatio.Value;
+                addPrediction.AverageDamage = bindVm.AverageDamage.Value;
+                addPrediction.MatchCounts = bindVm.MatchCounts.Value;
+                addPrediction.IsParty = bindVm.IsParty;
 
-                bindVm.SeasonOptions = _context.SeasonNames;
-                bindVm.RankOptions = _context.Ranks;
-                return View(bindVm);
+                //Add data
+                _context.Add(addPrediction);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "PredictionDatums");
             }
 
+            // Rebind data when model is invalid.
             var vm = new PredictionDataInputViewModel
             {
                 SeasonOptions = _context.SeasonNames,
                 RankOptions = _context.Ranks
             };
 
-            //ViewData["RankId"] = new SelectList(_context.Ranks, "RankId", "RankName");
-            //ViewData["SeasonId"] = new SelectList(_context.SeasonNames, "SeasonId", "SeasonName1");
-            return View(vm);
+           return View(vm);
 
         }
 
