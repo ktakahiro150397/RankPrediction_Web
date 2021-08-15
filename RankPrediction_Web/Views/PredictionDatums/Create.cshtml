@@ -20,7 +20,6 @@
                     new { @class = "form-control" }
                 )
                 @Html.ValidationMessageFor(model => model.SelectedSeasonId)
-                @Html.ValidationMessageFor(model => model.SeasonOptions)
             </div>
             <div class="form-group">
                 <label asp-for="SelectedRankId" class="control-label"></label>
@@ -31,7 +30,29 @@
                     new { @class = "form-control" }
                 )
                 @Html.ValidationMessageFor(model => model.SelectedRankId)
-                @Html.ValidationMessageFor(model => model.RankOptions)
+            </div>
+            <div class="form-group">
+                <label asp-for="KillDeathRatio" class="control-label"></label>
+                @Html.TextBoxFor(
+                   model => model.KillDeathRatio,
+                   new { @class = "form-control" }
+               )
+                @Html.ValidationMessageFor(model => model.KillDeathRatio)
+            </div>
+            <div class="form-group">
+                <label asp-for="AverageDamage" class="control-label"></label>
+                @Html.TextBoxFor(model => model.AverageDamage, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AverageDamage)
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchCounts" class="control-label"></label>
+                @Html.TextBoxFor(model => model.MatchCounts, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MatchCounts)
+            </div>
+            <div class="form-group">
+                <label asp-for="IsParty" class="control-label"></label>
+                @Html.CheckBoxFor(model => model.IsParty,new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.IsParty)
             </div>
             @*<div class="form-group">
             <label asp-for="RankId" class="control-label"></label>
