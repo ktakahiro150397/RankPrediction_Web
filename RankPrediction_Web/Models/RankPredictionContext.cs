@@ -22,15 +22,6 @@ namespace RankPrediction_Web.Models
         public virtual DbSet<SeasonName> SeasonNames { get; set; }
         public virtual DbSet<SeasonSplit> SeasonSplits { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Persist Security Info=False;User ID=owashota;Password=Kuwahara0808;Initial Catalog=RankPrediction;Server=20.89.57.179");
-//            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Japanese_CI_AS");
