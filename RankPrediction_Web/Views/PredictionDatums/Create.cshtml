@@ -1,45 +1,62 @@
-﻿@model RankPrediction_Web.Models.PredictionDatum
+﻿@model RankPrediction_Web.Models.PredictionDataInputViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>戦績データ入力</h1>
 
-<h4>PredictionDatum</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SeasonId" class="control-label"></label>
-                <select asp-for="SeasonId" class ="form-control" asp-items="ViewBag.SeasonId"></select>
+                <label asp-for="SelectedSeasonId" class="control-label"></label>
+                @Html.DropDownListFor(
+                    model => model.SelectedSeasonId,
+                    new SelectList(Model.SeasonOptions, "SeasonId", "SeasonName1"),
+                    "",
+                    new { @class = "form-control" }
+                )
+                @Html.ValidationMessageFor(model => model.SelectedSeasonId)
+                @Html.ValidationMessageFor(model => model.SeasonOptions)
             </div>
             <div class="form-group">
-                <label asp-for="RankId" class="control-label"></label>
-                <select asp-for="RankId" class ="form-control" asp-items="ViewBag.RankId"></select>
+                <label asp-for="SelectedRankId" class="control-label"></label>
+                @Html.DropDownListFor(
+                    model => model.SelectedRankId,
+                    new SelectList(Model.RankOptions, "RankId", "RankName"),
+                    "",
+                    new { @class = "form-control" }
+                )
+                @Html.ValidationMessageFor(model => model.SelectedRankId)
+                @Html.ValidationMessageFor(model => model.RankOptions)
             </div>
-            <div class="form-group">
-                <label asp-for="KillDeathRatio" class="control-label"></label>
-                <input asp-for="KillDeathRatio" class="form-control" />
-                <span asp-validation-for="KillDeathRatio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AverageDamage" class="control-label"></label>
-                <input asp-for="AverageDamage" class="form-control" />
-                <span asp-validation-for="AverageDamage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MatchCounts" class="control-label"></label>
-                <input asp-for="MatchCounts" class="form-control" />
-                <span asp-validation-for="MatchCounts" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsParty" /> @Html.DisplayNameFor(model => model.IsParty)
-                </label>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="RankId" class="control-label"></label>
+            <select asp-for="RankId" class ="form-control" asp-items="ViewBag.RankId"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="KillDeathRatio" class="control-label"></label>
+            <input asp-for="KillDeathRatio" class="form-control" />
+            <span asp-validation-for="KillDeathRatio" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AverageDamage" class="control-label"></label>
+            <input asp-for="AverageDamage" class="form-control" />
+            <span asp-validation-for="AverageDamage" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MatchCounts" class="control-label"></label>
+            <input asp-for="MatchCounts" class="form-control" />
+            <span asp-validation-for="MatchCounts" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="IsParty" /> @Html.DisplayNameFor(model => model.IsParty)
+            </label>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

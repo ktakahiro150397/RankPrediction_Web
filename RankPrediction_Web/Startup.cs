@@ -27,6 +27,15 @@ namespace RankPrediction_Web
         {
             services.AddControllersWithViews();
 
+            //services.AddControllersWithViews().AddMvcOptions(
+            //    options =>
+            //    {
+            //        options.MaxModelValidationErrors = 50;
+            //        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+            //            _ => "’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+            //    }
+            //);
+
             services.AddDbContext<RankPredictionContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("mldb")));
         }
