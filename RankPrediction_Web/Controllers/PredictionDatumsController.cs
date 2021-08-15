@@ -48,9 +48,16 @@ namespace RankPrediction_Web.Controllers
         // GET: PredictionDatums/Create
         public IActionResult Create()
         {
-            ViewData["RankId"] = new SelectList(_context.Ranks, "RankId", "RankName");
-            ViewData["SeasonId"] = new SelectList(_context.SeasonNames, "SeasonId", "SeasonName1");
-            return View();
+
+
+            var vm = new PredictionDataInputViewModel
+            {
+                SeasonOptions = _context.SeasonNames,
+                RankOptions = _context.Ranks
+            };
+
+            return View(vm);
+
         }
 
         // POST: PredictionDatums/Create
@@ -58,17 +65,35 @@ namespace RankPrediction_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SeasonId,RankId,KillDeathRatio,AverageDamage,MatchCounts,IsParty,CreateDate")] PredictionDatum predictionDatum)
+        public async Task<IActionResult> Create([Bind("SelectedSeasonId,SelectedRankId,KillDeathRatio,AverageDamage,MatchCounts,IsParty")] PredictionDataInputViewModel bindVm)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(predictionDatum);
+                //Obtain data from posted ViewModel
+                var addPrediction = new PredictionDatum();
+                addPrediction.SeasonId = bindVm.SelectedSeasonId.Value;
+                addPrediction.RankId = bindVm.SelectedRankId.Value;
+                addPrediction.KillDeathRatio = bindVm.KillDeathRatio.Value;
+                addPrediction.AverageDamage = bindVm.AverageDamage.Value;
+                addPrediction.MatchCounts = bindVm.MatchCounts.Value;
+                addPrediction.IsParty = bindVm.IsParty;
+
+                //Add data
+                _context.Add(addPrediction);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Index", "PredictionDatums");
             }
-            ViewData["RankId"] = new SelectList(_context.Ranks, "RankId", "RankName", predictionDatum.RankId);
-            ViewData["SeasonId"] = new SelectList(_context.SeasonNames, "SeasonId", "SeasonName1", predictionDatum.SeasonId);
-            return View(predictionDatum);
+
+            // Rebind data when model is invalid.
+            var vm = new PredictionDataInputViewModel
+            {
+                SeasonOptions = _context.SeasonNames,
+                RankOptions = _context.Ranks
+            };
+
+           return View(vm);
+
         }
 
         // GET: PredictionDatums/Edit/5
@@ -161,5 +186,8 @@ namespace RankPrediction_Web.Controllers
         {
             return _context.PredictionData.Any(e => e.Id == id);
         }
+
+
+
     }
 }
