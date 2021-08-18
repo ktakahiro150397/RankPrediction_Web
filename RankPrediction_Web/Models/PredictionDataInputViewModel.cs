@@ -15,7 +15,7 @@ namespace RankPrediction_Web.Models
     {
 
         [Required(ErrorMessage = "{0}を選択してください。")]
-        [Display(Name ="シーズン名")]
+        [Display(Name = "シーズン名")]
         public int? SelectedSeasonId { get; set; }
 
         [Required(ErrorMessage = "到達ランクを選択してください。")]
@@ -34,7 +34,56 @@ namespace RankPrediction_Web.Models
 
         [Required(ErrorMessage = "{0}を入力してください。")]
         [Display(Name = "合計ゲーム数")]
-        public int? MatchCounts { get; set; }
+        [RegularExpression(@"^\d+?(|[KkMm]|\.\d{1,3}[KkMm])$", ErrorMessage = @"{0}には数値を入力してください。(""K""や""M""が末尾についている場合、そのまま入力してください)")]
+        public string MatchCounts { get; set; }
+
+        /// <summary>
+        /// 入力されたマッチ数を整数に変換して返します。
+        /// </summary>
+        public long MatchCount_long
+        {
+            get
+            {
+                if (MatchCounts == null)
+                {
+                    return -1;
+                }
+
+                var matchCountsRegEx = new System.Text.RegularExpressions.Regex(@"^\d+?(|[KkMm]|\.\d{1,3}[KkMm])$");
+
+                if (matchCountsRegEx.IsMatch(MatchCounts))
+                {
+                    double matchCnt;
+
+                    if (MatchCounts.EndsWith("k") || MatchCounts.EndsWith("K"))
+                    {
+                        //K付き：
+                        matchCnt = Convert.ToDouble(MatchCounts.Substring(0, MatchCounts.Length - 1));
+                        matchCnt *= 1000;
+                    }
+                    else if (MatchCounts.EndsWith("m") || MatchCounts.EndsWith("M"))
+                    {
+                        //M付き：
+                        matchCnt = Convert.ToDouble(MatchCounts.Substring(0, MatchCounts.Length - 1));
+                        matchCnt *= 1000000;
+                    }
+                    else
+                    {
+                        //サフィックスなし
+                        matchCnt = Convert.ToDouble(MatchCounts);
+                    }
+
+                    return Convert.ToInt64(matchCnt);
+                
+                } else
+                {
+                    return -1;
+                }
+
+               
+
+            }
+        }
 
         [Display(Name = "主にパーティでプレイした")]
         public bool IsParty { get; set; }

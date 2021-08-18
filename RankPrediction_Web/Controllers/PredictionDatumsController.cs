@@ -75,8 +75,11 @@ namespace RankPrediction_Web.Controllers
                 addPrediction.RankId = bindVm.SelectedRankId.Value;
                 addPrediction.KillDeathRatio = bindVm.KillDeathRatio.Value;
                 addPrediction.AverageDamage = bindVm.AverageDamage.Value;
-                addPrediction.MatchCounts = bindVm.MatchCounts.Value;
                 addPrediction.IsParty = bindVm.IsParty;
+
+                //マッチ数
+                addPrediction.MatchCounts = bindVm.MatchCount_long;
+
 
                 //Add data
                 _context.Add(addPrediction);
