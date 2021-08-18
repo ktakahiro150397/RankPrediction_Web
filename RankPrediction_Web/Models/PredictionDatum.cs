@@ -25,7 +25,7 @@ namespace RankPrediction_Web.Models
         public decimal AverageDamage { get; set; }
 
         [Display(Name = "合計ゲーム数")]
-        public int MatchCounts { get; set; }
+        public long MatchCounts { get; set; }
 
         [Display(Name = "PTプレイ")]
         public bool IsParty { get; set; }
