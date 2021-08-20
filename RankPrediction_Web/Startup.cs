@@ -28,7 +28,7 @@ namespace RankPrediction_Web
             services.AddControllersWithViews();
 
             services.AddDbContext<RankPredictionContext>(
-                options => options.UseSqlServer(Configuration["ConnectionStrings:dbml"]));
+                options => options.UseSqlServer(Configuration.GetConnectionString("dbml")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
