@@ -1,14 +1,19 @@
-DROP PROCEDURE IF EXISTS py_predict_rank;
+USE [RankPrediction]
 GO
-CREATE PROCEDURE py_predict_rank (@model varchar(100))
+
+/****** Object:  StoredProcedure [ml_predict].[py_predict_rank]    Script Date: 8/21/2021 6:02:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ml_predict].[py_predict_rank] (@p_id int,@model varchar(100))
 AS
 BEGIN
     DECLARE @py_model varbinary(max) = (select model from rank_py_models where model_name = @model);
 
-    EXEC sp_execute_external_script 
-                    @language = N'Python'
-                  , @script = N'
-import numpy as np
+	Declare @p_script nvarchar(max) = N'import numpy as np
 from numpy.lib.twodim_base import triu_indices_from
 import pandas as pd
 from sklearn.svm import SVC
@@ -57,7 +62,12 @@ class mlforrank(object):
 		c = [ np.random.choice(a, p=w2) for i in range(sum(w)) ]
 		print(Counter(c))
 		"""
-		return unestimation+v
+		result = unestimation+v
+		if result==22:
+			result = 21
+		elif result==-1:
+			result = 0
+		return result
 	def estimator(self):
 		self.teature_extractor()
 		self.test_extractor()
@@ -71,15 +81,24 @@ class mlforrank(object):
 		
 
 df=rank_score_data
-id= #yamaimo頼んだ
+id= int(#INPUT_USER_ID#)
 print(df)
 rank = mlforrank(df, id)
-rank_id = rank.estimator()
+rank_id = pd.DataFrame(np.array([rank.estimator()]))
 '
-    , @input_data_1 = N'Select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '--yaneimoに任す
+
+Declare @p_replacedScript nvarchar(max) = REPLACE(@p_script,'#INPUT_USER_ID#',@p_id)
+
+    EXEC sp_execute_external_script 
+    @language = N'Python'
+    , @script = @p_replacedScript
+    , @input_data_1 = N'Select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '
     , @input_data_1_name = N'rank_score_data'
+	, @output_data_1_name = N'rank_id'
     , @params = N'@py_model varbinary(max)'
     , @py_model = @py_model
     with result sets (("rank_id" int));
 END;
 GO
+
+
