@@ -22,6 +22,8 @@
 	<ItemGroup>
 	  <None Remove="Views\Maintenance\" />
 	  <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+	  <None Remove="Models\ViewModels\" />
+	  <None Remove="Models\DbContexts\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
@@ -38,5 +40,9 @@
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>I18n.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Models\ViewModels\" />
+	  <Folder Include="Models\DbContexts\" />
 	</ItemGroup>
 </Project>

@@ -86,9 +86,10 @@ namespace RankPrediction_Web.Controllers
                 return View("Index", "ApexRank");
             }
 
-
-
-            return View();
+            //指定IDの予測結果VMを取得
+            var resultVm = new PredictionResultViewModel(_context, id.Value);
+            
+            return View(resultVm);
         }
 
 
