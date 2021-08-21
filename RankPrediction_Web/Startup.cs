@@ -61,7 +61,7 @@ namespace RankPrediction_Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ApexRank}/{action=Index}");
+                    pattern: "{controller=ApexRank}/{action=Index}/{id?}");
             });
         }
     }
