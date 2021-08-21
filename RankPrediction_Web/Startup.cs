@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RankPrediction_Web.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace RankPrediction_Web
 {
@@ -25,7 +26,12 @@ namespace RankPrediction_Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+#if DEBUG
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+#else
             services.AddControllersWithViews();
+#endif
 
             services.AddDbContext<RankPredictionContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("dbml")));
@@ -55,7 +61,7 @@ namespace RankPrediction_Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=ApexRank}/{action=Index}");
             });
         }
     }
