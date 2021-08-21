@@ -1,6 +1,14 @@
-DROP PROCEDURE IF EXISTS generate_rank_py_model;
-go
-CREATE PROCEDURE generate_rank_py_model (@trained_model varbinary(max) OUTPUT)
+USE [RankPrediction]
+GO
+
+/****** Object:  StoredProcedure [ml_predict].[generate_rank_py_model]    Script Date: 8/21/2021 6:03:04 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ml_predict].[generate_rank_py_model] (@p_selectStr nvarchar(max),@trained_model varbinary(max) OUTPUT)
 AS
 BEGIN
     EXECUTE sp_execute_external_script
@@ -58,9 +66,11 @@ rank = gen_model(df)
 clf = rank.generator()
 trained_model = pickle.dumps(clf)
 '
-	, @input_data_1 = N'select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '
+	, @input_data_1 = @p_selectStr
     , @input_data_1_name = N'rank_train_data'
     , @params = N'@trained_model varbinary(max) OUTPUT'
     , @trained_model = @trained_model OUTPUT;
 END;
 GO
+
+
