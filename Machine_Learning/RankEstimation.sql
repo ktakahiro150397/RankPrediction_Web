@@ -64,16 +64,15 @@ class gen_model(object):
 		self.teature_extractor()
 		self.grid()
 		self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
+		self.clf.fit(self.x,self.y.values.reshape(-1,))
 		return self.clf
 		
-def main():
-	df=rank_train_data
-	print(df)
-	rank = gen_model(df)
-	clf = rank.generator()
-	trained_model = pickle.dumps(clf)
 
-main()
+df=rank_train_data
+print(df)
+rank = gen_model(df)
+clf = rank.generator()
+trained_model = pickle.dumps(clf)
 '
 	, @input_data_1 = N'select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '
     , @input_data_1_name = N'rank_train_data'
@@ -157,22 +156,19 @@ class mlforrank(object):
 		self.teature_extractor()
 		self.test_extractor()
 		self.clf = pickle.loads(py_model)
-		self.clf.fit(self.x,self.y.values.reshape(-1,))
 		score = self.cross_val()#正答率のようなもの
 		if score < self.limit :
 			return self.weight(self.y_test)#重みのついたランダムを返す
 		else:
-			pred_y = self.classifier.predict(self.x_test.values.reshape([1,-1]))
+			pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
 			return pred_y[0]
 		
-def estimate():
-	df=rank_score_data
-	id= #yamaimo頼んだ
-	print(df)
-	rank = mlforrank(df, id)
-	rank_id = rank.estimator()
 
-estimate()
+df=rank_score_data
+id= #yamaimo頼んだ
+print(df)
+rank = mlforrank(df, id)
+rank_id = rank.estimator()
 '
     , @input_data_1 = N'Select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '--yaneimoに任す
     , @input_data_1_name = N'rank_score_data'
