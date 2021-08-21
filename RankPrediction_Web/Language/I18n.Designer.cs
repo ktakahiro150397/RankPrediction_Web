@@ -63,9 +63,9 @@ namespace RankPrediction_Web.Language {
         /// <summary>
         ///   Apex Legends ランク予測 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string PAGE_TITLE {
+        public static string SITE_TITLE {
             get {
-                return ResourceManager.GetString("PAGE_TITLE", resourceCulture);
+                return ResourceManager.GetString("SITE_TITLE", resourceCulture);
             }
         }
     }

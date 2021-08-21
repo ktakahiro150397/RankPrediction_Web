@@ -22,6 +22,9 @@
 	  <None Remove="Views\Maintenance\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Include="wwwroot\css\Index.css" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Compile Update="Language\I18n.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
