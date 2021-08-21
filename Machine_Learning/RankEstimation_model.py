@@ -22,8 +22,8 @@ class gen_model(object):
 		self.kernel = 'rbf'
 		self.gamma = 0.01
 	def teature_extractor(self):
-		self.x = self.dataframe.iloc[:-1,:-1]#dataframeの最後のcol以外を説明変数としている
-		#print(self.x)
+		self.x = self.dataframe.iloc[:-1,1:-1]#dataframeの最後のcol以外を説明変数としている
+		print(self.x)
 		self.y = self.dataframe.iloc[:-1,[-1]]#最後のcolはランクラベル
 		#print(self.y)
 	def test_extractor(self):
