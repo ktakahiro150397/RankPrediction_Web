@@ -70,7 +70,12 @@ class mlforrank(object):
 		c = [ np.random.choice(a, p=w2) for i in range(sum(w)) ]
 		print(Counter(c))
 		"""
-		return unestimation+v
+		result = unestimation+v
+		if result==22:
+			result = 21
+		elif result==-1:
+			result = 0
+		return result
 		
 	def estimator(self):
 		self.teature_extractor()
