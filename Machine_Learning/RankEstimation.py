@@ -1,10 +1,13 @@
+"""
+入力するものとして以下の３つが必要
+#データ
+#予測するデータのid
+#modelをつくるかの true false
+"""
+
 import numpy as np
-from numpy.lib.twodim_base import triu_indices_from
 import pandas as pd
-from sklearn.metrics import accuracy_score
-from sklearn.multiclass import OneVsRestClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import hinge_loss
 from sklearn.model_selection import cross_validate, StratifiedKFold, GridSearchCV
 import pickle
 
@@ -58,9 +61,7 @@ class mlforrank(object):
 	def weight(self,unestimation):
 		d = [(-1, 98), (0, 844), (1, 1028)]
 		a, w = zip(*d)
-		print(a, w)
-		# -> ('foo', 'bar', 'baz') (98, 844, 1028)
-
+		#print(a, w)
 		w2 = np.array(w) / sum(w)
 		v = np.random.choice(a, p=w2)
 		"""
@@ -97,4 +98,3 @@ def main():
 	print(rank.estimator())
 if __name__ == '__main__':
 	main()
-		
