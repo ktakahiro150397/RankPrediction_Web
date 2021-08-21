@@ -14,12 +14,14 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<DotNetCilToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Views\Maintenance\" />
+	  <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />

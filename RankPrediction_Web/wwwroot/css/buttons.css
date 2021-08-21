@@ -1,0 +1,36 @@
+﻿a.btn {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    display: inline-block;
+    position: relative;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    /* Let user can't select button as text   */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    border-radius: 0.5rem;
+    background-color: orange;
+    color: white;
+}
+
+a.btn-maincolor {
+    background-color: darkorange;
+    color: white;
+}
+
+a.btn-small {
+    font-size: 1.0rem;
+    padding: 0.5rem 1.0rem;
+}
+
+a.btn:hover {
+}
