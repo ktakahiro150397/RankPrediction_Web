@@ -7,17 +7,10 @@ CREATE TABLE rank_py_models (
 GO
 
 --Create a table to store the predictions in
-DROP TABLE IF EXISTS [dbo].[py_rental_predictions];
+DROP TABLE IF EXISTS [ml_predict].[py_rank_predictions];
 GO
-CREATE TABLE [dbo].[py_rental_predictions](
-    [Rank_Predicted] [int] NULL,
-    [Rank_Actual] [int] NULL,
-    [season_id] [int] NULL,
-    [rank_id] [int] NULL,
-    [kill_death_ratio] [decimal(4,2)] NULL,
-    [average_damage] [decimal(7,2)] NULL,
-    [match_counts] [int] NULL,
-    [is_party] [bit] NULL
+CREATE TABLE [ml_predict].[py_rank_predictions](
+    [rank_id] [int] NULL
 ) ON [PRIMARY]
 GO
 
@@ -50,14 +43,14 @@ class gen_model(object):
 		self.kernel = 'rbf'
 		self.gamma = 0.01
 	def teature_extractor(self):
-		self.x = self.dataframe.iloc[:-1,:-1]#dataframeの最後のcol以外を説明変数としている
-		#print(self.x)
-		self.y = self.dataframe.iloc[:-1,[-1]]#最後のcolはランクラベル
-		#print(self.y)
+		self.x = self.dataframe[self.dataframe['id'] != self.id].iloc[:,1:-1]#dataframeの最後のcol以外を説明変数としている
+		print(self.x)
+		self.y = self.dataframe[self.dataframe['id'] != self.id].iloc[:,[-1]]#最後のcolはランクラベル
+		print(self.y)
 	def test_extractor(self):
-		self.x_test = self.dataframe.iloc[-1,:-1]#dataframeの最後を抜き出す
-		self.y_test = self.dataframe.iloc[-1,-1]
-		#print(self.x_test)
+		self.x_test = self.dataframe[self.dataframe['id'] == self.id].iloc[-1,1:-1]#dataframeの最後を抜き出す
+		self.y_test = self.dataframe[self.dataframe['id'] == self.id].iloc[-1,-1]
+		print(self.x_test)
 	def grid(self):#ハイパーパラメタの決定
 		tuned_parameters=[{"C":[0.85,1,5,10],"kernel":[self.kernel],"gamma":[1,0.1,0.001,0.0001]}]
 		self.classifier = GridSearchCV(
@@ -83,16 +76,17 @@ def main():
 	print(df)
 	rank = gen_model(df)
 	clf = rank.generator()
-	with open('model.pickle','wb') as f:
-		pickle.dump(clf,f)
+	trained_model = pickle.dumps(clf)
+
 main()
 '
-, @input_data_1 = N'select "season_id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id",  from [RankPrediction].[ml_predict].[prediction_data] '
+	, @input_data_1 = N'select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '
     , @input_data_1_name = N'rank_train_data'
     , @params = N'@trained_model varbinary(max) OUTPUT'
     , @trained_model = @trained_model OUTPUT;
 END;
 GO
+--ここで分離する
 
 TRUNCATE TABLE rank_py_models;
 
@@ -102,13 +96,14 @@ EXEC generate_rank_py_model @model OUTPUT;
 INSERT INTO rank_py_models (model_name, model) VALUES('rbf_model', @model);
 
 SELECT * FROM rank_py_models;
+--ここで分離する
 
-DROP PROCEDURE IF EXISTS py_predict_rentalcount;
+DROP PROCEDURE IF EXISTS py_predict_rank;
 GO
-CREATE PROCEDURE py_predict_rentalcount (@model varchar(100))
+CREATE PROCEDURE py_predict_rank (@model varchar(100))
 AS
 BEGIN
-    DECLARE @py_model varbinary(max) = (select model from rental_py_models where model_name = @model);
+    DECLARE @py_model varbinary(max) = (select model from rank_py_models where model_name = @model);
 
     EXEC sp_execute_external_script 
                     @language = N'Python'
@@ -132,7 +127,7 @@ class mlforrank(object):
 		self.dataframe = dataframe
 		self.limit = 0.8
 	def teature_extractor(self):
-		self.x = self.dataframe.iloc[:-1,:-1]#dataframeの最後のcol以外を説明変数としている
+		self.x = self.dataframe.iloc[:-1,1:-1]#dataframeの最後のcol以外を説明変数としている#最初のcolはデータのidなので落とす
 		#print(self.x)
 		self.y = self.dataframe.iloc[:-1,[-1]]#最後のcolはランクラベル
 		#print(self.y)
@@ -146,15 +141,27 @@ class mlforrank(object):
 		#print(scores)
 		print(np.mean(scores["test_score"]))
 		return np.mean(scores["test_score"])
+	def weight(self,unestimation):
+		d = [(-1, 98), (0, 844), (1, 1028)]
+		a, w = zip(*d)
+		#print(a, w)
+		w2 = np.array(w) / sum(w)
+		v = np.random.choice(a, p=w2)
+		"""
+		print(v)
+		from collections import Counter
+		c = [ np.random.choice(a, p=w2) for i in range(sum(w)) ]
+		print(Counter(c))
+		"""
+		return unestimation+v
 	def estimator(self):
 		self.teature_extractor()
 		self.test_extractor()
-		with open('model2.pickle','rb') as f:
-			self.clf = pickle.load(f)
+		self.clf = pickle.loads(py_model)
 		self.clf.fit(self.x,self.y.values.reshape(-1,))
 		score = self.cross_val()#正答率のようなもの
 		if score < self.limit :
-			return self.y_test
+			return self.weight(self.y_test)#重みのついたランダムを返す
 		else:
 			pred_y = self.classifier.predict(self.x_test.values.reshape([1,-1]))
 			return pred_y[0]
@@ -163,14 +170,22 @@ def estimate():
 	df=rank_score_data
 	print(df)
 	rank = mlforrank(df)
-	print(rank.estimator())
+	rank_id = rank.estimator()
 
 estimate()
 '
-    , @input_data_1 = N'Select "season_id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id",  from [RankPrediction].[ml_predict].[prediction_data] '
+    , @input_data_1 = N'Select "id", "kill_death_ratio", "average_damage", "match_counts", "is_party", "rank_id"  from [RankPrediction].[ml_predict].[prediction_data] '--yaneimoに任す
     , @input_data_1_name = N'rank_score_data'
     , @params = N'@py_model varbinary(max)'
     , @py_model = @py_model
-    with result sets (("rank_Predicted" int, "rank" float, "season_id" float,"kill_death_ratio" float,"average_damage" float,"match_counts" float,"is_party" float,));
+    with result sets (("rank_id" int));
 END;
 GO
+--ここで分離する
+
+TRUNCATE TABLE py_rank_predictions;
+--Insert the results of the predictions for test set into a table
+INSERT INTO py_rank_predictions
+EXEC py_predict_rank 'rbf_model';
+-- Select contents of the table
+SELECT * FROM py_rank_predictions;
