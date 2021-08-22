@@ -6,7 +6,7 @@
     <section>
         <p>あなたのランクは...</p>
 
-        <p>koko ni gazo oku</p>
+        <p>ここにランク画像を置く</p>
 
         <p>@Html.Label(Model.RankDiscriptionstring)  </p>
 
@@ -17,11 +17,13 @@
     <section>
         <p>
             データ入力のご協力ありがとうございました！<br />
-            あなたのフレンドにも入力してもらいませんか？<br />
+            予測結果を共有してみませんか？<br />
         </p>
 
         <div>
-            <p>ここに共有ボタン群を表示する</p>
+            <p>
+                @await Html.PartialAsync("_tweet", null)
+            </p>
         </div>
     </section>
 
