@@ -55,9 +55,11 @@ namespace RankPrediction_Web.Models
         {
             _id = id;
 
-            // TODO : kokoni kekka wo ireru
-            PredictResult = dbContext.Ranks.Where(item => item.RankId == 21).First();
+            var execRawSql = "EXEC ml_predict.get_predict_result_by_id {0}";
 
+            var predictRes = dbContext.Ranks.FromSqlRaw(execRawSql, id).ToList();
+
+            PredictResult = predictRes.First();
         }
     }
 }
