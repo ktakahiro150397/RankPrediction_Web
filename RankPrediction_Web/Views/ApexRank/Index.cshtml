@@ -58,11 +58,11 @@
         <div class="bg-sub-desc">
             <h3>このサイトを共有する</h3>
             <p>
-                フレンドにもこのサイトでランクを予測してもらいませんか？<br />
+                フレンドと一緒にランクを予測してみませんか？<br />
                 データが増えるほど正確な予測が可能になります！<br />
             </p>
             <p>
-                ここに共有ボタン群を表示
+                @await Html.PartialAsync("_tweet",null)
             </p>
 
         </div>
@@ -81,12 +81,3 @@
 
 
 </article>
-
-
-@section Scripts {
-
-    @*<script>
-            alert("RenderAsync!");
-        </script>*@
-
-}
