@@ -116,7 +116,7 @@ namespace RankPrediction_Web.Models
                 if (String.IsNullOrEmpty(input))
                 {
                     return new ValidationResult(
-                        @"{0}を入力してください。",
+                        @"合計ゲーム数を入力してください。",
                         new[] { nameof(vm.MatchCounts) });
                 }
 

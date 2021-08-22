@@ -4,11 +4,17 @@
     ViewData["Title"] = "戦績データ入力";
 }
 
+@section css {
+
+    <link rel="stylesheet" href="~/css/Index.css" />
+
+}
+
 <h1>戦績データ入力</h1>
 <hr />
-<div class="row">
+<section class="row">
     <div class="col-md-4">
-        <form asp-action="Input">
+        <form asp-action="Input" name="status_form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SelectedSeasonId" class="control-label"></label>
@@ -35,52 +41,60 @@
                 <label asp-for="KillDeathRatio" class="control-label"></label>
                 @Html.TextBoxFor(
                    model => model.KillDeathRatio,
-                   new { @class = "form-control" }
+                   new { @class = "form-control", @type = "tel" }
                )
                 @Html.ValidationMessageFor(model => model.KillDeathRatio, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label asp-for="AverageDamage" class="control-label"></label>
-                @Html.TextBoxFor(model => model.AverageDamage, new { @class = "form-control" })
+                @Html.TextBoxFor(
+               model => model.AverageDamage,
+               new { @class = "form-control", @type = "tel" })
                 @Html.ValidationMessageFor(model => model.AverageDamage, null, new { @class = "text-danger" })
             </div>
 
             <div class="form-group form-check">
                 <label class="control-label">
-                    @Html.CheckBoxFor(model => model.IsInputMatchCounts,new { @class = "form-check-input", @id = "chkIsInputMatchCounts" })
+                    @Html.CheckBoxFor(
+                   model => model.IsInputMatchCounts,
+                   new { @class = "form-check-input", @id = "chkIsInputMatchCounts" })
                     @Html.DisplayNameFor(model => model.IsInputMatchCounts)
                 </label>
             </div>
             <div id="divMatchCounts" class="form-group ">
                 <label asp-for="MatchCounts" class="control-label"></label>
-                @Html.TextBoxFor(model => model.MatchCounts, new { @class = "form-control",@id = "txtMatchCount" })
+                @Html.TextBoxFor(
+               model => model.MatchCounts,
+               new { @class = "form-control", @id = "txtMatchCount", @type = "tel" })
                 @Html.ValidationMessageFor(model => model.MatchCounts, null, new { @class = "text-danger" })
             </div>
 
             <div class="form-group form-check">
                 <label class="control-label">
-                    @Html.CheckBoxFor(model => model.IsParty, new { @class = "form-check-input" })
+                    @Html.CheckBoxFor(
+                   model => model.IsParty,
+                   new { @class = "form-check-input" })
                     @Html.DisplayNameFor(model => model.IsParty)
                 </label>
                 @Html.ValidationMessageFor(model => model.IsParty, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <input type="submit" value="データ作成" class="btn btn-primary" />
+                <a href="javascript:status_form.submit();" class="btn btn-maincolor">
+                    入力データで予測する
+                </a>
             </div>
         </form>
     </div>
-</div>
+</section>
 
-<div>
-    <a asp-controller="ApexRank" asp-action="Index">一覧に戻る</a>
-</div>
+<section>
+    <a asp-controller="ApexRank" asp-action="Index" class="btn btn-maincolor btn-small">トップに戻る</a>
+</section>
 
 
 @section Scripts {
 
-    <script>
-
-        function onIsInputMatchCountsChange() {
+    <script>function onIsInputMatchCountsChange() {
             let chkIsInputMatchCounts = document.getElementById("chkIsInputMatchCounts");
             let divMatchCounts = document.getElementById("divMatchCounts");
 
@@ -95,8 +109,5 @@
         chkIsInputMatchCounts.addEventListener("change", onIsInputMatchCountsChange);
 
         //初回ロード時のチェック表示切り替え
-        onIsInputMatchCountsChange();
-        
-
-    </script>
+        onIsInputMatchCountsChange();</script>
 }
