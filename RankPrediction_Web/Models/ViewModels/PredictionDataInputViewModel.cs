@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace RankPrediction_Web.Models
@@ -32,9 +33,8 @@ namespace RankPrediction_Web.Models
         [Display(Name = "平均ダメージ")]
         public decimal? AverageDamage { get; set; }
 
-        [Required(ErrorMessage = "{0}を入力してください。")]
         [Display(Name = "合計ゲーム数")]
-        [RegularExpression(@"^\d+?(|[KkMm]|\.\d{1,3}[KkMm])$", ErrorMessage = @"{0}には数値を入力してください。(""K""や""M""が末尾についている場合、そのまま入力してください)")]
+        [MatchCountsValidation]
         public string MatchCounts { get; set; }
 
         /// <summary>
@@ -44,6 +44,11 @@ namespace RankPrediction_Web.Models
         {
             get
             {
+                if(IsInputMatchCounts == false)
+                {
+                    return -1;
+                }
+
                 if (MatchCounts == null)
                 {
                     return -1;
@@ -85,6 +90,9 @@ namespace RankPrediction_Web.Models
             }
         }
 
+        [Display(Name = "ゲーム数を入力する")]
+        public bool IsInputMatchCounts { get; set; }
+
         [Display(Name = "主にパーティでプレイした")]
         public bool IsParty { get; set; }
 
@@ -93,4 +101,46 @@ namespace RankPrediction_Web.Models
         public IEnumerable<Rank> RankOptions { get; set; }
 
     }
+
+    public class MatchCountsValidationAttribute : ValidationAttribute
+    {
+
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+
+            var input = (string)value;
+            var vm = (PredictionDataInputViewModel)validationContext.ObjectInstance;
+
+            if (vm.IsInputMatchCounts)
+            {
+                if (String.IsNullOrEmpty(input))
+                {
+                    return new ValidationResult(
+                        @"{0}を入力してください。",
+                        new[] { nameof(vm.MatchCounts) });
+                }
+
+                var regEx = new Regex(@"^\d+?(|[KkMm]|\.\d{1,3}[KkMm])$");
+                if (!regEx.IsMatch(input))
+                {
+                    //フォーマット不一致
+                    return new ValidationResult(
+                       $"合計ゲーム数には数値を入力してください。(\"K\"や\"M\"が末尾についている場合、そのまま入力してください)");
+                }
+
+                return ValidationResult.Success;
+            }
+            else
+            {
+                //入力しない場合は常に検証成功
+                return ValidationResult.Success;
+            }
+
+        }
+    }
+
+
+
+
+
 }

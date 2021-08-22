@@ -44,11 +44,19 @@
                 @Html.TextBoxFor(model => model.AverageDamage, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AverageDamage, null, new { @class = "text-danger" })
             </div>
-            <div class="form-group">
+
+            <div class="form-group form-check">
+                <label class="control-label">
+                    @Html.CheckBoxFor(model => model.IsInputMatchCounts,new { @class = "form-check-input", @id = "chkIsInputMatchCounts" })
+                    @Html.DisplayNameFor(model => model.IsInputMatchCounts)
+                </label>
+            </div>
+            <div id="divMatchCounts" class="form-group ">
                 <label asp-for="MatchCounts" class="control-label"></label>
-                @Html.TextBoxFor(model => model.MatchCounts, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.MatchCounts, new { @class = "form-control",@id = "txtMatchCount" })
                 @Html.ValidationMessageFor(model => model.MatchCounts, null, new { @class = "text-danger" })
             </div>
+
             <div class="form-group form-check">
                 <label class="control-label">
                     @Html.CheckBoxFor(model => model.IsParty, new { @class = "form-check-input" })
@@ -67,3 +75,28 @@
     <a asp-controller="ApexRank" asp-action="Index">一覧に戻る</a>
 </div>
 
+
+@section Scripts {
+
+    <script>
+
+        function onIsInputMatchCountsChange() {
+            let chkIsInputMatchCounts = document.getElementById("chkIsInputMatchCounts");
+            let divMatchCounts = document.getElementById("divMatchCounts");
+
+            if (chkIsInputMatchCounts.checked) {
+                divMatchCounts.style.display = "block";
+            } else {
+                divMatchCounts.style.display = "none";
+            }
+        }
+
+        //イベントの追加
+        chkIsInputMatchCounts.addEventListener("change", onIsInputMatchCountsChange);
+
+        //初回ロード時のチェック表示切り替え
+        onIsInputMatchCountsChange();
+        
+
+    </script>
+}

@@ -29,7 +29,8 @@ namespace RankPrediction_Web.Controllers
             var vm = new PredictionDataInputViewModel
             {
                 SeasonOptions = _context.SeasonNames,
-                RankOptions = _context.Ranks
+                RankOptions = _context.Ranks,
+                IsInputMatchCounts = true
             };
 
             return View(vm);
@@ -42,7 +43,8 @@ namespace RankPrediction_Web.Controllers
             "KillDeathRatio",
             "AverageDamage",
             "MatchCounts",
-            "IsParty")] PredictionDataInputViewModel bindVm)
+            "IsParty",
+            "IsInputMatchCounts")] PredictionDataInputViewModel bindVm)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +72,8 @@ namespace RankPrediction_Web.Controllers
                 var vm = new PredictionDataInputViewModel
                 {
                     SeasonOptions = _context.SeasonNames,
-                    RankOptions = _context.Ranks
+                    RankOptions = _context.Ranks,
+                    IsInputMatchCounts = bindVm.IsInputMatchCounts
                 };
 
                 return View(vm);
