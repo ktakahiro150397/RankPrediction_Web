@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/buttons.css" />
+    <link rel="stylesheet" href="~/css/loading.css" />
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -23,18 +24,26 @@
     <div class="container">
         <main role="main" class="pb-3 bg-main">
             @RenderBody()
+
+            @*ロードアイコンの全画面表示*@
+            <div id="load-icon">
+                @await Html.PartialAsync("_LoadingIcon", null)
+            </div>
         </main>
+
+
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - Apexランク予測
-            &nbsp; @await Html.PartialAsync("_tweet",null)
+            &nbsp; @await Html.PartialAsync("_tweet", null)
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/loading.js" asp-append-version="true"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
