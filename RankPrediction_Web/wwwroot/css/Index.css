@@ -1,16 +1,17 @@
 ﻿.bg-sub-desc {
-    background-color: ghostwhite;
+/*    background-color: ghostwhite;*/
     padding: 1em;
     border-radius: 0.5em;
 }
 
 .bg-main-desc {
+    /*    background-color: ghostwhite;*/
     padding: 0.5em;
     border-radius: 0.5em;
 }
 
 .bg-notice {
-    background-color: lightgray;
+    /*    background-color: ghostwhite;*/
     padding: 1em;
     border-radius: 0.5em;
 }

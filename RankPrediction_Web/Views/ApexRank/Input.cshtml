@@ -7,6 +7,7 @@
 @section css {
 
     <link rel="stylesheet" href="~/css/Index.css" />
+    <link rel="stylesheet" href="~/css/loading.css" />
 
 }
 
@@ -79,7 +80,7 @@
                 @Html.ValidationMessageFor(model => model.IsParty, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <a href="javascript:status_form.submit();" class="btn btn-maincolor">
+                <a href="javascript:status_form.submit();" class="btn btn-maincolor" >
                     入力データで予測する
                 </a>
             </div>
@@ -91,10 +92,10 @@
     <a asp-controller="ApexRank" asp-action="Index" class="btn btn-maincolor btn-small">トップに戻る</a>
 </section>
 
-
 @section Scripts {
 
-    <script>function onIsInputMatchCountsChange() {
+    <script>
+        function onIsInputMatchCountsChange() {
             let chkIsInputMatchCounts = document.getElementById("chkIsInputMatchCounts");
             let divMatchCounts = document.getElementById("divMatchCounts");
 
@@ -109,5 +110,8 @@
         chkIsInputMatchCounts.addEventListener("change", onIsInputMatchCountsChange);
 
         //初回ロード時のチェック表示切り替え
-        onIsInputMatchCountsChange();</script>
+        onIsInputMatchCountsChange();
+
+
+    </script>
 }
