@@ -7,17 +7,29 @@
         loader.classList.remove("icon-disable");
     } else {
         loader.classList.add("icon-disable");
+
+
+        //画面の指定されたタグにロードイベントを追加する
+        var inputs = document.getElementsByTagName("a");
+
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].hasAttribute("onClickLoad")) {
+                inputs[i].addEventListener("click", showLoadingIcon);
+            }
+        }
+
     }
 
     console.log("state:" + state);
 }
 
-document.onsubmit = function () {
-    const loader = document.getElementById("load-icon");
-    loader.classList.remove("icon-disable");
-}
+document.onsubmit = showLoadingIcon
 
-window.onbeforeunload = function () {
+window.onbeforeunload = showLoadingIcon
+
+window.onpagehide = showLoadingIcon
+
+function showLoadingIcon() {
     const loader = document.getElementById("load-icon");
     loader.classList.remove("icon-disable");
 }
