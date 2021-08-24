@@ -1,21 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@*共有ボタン系を配置する*@
+
+<div id="shareButtons">
+
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+       class="twitter-share-button"
+       data-show-count="true"
+       data-lang="ja"
+       data-text="Here is data-text attribute"
+       data-url="https://dev.twitter.com/web/tweet-button"
+       data-hashtags="testTag,tags,hashTags">ツイートする</a>
+
+    <a href="javascript:displayNativeShareMenu();" shareLink>共有する</a>
+
+    @*<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        class="twitter-share-button"
+        data-show-count="true"
+        data-lang="ja"
+        data-text="Apex Legends ランク予測サイト - あなたのランクを機械学習で予測します！"
+        data-hashtags="Apexランク予測,ApexLegends">ツイートする</a>*@
+
+</div>
+
+<script>
+    function displayNativeShareMenu() {
+        navigator.share({
+            url: "https://developer.mozilla.org/ja/docs/Web/API/Navigator/share",
+            title: "navigator.shareで共有メニューが開かれました！",
+            text: "ここに共有する内容を記載する！"
+        })
+    }
 
 
-<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-   class="twitter-share-button"
-   data-show-count="true"
-   data-lang="ja"
-   data-text="Here is data-text attribute"
-   data-url="https://dev.twitter.com/web/tweet-button"
-   data-hashtags="testTag,tags,hashTags">ツイートする</a>
+    if (navigator.share) {
+        console.log("navigator.share is supported!");
+    } else {
+        console.log("navigator.share is not supported!");
 
-@*<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-    class="twitter-share-button"
-    data-show-count="true"
-    data-lang="ja"
-    data-text="Apex Legends ランク予測サイト - あなたのランクを機械学習で予測します！"
-    data-hashtags="Apexランク予測,ApexLegends">ツイートする</a>*@
+        //画面のネイティブ共有ボタンを非表示にする
+        var shareLinks = Array.prototype.slice.call(document.getElementsByTagName("a"));
+        shareLinks.filter(item => item.hasAttribute("shareLink")).forEach(item => item.style.display = "none");
+
+    }
+</script>
+
+<style>
+    #shareButtons{
+
+    }
+    #shareButtons a{
+        background-color:red;
+    }
+</style>
