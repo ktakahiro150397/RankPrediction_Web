@@ -69,7 +69,9 @@ namespace RankPrediction_Web.Models
                         (_, rank) => new Rank()
                         {
                             RankId = rank.RankId,
-                            RankName = rank.RankName
+                            RankName = rank.RankName,
+                            RankNameJa = rank.RankNameJa
+
                         })
                     .First();
             }

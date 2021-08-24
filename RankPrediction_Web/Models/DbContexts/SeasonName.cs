@@ -14,6 +14,8 @@ namespace RankPrediction_Web.Models.DbContexts
 
         public int SeasonId { get; set; }
         public string SeasonName1 { get; set; }
+        public string SeasonNameJa { get; set; }
+        public int DisplaySeq { get; set; }
 
         public virtual ICollection<PredictionDatum> PredictionData { get; set; }
     }

@@ -21,7 +21,7 @@
                 <label asp-for="SelectedSeasonId" class="control-label"></label>
                 @Html.DropDownListFor(
                     model => model.SelectedSeasonId,
-                    new SelectList(Model.SeasonOptions, "SeasonId", "SeasonName1"),
+                    new SelectList(Model.SeasonOptions, "SeasonId", "SeasonNameJa"),
                     "",
                     new { @class = "form-control" }
                 )
@@ -32,7 +32,7 @@
                 <label asp-for="SelectedRankId" class="control-label"></label>
                 @Html.DropDownListFor(
                     model => model.SelectedRankId,
-                    new SelectList(Model.RankOptions, "RankId", "RankName"),
+                    new SelectList(Model.RankOptions, "RankId", "RankNameJa"),
                     "",
                     new { @class = "form-control" }
                 )
