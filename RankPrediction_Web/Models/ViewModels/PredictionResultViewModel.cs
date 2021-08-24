@@ -1,4 +1,6 @@
 ﻿using System;
+using RankPrediction_Web.Models.DbContexts;
+
 namespace RankPrediction_Web.Models
 {
     public class PredictionResultViewModel

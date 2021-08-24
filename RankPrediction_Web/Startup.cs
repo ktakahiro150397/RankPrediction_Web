@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using RankPrediction_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
+using RankPrediction_Web.Models.DbContexts;
 
 namespace RankPrediction_Web
 {

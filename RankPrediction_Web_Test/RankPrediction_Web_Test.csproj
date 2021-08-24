@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+    <UserSecretsId>82c69612-ba15-401d-87f6-ce314232bfe9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,5 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\RankPrediction_Web\RankPrediction_Web.csproj" />
   </ItemGroup>
+
 
 </Project>
