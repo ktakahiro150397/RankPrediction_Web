@@ -29,8 +29,8 @@ namespace RankPrediction_Web.Controllers
 
             var vm = new PredictionDataInputViewModel
             {
-                SeasonOptions = _context.SeasonNames,
-                RankOptions = _context.Ranks,
+                SeasonOptions = _context.SeasonNames.OrderBy(item => item.DisplaySeq),
+                RankOptions = _context.Ranks.OrderBy(item => item.DisplaySeq),
                 IsInputMatchCounts = true
             };
 
@@ -72,8 +72,8 @@ namespace RankPrediction_Web.Controllers
             {
                 var vm = new PredictionDataInputViewModel
                 {
-                    SeasonOptions = _context.SeasonNames,
-                    RankOptions = _context.Ranks,
+                    SeasonOptions = _context.SeasonNames.OrderBy(item => item.DisplaySeq),
+                    RankOptions = _context.Ranks.OrderBy(item => item.DisplaySeq),
                     IsInputMatchCounts = bindVm.IsInputMatchCounts
                 };
 

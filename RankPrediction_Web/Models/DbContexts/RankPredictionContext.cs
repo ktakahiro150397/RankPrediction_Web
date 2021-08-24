@@ -95,11 +95,19 @@ namespace RankPrediction_Web.Models.DbContexts
                     .ValueGeneratedNever()
                     .HasColumnName("rank_id");
 
+                entity.Property(e => e.DisplaySeq).HasColumnName("display_seq");
+
                 entity.Property(e => e.RankName)
                     .IsRequired()
                     .HasMaxLength(32)
                     .IsUnicode(false)
                     .HasColumnName("rank_name");
+
+                entity.Property(e => e.RankNameJa)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnName("rank_name_ja")
+                    .HasDefaultValueSql("('')");
             });
 
             modelBuilder.Entity<RankPyModel>(entity =>
@@ -131,11 +139,19 @@ namespace RankPrediction_Web.Models.DbContexts
                     .ValueGeneratedNever()
                     .HasColumnName("season_id");
 
+                entity.Property(e => e.DisplaySeq).HasColumnName("display_seq");
+
                 entity.Property(e => e.SeasonName1)
                     .IsRequired()
                     .HasMaxLength(128)
                     .IsUnicode(false)
                     .HasColumnName("season_name");
+
+                entity.Property(e => e.SeasonNameJa)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnName("season_name_ja")
+                    .HasDefaultValueSql("('')");
             });
 
             OnModelCreatingPartial(modelBuilder);
