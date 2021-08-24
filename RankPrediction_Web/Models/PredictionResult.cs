@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using RankPrediction_Web.Models.DbContexts;
 
 namespace RankPrediction_Web.Models
 {
@@ -47,7 +48,7 @@ namespace RankPrediction_Web.Models
         }
 
         /// <summary>
-        /// 指定のDBコンテキストを使用し、対象IDの予測結果を初期化します。
+        /// 指定のDBコンテキストを使用し、対象データIDの予測結果を初期化します。
         /// </summary>
         /// <param name="dbContext"></param>
         /// <param name="id"></param>
@@ -55,11 +56,44 @@ namespace RankPrediction_Web.Models
         {
             _id = id;
 
-            var execRawSql = "EXEC ml_predict.get_predict_result_by_id {0}";
+            if (dbContext.PyRankPredictions.Any(item => item.SourceDataId == _id))
+            {
+                // 結果が存在する場合、その結果を取得する
+                // 
+                PredictResult = dbContext.PyRankPredictions
+                    .Where(item => item.SourceDataId == _id)
+                    .Join(
+                        dbContext.Ranks,
+                        pyRank => pyRank.PredictResultRankId,
+                        rank => rank.RankId,
+                        (_, rank) => new Rank()
+                        {
+                            RankId = rank.RankId,
+                            RankName = rank.RankName
+                        })
+                    .First();
+            }
+            else
+            {
+                //結果が存在しない場合、SPから取得する
 
-            var predictRes = dbContext.Ranks.FromSqlRaw(execRawSql, id).ToList();
+                if(dbContext.PredictionData.Any(item=> item.Id == _id))
+                {
+                //対象のデータIDが存在する場合はSP実行
+                var execRawSql = "EXEC ml_predict.get_predict_result_by_id {0}";
+                var predictRes = dbContext.Ranks.FromSqlRaw(execRawSql, id).ToList();
 
-            PredictResult = predictRes.First();
+                PredictResult = predictRes.First();
+
+                }
+                else
+                {
+                    //存在しないデータID
+                    PredictResult = null;
+                    
+                }
+            }
+
         }
     }
 }

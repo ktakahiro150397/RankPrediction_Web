@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RankPrediction_Web.Models.DbContexts;
 
 namespace RankPrediction_Web.Controllers
 {
@@ -91,7 +92,13 @@ namespace RankPrediction_Web.Controllers
 
             //指定IDの予測結果VMを取得
             var resultVm = new PredictionResultViewModel(_context, id.Value);
-            
+
+
+            if(resultVm.PredictedResult.PredictResult == null)
+            {
+                //存在しないIDでアクセスしてきている奴はトップに戻す
+                return View("Index", "ApexRank");
+            }
             return View(resultVm);
         }
 

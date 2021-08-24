@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace RankPrediction_Web.Models
+namespace RankPrediction_Web.Models.DbContexts
 {
     public partial class SeasonName
     {
