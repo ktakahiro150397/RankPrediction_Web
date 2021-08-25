@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using RankPrediction_Web.Models.DbContexts;
 
 namespace RankPrediction_Web.Models
 {
@@ -26,12 +27,12 @@ namespace RankPrediction_Web.Models
         [Required(ErrorMessage = "{0}を入力してください。")]
         [Range(0, 99.99, ErrorMessage = "{0}は{1}から{2}の範囲で入力してください。")]
         [Display(Name = "K/D")]
-        public decimal? KillDeathRatio { get; set; }
+        public double? KillDeathRatio { get; set; }
 
         [Required(ErrorMessage = "{0}を入力してください。")]
         [Range(0, 99999.99, ErrorMessage = "{0}は{1}から{2}の範囲で入力してください。")]
         [Display(Name = "平均ダメージ")]
-        public decimal? AverageDamage { get; set; }
+        public double? AverageDamage { get; set; }
 
         [Display(Name = "合計ゲーム数")]
         [MatchCountsValidation]

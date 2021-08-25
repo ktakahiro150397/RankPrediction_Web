@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace RankPrediction_Web.Models
+namespace RankPrediction_Web.Models.DbContexts
 {
     public partial class Rank
     {
@@ -14,6 +14,8 @@ namespace RankPrediction_Web.Models
 
         public int RankId { get; set; }
         public string RankName { get; set; }
+        public string RankNameJa { get; set; }
+        public int DisplaySeq { get; set; }
 
         public virtual ICollection<PredictionDatum> PredictionData { get; set; }
     }

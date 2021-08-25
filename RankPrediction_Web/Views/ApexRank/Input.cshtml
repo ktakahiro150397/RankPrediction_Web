@@ -7,6 +7,7 @@
 @section css {
 
     <link rel="stylesheet" href="~/css/Index.css" />
+    <link rel="stylesheet" href="~/css/loading.css" />
 
 }
 
@@ -20,7 +21,7 @@
                 <label asp-for="SelectedSeasonId" class="control-label"></label>
                 @Html.DropDownListFor(
                     model => model.SelectedSeasonId,
-                    new SelectList(Model.SeasonOptions, "SeasonId", "SeasonName1"),
+                    new SelectList(Model.SeasonOptions, "SeasonId", "SeasonNameJa"),
                     "",
                     new { @class = "form-control" }
                 )
@@ -31,7 +32,7 @@
                 <label asp-for="SelectedRankId" class="control-label"></label>
                 @Html.DropDownListFor(
                     model => model.SelectedRankId,
-                    new SelectList(Model.RankOptions, "RankId", "RankName"),
+                    new SelectList(Model.RankOptions, "RankId", "RankNameJa"),
                     "",
                     new { @class = "form-control" }
                 )
@@ -41,7 +42,7 @@
                 <label asp-for="KillDeathRatio" class="control-label"></label>
                 @Html.TextBoxFor(
                    model => model.KillDeathRatio,
-                   new { @class = "form-control", @type = "tel" }
+                   new { @class = "form-control", @type = "number" }
                )
                 @Html.ValidationMessageFor(model => model.KillDeathRatio, null, new { @class = "text-danger" })
             </div>
@@ -49,7 +50,7 @@
                 <label asp-for="AverageDamage" class="control-label"></label>
                 @Html.TextBoxFor(
                model => model.AverageDamage,
-               new { @class = "form-control", @type = "tel" })
+               new { @class = "form-control", @type = "number" })
                 @Html.ValidationMessageFor(model => model.AverageDamage, null, new { @class = "text-danger" })
             </div>
 
@@ -65,7 +66,7 @@
                 <label asp-for="MatchCounts" class="control-label"></label>
                 @Html.TextBoxFor(
                model => model.MatchCounts,
-               new { @class = "form-control", @id = "txtMatchCount", @type = "tel" })
+               new { @class = "form-control", @id = "txtMatchCount", @type = "number" })
                 @Html.ValidationMessageFor(model => model.MatchCounts, null, new { @class = "text-danger" })
             </div>
 
@@ -79,7 +80,7 @@
                 @Html.ValidationMessageFor(model => model.IsParty, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <a href="javascript:status_form.submit();" class="btn btn-maincolor">
+                <a href="javascript:status_form.submit();" class="btn btn-maincolor" onClickLoad>
                     入力データで予測する
                 </a>
             </div>
@@ -88,13 +89,13 @@
 </section>
 
 <section>
-    <a asp-controller="ApexRank" asp-action="Index" class="btn btn-maincolor btn-small">トップに戻る</a>
+    <a asp-controller="ApexRank" asp-action="Index" class="btn btn-maincolor btn-small" onClickLoad>トップに戻る</a>
 </section>
-
 
 @section Scripts {
 
-    <script>function onIsInputMatchCountsChange() {
+    <script>
+        function onIsInputMatchCountsChange() {
             let chkIsInputMatchCounts = document.getElementById("chkIsInputMatchCounts");
             let divMatchCounts = document.getElementById("divMatchCounts");
 
@@ -109,5 +110,8 @@
         chkIsInputMatchCounts.addEventListener("change", onIsInputMatchCountsChange);
 
         //初回ロード時のチェック表示切り替え
-        onIsInputMatchCountsChange();</script>
+        onIsInputMatchCountsChange();
+
+
+    </script>
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RankPrediction_Web.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -34,6 +36,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -47,6 +50,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -60,6 +64,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -73,6 +78,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -86,6 +92,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -100,6 +107,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -113,6 +121,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -126,6 +135,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -139,6 +149,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -152,6 +163,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -165,6 +177,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -178,6 +191,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -192,6 +206,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -207,6 +222,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -220,6 +236,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
@@ -233,6 +250,7 @@ namespace RankPrediction_Web_Test.ViewModel
 
             var vm = new PredictionDataInputViewModel();
             vm.MatchCounts = input;
+            vm.IsInputMatchCounts = true;
 
             Assert.AreEqual(expect, vm.MatchCount_long);
 
