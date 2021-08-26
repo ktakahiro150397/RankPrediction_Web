@@ -27,6 +27,15 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
+	  <None Include="wwwroot\sozai\Apex Legends Screenshot 2021.08.24 - 21.30.49.74.png" />
+	  <None Include="wwwroot\sozai\EtXheooUUA8CO1c.png" />
+	  <None Include="wwwroot\sozai\Instagram-BRC-Asset-Downloads-Feb-2021-20210302T011642Z-001\glyph-logo_May2016.png" />
+	  <None Include="wwwroot\sozai\Instagram-BRC-Asset-Downloads-Feb-2021-20210302T011642Z-001\Instagram_Glyph_Gradient_RGB.png" />
+	  <None Include="wwwroot\sozai\PNG\f_logo_RGB-Black_512.png" />
+	  <None Include="wwwroot\sozai\twitter-logo-01282021\2021 Twitter logo - black.png" />
+	  <None Include="wwwroot\sozai\twitter-logo-01282021\Logo black.svg" />
+	  <None Include="wwwroot\sozai\twitter-logo-01282021\Logo blue.svg" />
+	  <None Include="wwwroot\sozai\twitter-logo-01282021\Logo white.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Language\I18n.Designer.cs">
@@ -44,5 +53,19 @@
 	<ItemGroup>
 	  <Folder Include="Models\ViewModels\" />
 	  <Folder Include="Models\DbContexts\" />
+	  <Folder Include="wwwroot\sozai\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Remove="wwwroot\css\loading.css" />
+	  <Content Remove="wwwroot\sozai\Apex Legends Screenshot 2021.08.24 - 21.30.49.74.png" />
+	  <Content Remove="wwwroot\sozai\EtXheooUUA8CO1c.png" />
+	  <Content Remove="wwwroot\sozai\Instagram-BRC-Asset-Downloads-Feb-2021-20210302T011642Z-001\glyph-logo_May2016.png" />
+	  <Content Remove="wwwroot\sozai\Instagram-BRC-Asset-Downloads-Feb-2021-20210302T011642Z-001\Instagram_Glyph_Gradient_RGB.png" />
+	  <Content Remove="wwwroot\sozai\PNG\f_logo_RGB-Black_512.png" />
+	  <Content Remove="wwwroot\sozai\twitter-logo-01282021\2021 Twitter logo - black.png" />
+	  <Content Remove="wwwroot\sozai\twitter-logo-01282021\Logo black.svg" />
+	  <Content Remove="wwwroot\sozai\twitter-logo-01282021\Logo blue.svg" />
+	  <Content Remove="wwwroot\sozai\twitter-logo-01282021\Logo white.svg" />
+	  <Content Remove="wwwroot\sozai\" />
 	</ItemGroup>
 </Project>

@@ -95,8 +95,12 @@ namespace RankPrediction_Web.Controllers
 
             var vm = new CalcViewModel()
             {
-                DataId = id.Value
+                Saying = "ここに取得した名言をセットする"
             };
+            if (id.HasValue)
+            {
+                vm.DataId = id.Value;
+            }
 
             return View(vm);
         }
@@ -106,7 +110,7 @@ namespace RankPrediction_Web.Controllers
         public IActionResult Result(int? id)
         {
 
-            //URLパラメータが存在しない場合トップに戻る
+            //URLパラメータが存在しない場合トップページに戻す
             if(!id.HasValue)
             {
                 return View("Index", "ApexRank");

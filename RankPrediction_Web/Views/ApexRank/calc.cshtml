@@ -5,9 +5,36 @@
     ViewData["Title"] = "計算中です...";
 }
 
+@section css {
+
+    <style>
+        .loading-div {
+            position: relative;
+            height: 100%;
+
+            margin:5vh 0;
+        }
+    </style>
+
+}
+
 <article>
 
-    <p>計算ページ</p>
+
+    <div class="loading-div">
+
+        @await Html.PartialAsync("_LoadingIcon", null)
+
+    </div>
+
+    <p>
+        入力データからランクを予測しています…<br />
+        このままお待ちください。<br />
+    </p>
+
+
+    <p>@Model.Saying</p>
+
 
 </article>
 
@@ -17,11 +44,15 @@
 
 @section Scripts {
 
+    @if (Model.DataId.HasValue)
+    {
+        <script>
+                //対象IDが存在する場合、結果ページへ遷移
+                window.location.href = "../result/@Model.DataId"
+        </script>
 
-    <script>
-        //結果ページへ遷移
-        window.location.href = "../result/@Model.DataId";
-    </script>
+    }
+
 }
 
 
