@@ -24,11 +24,6 @@
     <div class="container">
         <main role="main" class="pb-3 bg-main">
             @RenderBody()
-
-            @*ロードアイコンの全画面表示*@
-            <div id="load-icon">
-                @await Html.PartialAsync("_LoadingIcon", null)
-            </div>
         </main>
 
 

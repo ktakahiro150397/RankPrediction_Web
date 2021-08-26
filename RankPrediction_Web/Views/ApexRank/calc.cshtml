@@ -1,0 +1,29 @@
+﻿@model RankPrediction_Web.Models.ViewModels.CalcViewModel
+
+
+@{
+    ViewData["Title"] = "計算中です...";
+}
+
+<article>
+
+    <p>計算ページ</p>
+
+</article>
+
+
+
+
+
+@section Scripts {
+
+
+    <script>
+        //結果ページへ遷移
+        window.location.href = "../result/@Model.DataId";
+    </script>
+}
+
+
+
+

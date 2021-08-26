@@ -1,7 +1,7 @@
 ﻿using System;
 using RankPrediction_Web.Models.DbContexts;
 
-namespace RankPrediction_Web.Models
+namespace RankPrediction_Web.Models.ViewModels
 {
     public class PredictionResultViewModel
     {
