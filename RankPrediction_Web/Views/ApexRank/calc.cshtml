@@ -7,7 +7,19 @@
 
 <article>
 
-    <p>計算ページ</p>
+    <p>
+        入力データからランクを予測しています…<br />
+        このままお待ちください。<br />
+    </p>
+
+
+    <div>
+        guruguru
+    </div>
+
+
+    <p>ここに名言を置く</p>
+
 
 </article>
 
@@ -17,11 +29,15 @@
 
 @section Scripts {
 
+    @if (Model.DataId.HasValue)
+    {
+        <script>
+                //対象IDが存在する場合、結果ページへ遷移
+                window.location.href = "../result/@Model.DataId"
+        </script>
 
-    <script>
-        //結果ページへ遷移
-        window.location.href = "../result/@Model.DataId";
-    </script>
+    }
+
 }
 
 
