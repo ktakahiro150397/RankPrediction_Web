@@ -364,3 +364,4 @@ FodyWeavers.xsd
 .github/.DS_Store
 .DS_Store
 .DS_Store
+RankPrediction_Web/Views/Shared/_Footer.cshtml
