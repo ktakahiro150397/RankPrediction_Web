@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RankPrediction_Web.Models;
+using RankPrediction_Web.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ namespace RankPrediction_Web.Controllers
                 //インサートしたデータのIDを取得
                 var insertId = addPrediction.Id;
 
-                return RedirectToAction("Result", "ApexRank",new { id = insertId });
+                return RedirectToAction("Calc", "ApexRank",new { id = insertId });
 
             }
             else
@@ -80,6 +81,27 @@ namespace RankPrediction_Web.Controllers
                 return View(vm);
             }
         }
+
+        public IActionResult Calc(int? id)
+        {
+
+#if DEBUG
+#else
+            //URLパラメータが存在しない場合トップ画面へ
+            if(!id.HasValue){
+                return View("Index", "ApexRank");
+            }
+#endif
+
+            var vm = new CalcViewModel()
+            {
+                DataId = id.Value
+            };
+
+            return View(vm);
+        }
+
+
 
         public IActionResult Result(int? id)
         {
