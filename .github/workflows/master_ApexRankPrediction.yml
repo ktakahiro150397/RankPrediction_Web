@@ -53,5 +53,5 @@ jobs:
       with:
         app-name: 'ApexRankPrediction'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d59c7451ddbe430e8eeed6483ed1cb94 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_942ac6ff725243798221f12573f35def }}
         package: .

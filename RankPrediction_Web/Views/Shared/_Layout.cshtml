@@ -24,14 +24,12 @@
         <main role="main" class="pb-3 bg-main">
             @RenderBody()
         </main>
-
-
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top modal-footer  text-muted">
         <div class="container">
             &copy; 2021 - Apexランク予測
-            &nbsp; @await Html.PartialAsync("_tweet", null)
+            @await Html.PartialAsync("_SNS", null)
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
