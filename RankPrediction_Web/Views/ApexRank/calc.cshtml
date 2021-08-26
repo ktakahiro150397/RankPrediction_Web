@@ -5,7 +5,27 @@
     ViewData["Title"] = "計算中です...";
 }
 
+@section css {
+
+    <style>
+        .loading-div {
+            position: relative;
+            height: 100%;
+
+            margin:5vh 0;
+        }
+    </style>
+
+}
+
 <article>
+
+
+    <div class="loading-div">
+
+        @await Html.PartialAsync("_LoadingIcon", null)
+
+    </div>
 
     <p>
         入力データからランクを予測しています…<br />
@@ -13,12 +33,7 @@
     </p>
 
 
-    <div>
-        guruguru
-    </div>
-
-
-    <p>ここに名言を置く</p>
+    <p>@Model.Saying</p>
 
 
 </article>

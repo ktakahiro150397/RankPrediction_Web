@@ -45,4 +45,7 @@
 	  <Folder Include="Models\ViewModels\" />
 	  <Folder Include="Models\DbContexts\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Content Remove="wwwroot\css\loading.css" />
+	</ItemGroup>
 </Project>
