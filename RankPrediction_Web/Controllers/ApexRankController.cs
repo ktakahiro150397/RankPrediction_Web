@@ -119,7 +119,7 @@ namespace RankPrediction_Web.Controllers
 
             if(resultVm.PredictedResult.PredictResult == null)
             {
-                //存在しないIDでアクセスしてきている奴はトップに戻す
+                //存在しないID・予測に失敗している場合はトップに戻す
                 return View("Index", "ApexRank");
             }
             return View(resultVm);
