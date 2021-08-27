@@ -4,7 +4,7 @@
     line-height: 1.5;
     display: inline-block;
     position: relative;
-    z-index:1;
+    z-index: 1;
     padding: 1rem 2rem;
     cursor: pointer;
     /* Let user can't select button as text   */
@@ -22,12 +22,21 @@
     color: white;
     border: 1px solid #ffb833;
     transition: all 0.2s ease-in-out;
-    overflow:hidden;
+    overflow: hidden;
 }
+
+    a.btn:hover {
+        color: lightgray;
+    }
+
+    a.btn:active {
+        background-color: #cc7000;
+        color:lightgray;
+    }
 
     a.btn:before {
         content: "";
-        padding:0;
+        padding: 0;
         width: 160%;
         position: absolute;
         top: -0.1rem;
@@ -36,13 +45,16 @@
         border-right: 60px solid transparent;
         transform: translateX(-100%);
         transition: transform ease .3s;
-        z-index:-1;
+        z-index: -1;
     }
 
+@media (min-width: 768px) {
+    /*PCサイズならかっちょいいホバーエフェクトをつける*/
     a.btn:hover:before {
         transform: translateX(0%);
-        
     }
+}
+
 
 a.btn-maincolor {
     background-color: darkorange;
@@ -52,9 +64,4 @@ a.btn-maincolor {
 a.btn-small {
     font-size: 1.0rem;
     padding: 0.5rem 1.0rem;
-}
-
-a.btn:hover, a.btn:active {
-    border-color: #cc7000;
-    color: white;
 }
