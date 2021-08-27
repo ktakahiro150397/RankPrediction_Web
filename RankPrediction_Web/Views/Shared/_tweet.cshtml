@@ -1,6 +1,54 @@
 @*共有ボタン系を配置する*@
 
-<div id="shareButtons">
+
+<style>
+
+    .share-color-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+        .share-color-container a {
+            margin-bottom: 1rem;
+        }
+
+    .fb-root {
+        margin-left: 0px;
+    }
+
+    .color-native-share {
+        display:inline-block;
+        position: relative;
+        left:0;
+        height: 1.2rem;
+        width: 7rem;
+        padding: 0;
+        border-radius: 0.2rem;
+        background-color: orange;
+
+        transition:all 1s;
+    }
+
+        .color-native-share span {
+            font-size: 0.9rem;
+            position: relative;
+            top: -0.1rem;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .color-native-share :hover {
+            background-color: red;
+        }
+
+        .color-native-share :before {
+            content: "<icon>";
+        }
+</style>
+
+<div id="shareButtons" class="share-color-container">
 
     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
        class="twitter-share-button"
@@ -10,7 +58,7 @@
        data-url="https://dev.twitter.com/web/tweet-button"
        data-hashtags="testTag,tags,hashTags">ツイートする</a>
 
-    <a href="javascript:displayNativeShareMenu();" shareLink>共有する</a>
+
     @*<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
         class="twitter-share-button"
         data-show-count="true"
@@ -23,34 +71,10 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v11.0" nonce="IRBPWOsn"></script>
     <div class="fb-like" data-href="https://apexrankprediction.azurewebsites.net/" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
 
+
+    <a href="javascript:displayNativeShareMenu();" class="color-native-share" shareLink>
+        <span>共有する</span>
+    </a>
 </div>
-<script>
-    function displayNativeShareMenu() {
-        navigator.share({
-            url: "https://developer.mozilla.org/ja/docs/Web/API/Navigator/share",
-            title: "navigator.shareで共有メニューが開かれました！",
-            text: "ここに共有する内容を記載する！"
-        })
-    }
 
 
-    if (navigator.share) {
-        console.log("navigator.share is supported!");
-    } else {
-        console.log("navigator.share is not supported!");
-
-        //画面のネイティブ共有ボタンを非表示にする
-        var shareLinks = Array.prototype.slice.call(document.getElementsByTagName("a"));
-        shareLinks.filter(item => item.hasAttribute("shareLink")).forEach(item => item.style.display = "none");
-
-    }
-</script>
-
-<style>
-    #shareButtons {
-    }
-
-        #shareButtons a {
-            background-color: red;
-        }
-</style>

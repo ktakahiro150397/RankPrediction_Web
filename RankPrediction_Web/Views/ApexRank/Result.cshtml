@@ -4,6 +4,26 @@
     ViewData["Title"] = "ランク予測結果";
 }
 
+@section css{
+
+    <style>
+        .btn-container{
+            display:flex;
+            flex-direction:column;
+        }
+        .btn-container .btn{
+            margin-bottom:1rem;
+            }
+
+        @@media (min-width:768px) {
+            .btn-container {
+                width:400px;
+            }
+        }
+    </style>
+
+}
+
 <article>
 
     <section>
@@ -31,7 +51,7 @@
     </section>
 
 
-    <div>
+    <div class="btn-container">
         <a class="btn btn-maincolor" asp-controller="ApexRank" asp-action="Input">もう一度入力する</a>
         <a class="btn btn-small" asp-controller="ApexRank" asp-action="Index">トップへ戻る</a>
     </div>
