@@ -1,10 +1,16 @@
 ﻿using System;
+using RankPrediction_Web.Models.DbContexts;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 namespace RankPrediction_Web.Models.ViewModels
 {
     public class CalcViewModel
     {
-        public CalcViewModel()
+        public CalcViewModel(RankPredictionContext db)
         {
+            Saying = db.Sayings.FromSqlRaw("SELECT TOP(1) * FROM [ml_predict].[sayings] ORDER BY NEWID() ")
+                    .First();
         }
 
         /// <summary>
@@ -12,10 +18,7 @@ namespace RankPrediction_Web.Models.ViewModels
         /// </summary>
         public int? DataId {get;set;}
 
-        /// <summary>
-        /// 画面に表示する名言
-        /// </summary>
-        public string Saying { get; set; }
+        public Saying Saying { get; set; }
 
     }
 }

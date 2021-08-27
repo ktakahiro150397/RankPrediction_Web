@@ -93,10 +93,7 @@ namespace RankPrediction_Web.Controllers
             }
 #endif
 
-            var vm = new CalcViewModel()
-            {
-                Saying = "ここに取得した名言をセットする"
-            };
+            var vm = new CalcViewModel(_context);
             if (id.HasValue)
             {
                 vm.DataId = id.Value;

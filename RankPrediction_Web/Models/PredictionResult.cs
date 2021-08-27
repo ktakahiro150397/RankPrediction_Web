@@ -57,7 +57,7 @@ namespace RankPrediction_Web.Models
             _id = id;
 
             if (dbContext.PyRankPredictions.Any(item => item.SourceDataId == _id))
-            {
+            {　
                 // 結果が存在する場合、その結果を取得する
                 // 
                 PredictResult = dbContext.PyRankPredictions
