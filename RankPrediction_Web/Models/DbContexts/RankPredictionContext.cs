@@ -21,6 +21,7 @@ namespace RankPrediction_Web.Models.DbContexts
         public virtual DbSet<PyRankPrediction> PyRankPredictions { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<RankPyModel> RankPyModels { get; set; }
+        public virtual DbSet<Saying> Sayings { get; set; }
         public virtual DbSet<SeasonName> SeasonNames { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -112,20 +113,53 @@ namespace RankPrediction_Web.Models.DbContexts
 
             modelBuilder.Entity<RankPyModel>(entity =>
             {
-                entity.HasKey(e => e.ModelName)
-                    .HasName("PK__rank_py___5DD3F6BA5211CB1C");
+                entity.HasKey(e => new { e.SeasonId, e.IsMatchcountsContain })
+                    .HasName("PK__rank_py___0E8878E67BCEBA20");
 
                 entity.ToTable("rank_py_models", "ml_predict");
 
-                entity.Property(e => e.ModelName)
-                    .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .HasColumnName("model_name")
-                    .HasDefaultValueSql("('default model')");
+                entity.Property(e => e.SeasonId).HasColumnName("season_id");
 
-                entity.Property(e => e.Model)
+                entity.Property(e => e.IsMatchcountsContain).HasColumnName("is_matchcounts_contain");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.ModelData).HasColumnName("model_data");
+
+                entity.HasOne(d => d.Season)
+                    .WithMany(p => p.RankPyModels)
+                    .HasForeignKey(d => d.SeasonId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SEASON_ID");
+            });
+
+            modelBuilder.Entity<Saying>(entity =>
+            {
+                entity.ToTable("sayings", "ml_predict");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Saying1)
                     .IsRequired()
-                    .HasColumnName("model");
+                    .HasColumnName("saying")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.SayingBy)
+                    .IsRequired()
+                    .HasColumnName("saying_by")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.SayingByJa)
+                    .IsRequired()
+                    .HasColumnName("saying_by_ja")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.SayingJa)
+                    .IsRequired()
+                    .HasColumnName("saying_ja")
+                    .HasDefaultValueSql("('')");
             });
 
             modelBuilder.Entity<SeasonName>(entity =>

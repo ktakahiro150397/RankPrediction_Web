@@ -11,8 +11,14 @@
         .loading-div {
             position: relative;
             height: 100%;
+            margin: 5vh 0;
+        }
 
-            margin:5vh 0;
+        .span-sayingby{
+            position:relative;
+            left:1rem;
+
+            margin-top:0.5rem;
         }
     </style>
 
@@ -32,9 +38,13 @@
         このままお待ちください。<br />
     </p>
 
-
-    <p>@Model.Saying</p>
-
+    <hr />
+    <p>
+        "@Model.Saying.SayingJa"<br />
+        <span class="span-sayingby">
+            — @Model.Saying.SayingByJa
+        </span>
+    </p>
 
 </article>
 

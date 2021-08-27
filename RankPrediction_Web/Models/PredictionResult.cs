@@ -56,23 +56,28 @@ namespace RankPrediction_Web.Models
         {
             _id = id;
 
-            if (dbContext.PyRankPredictions.Any(item => item.SourceDataId == _id))
+            if (dbContext.PyRankPredictions.Any(item => item.SourceDataId == _id && item.PredictResultRankId != null))
             {
-                // 結果が存在する場合、その結果を取得する
-                // 
+                // nullではない結果が存在する場合、その結果を取得する
                 PredictResult = dbContext.PyRankPredictions
-                    .Where(item => item.SourceDataId == _id)
+                    .Where(item => item.SourceDataId == _id && item.PredictResultRankId != null)
                     .Join(
                         dbContext.Ranks,
                         pyRank => pyRank.PredictResultRankId,
                         rank => rank.RankId,
-                        (_, rank) => new Rank()
+                        (pyRank, rank) => new
                         {
                             RankId = rank.RankId,
                             RankName = rank.RankName,
-                            RankNameJa = rank.RankNameJa
-
+                            RankNameJa = rank.RankNameJa,
+                            pyRankId = pyRank.Id
                         })
+                    .OrderByDescending(item => item.pyRankId)
+                    .Select(item => new Rank() {
+                        RankId = item.RankId,
+                        RankName = item.RankName,
+                        RankNameJa = item.RankNameJa
+                    })
                     .First();
             }
             else
@@ -81,11 +86,11 @@ namespace RankPrediction_Web.Models
 
                 if(dbContext.PredictionData.Any(item=> item.Id == _id))
                 {
-                //対象のデータIDが存在する場合はSP実行
-                var execRawSql = "EXEC ml_predict.get_predict_result_by_id {0}";
-                var predictRes = dbContext.Ranks.FromSqlRaw(execRawSql, id).ToList();
+                    //対象のデータIDが存在する場合はSP実行
+                    var execRawSql = "EXEC ml_predict.get_predict_result_by_id {0}";
+                    var predictRes = dbContext.Ranks.FromSqlRaw(execRawSql, id).ToList();
 
-                PredictResult = predictRes.First();
+                    PredictResult = predictRes.FirstOrDefault();
 
                 }
                 else

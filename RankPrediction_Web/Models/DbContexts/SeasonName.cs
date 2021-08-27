@@ -10,6 +10,7 @@ namespace RankPrediction_Web.Models.DbContexts
         public SeasonName()
         {
             PredictionData = new HashSet<PredictionDatum>();
+            RankPyModels = new HashSet<RankPyModel>();
         }
 
         public int SeasonId { get; set; }
@@ -18,5 +19,6 @@ namespace RankPrediction_Web.Models.DbContexts
         public int DisplaySeq { get; set; }
 
         public virtual ICollection<PredictionDatum> PredictionData { get; set; }
+        public virtual ICollection<RankPyModel> RankPyModels { get; set; }
     }
 }
