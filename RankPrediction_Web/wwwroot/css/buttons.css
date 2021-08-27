@@ -17,10 +17,10 @@
     vertical-align: middle;
     text-decoration: none;
     letter-spacing: 0.1em;
-    border-radius: 0.1rem;
+    border-radius: 0.3rem;
     background-color: orange;
     color: white;
-    border: 1px solid #ffb833;
+    border: .1rem solid #663800;
     transition: all 0.2s ease-in-out;
     overflow: hidden;
 }
@@ -44,7 +44,7 @@
         border-bottom: 70px solid #cc7000;
         border-right: 60px solid transparent;
         transform: translateX(-100%);
-        transition: transform ease .3s;
+        transition: transform ease .4s;
         z-index: -1;
     }
 
