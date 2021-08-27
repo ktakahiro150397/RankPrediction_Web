@@ -13,7 +13,7 @@
 <h1>戦績データ入力</h1>
 <hr />
 <section class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Input" name="status_form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -22,7 +22,7 @@
                     model => model.SelectedSeasonId,
                     new SelectList(Model.SeasonOptions, "SeasonId", "SeasonNameJa"),
                     "",
-                    new { @class = "form-control" }
+                    new { @class = "form-control col-md-6" }
                 )
                 @Html.ValidationMessageFor(model => model.SelectedSeasonId, null, new { @class = "text-danger" })
 
@@ -33,7 +33,7 @@
                     model => model.SelectedRankId,
                     new SelectList(Model.RankOptions, "RankId", "RankNameJa"),
                     "",
-                    new { @class = "form-control" }
+                    new { @class = "form-control col-md-6" }
                 )
                 @Html.ValidationMessageFor(model => model.SelectedRankId, null, new { @class = "text-danger" })
             </div>
@@ -41,7 +41,7 @@
                 <label asp-for="KillDeathRatio" class="control-label"></label>
                 @Html.TextBoxFor(
                    model => model.KillDeathRatio,
-                   new { @class = "form-control", @type = "number" }
+                   new { @class = "form-control col-md-6", @type = "number" }
                )
                 @Html.ValidationMessageFor(model => model.KillDeathRatio, null, new { @class = "text-danger" })
             </div>
@@ -49,7 +49,7 @@
                 <label asp-for="AverageDamage" class="control-label"></label>
                 @Html.TextBoxFor(
                model => model.AverageDamage,
-               new { @class = "form-control", @type = "number" })
+               new { @class = "form-control col-md-6", @type = "number" })
                 @Html.ValidationMessageFor(model => model.AverageDamage, null, new { @class = "text-danger" })
             </div>
 
@@ -65,7 +65,7 @@
                 <label asp-for="MatchCounts" class="control-label"></label>
                 @Html.TextBoxFor(
                model => model.MatchCounts,
-               new { @class = "form-control", @id = "txtMatchCount", @type = "number" })
+               new { @class = "form-control col-md-6", @id = "txtMatchCount", @type = "number" })
                 @Html.ValidationMessageFor(model => model.MatchCounts, null, new { @class = "text-danger" })
             </div>
 
