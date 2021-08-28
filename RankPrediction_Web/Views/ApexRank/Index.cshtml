@@ -31,13 +31,11 @@
     @*サイトの趣旨を説明する*@
     <section>
         <div class="bg-main-desc">
-            <h1>ここにデカ見出し</h1>
+            <h1>AIであなたの実力を診断します！</h1>
 
             <p>
-                ここにユーザーが戦績をじゃぶじゃぶ投入したくなる文章を書く。<br />
-                使うワード：機械学習・ランク予測・結果がすぐ出る<br />
-                ランク気になりませんか？とか<br />
-                キルレから出ます！とか<br />
+                あなたは初心者？それとも上級者？<br />
+                キルレ、ダメージを入力して実力を診断しよう<br />
             </p>
 
             <div>
@@ -45,7 +43,7 @@
             </div>
         </div>
     </section>
-
+    <!--
     <section>
         <div class="bg-sub-desc">
             <h2>機械学習による予測</h2>
@@ -61,7 +59,7 @@
             <a class="btn btn-maincolor btn-small" asp-controller="ApexRank" asp-action="Input" onClickLoad>ランクを予測してみる</a>
         </div>
     </section>
-
+    -->
     <section>
         <div class="bg-sub-desc">
             <h2>実力が気になりませんか？</h2>
@@ -80,7 +78,7 @@
                 フレンドと一緒にランクを予測してみませんか？<br />
                 データが増えるほど正確な予測が可能になります！<br />
             </p>
-            @await Html.PartialAsync("_tweet",null)
+            @await Html.PartialAsync("_tweet", null)
 
         </div>
     </section>

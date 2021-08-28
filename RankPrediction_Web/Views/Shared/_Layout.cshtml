@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/buttons.css" />
+    <link rel="stylesheet" href="~/css/loading.css" />
+    <link rel="stylesheet" href="~/css/ibm-plex-sans-jp.css">
+    <link rel="stylesheet" href="~/css/ibm-plex-sans-jp.min.css">
+    <style>
+         body {
+             font-family: 'IBM Plex Sans JP'
+         }
+     </style>
     @RenderSection("css", required: false)
 </head>
 <body ontouchstart="">
@@ -18,8 +26,8 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg border-bottom box-shadow mb-3">
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="ApexRank" asp-action="Index" onClickLoad>Apex Legends ランク予測</a>
-                </div>
+                    <h3><a class="navbar-brand" id="header_txt" asp-area="" asp-controller="ApexRank" asp-action="Index" onClickLoad>Apex Legends ランク予測</a></h3>
+</div>
             </nav>
         </header>
         <div class="container" id="content-main">
