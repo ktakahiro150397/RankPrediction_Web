@@ -48,13 +48,9 @@
         <p>
             データ入力のご協力ありがとうございました！<br />
             予測結果を共有してみませんか？<br />
+            @await Html.PartialAsync("_SNS", null)
         </p>
 
-        <div>
-            <p>
-                @await Html.PartialAsync("_tweet", null)
-            </p>
-        </div>
     </section>
 
 
