@@ -94,6 +94,7 @@ body {
     position: relative;
     box-sizing: border-box;
     padding-bottom:6rem;
+    min-height:100vh;
 }
 
 .footer {
