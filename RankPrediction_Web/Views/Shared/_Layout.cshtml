@@ -13,26 +13,29 @@
     <link rel="stylesheet" href="~/css/buttons.css" />
     @RenderSection("css", required: false)
 </head>
-<body  ontouchstart="">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="ApexRank" asp-action="Index" onClickLoad>Apex Legends ランク予測</a>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3 bg-main">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top modal-footer  text-muted">
-        <div class="container">
-            &copy; 2021 - Apexランク予測
-            @await Html.PartialAsync("_SNS", null)
+<body ontouchstart="">
+    <div id="content-wrap">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="ApexRank" asp-action="Index" onClickLoad>Apex Legends ランク予測</a>
+                </div>
+            </nav>
+        </header>
+        <div class="container" id="content-main">
+            @RenderSection("bodycontainer", required: false)
+            <main role="main" class="pb-3 bg-main">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+
+        <footer class="border-top modal-footer text-muted footer">
+            <div class="container">
+                @*&copy; 2021 - Apexランク予測*@
+                @await Html.PartialAsync("_SNS", null)
+            </div>
+        </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
