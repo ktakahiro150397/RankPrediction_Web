@@ -31,6 +31,7 @@ class mlforrank(object):
 		self.kernel = "rbf"
 		self.gamma = 0.01
 		self.userrank = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,-1]#計算するidのランク
+		self.norank = self.userrank == 22
 		self.rank_col_name = self.dataframe.columns.values[-1]#ランクが入っているcolの名前
 		print("rank conuts")
 		print(self.dataframe[self.rank_col_name].value_counts())
@@ -90,39 +91,48 @@ class mlforrank(object):
 		return result
 		
 	def estimator(self):
-		if self.unique:
+		if self.unique and not self.norank:#ユニークでランクを入力されているやつ
 			print(self.unique)
 			return self.weight(self.userrank)#重みのついたランダムを返す
-		else:
-			self.teature_extractor()
-			self.test_extractor()
-			if self.do_grid:
-				self.grid()
-				self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
-				with open('model.pickle','wb') as f:
-					pickle.dump(self.clf,f)
-			else:
-				with open('model.pickle','rb') as f:
-					self.clf = pickle.load(f)
+
+		self.teature_extractor()
+		self.test_extractor()
+		if self.norank:	
+			with open('model.pickle','rb') as f:
+				self.clf = pickle.load(f)
 			self.clf.fit(self.x,self.y.values.reshape(-1,))
-			if self.do_split:
-				score = self.cross_val()#正答率のようなもの
-			elif self.do_est:
-				score = self.fitting_score()
-			else :
-				return self.weight(self.userrank)
-			print(score)
-			if score < self.limit :
-				return self.weight(self.userrank)#重みのついたランダムを返す
-			else:
-				pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
-				print("predicted")
-				return pred_y[0]
-		
+			pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
+			print("predicted!!!!!")
+			return pred_y[0]
+
+		if self.do_grid:
+			self.grid()
+			self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
+			with open('model.pickle','wb') as f:
+				pickle.dump(self.clf,f)
+		else:
+			with open('model.pickle','rb') as f:
+				self.clf = pickle.load(f)
+		self.clf.fit(self.x,self.y.values.reshape(-1,))
+
+		if self.do_split:
+			score = self.cross_val()#正答率のようなもの
+		elif self.do_est:
+			score = self.fitting_score()
+		else :
+			return self.weight(self.userrank)
+		print(score)
+		if score < self.limit :
+			return self.weight(self.userrank)#重みのついたランダムを返す
+		else:
+			pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
+			print("predicted")
+			return pred_y[0]
+
 def main():
 	df=pd.read_csv(r'Machine_Learning\test.csv')
 	print(df)
-	rank = mlforrank(df, 6)
+	rank = mlforrank(df, 15)
 	print(rank.estimator())
 if __name__ == '__main__':
 	main()
