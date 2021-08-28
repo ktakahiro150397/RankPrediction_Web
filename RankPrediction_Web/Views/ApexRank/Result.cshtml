@@ -4,20 +4,27 @@
     ViewData["Title"] = "ランク予測結果";
 }
 
+@section bodycontainer {
+
+    @*<div class="page-bg"></div>*@
+
+}
+
 @section css{
 
     <style>
-        .btn-container{
-            display:flex;
-            flex-direction:column;
+        .btn-container {
+            display: flex;
+            flex-direction: column;
         }
-        .btn-container .btn{
-            margin-bottom:1rem;
+
+            .btn-container .btn {
+                margin-bottom: 1rem;
             }
 
         @@media (min-width:768px) {
             .btn-container {
-                width:400px;
+                width: 400px;
             }
         }
     </style>

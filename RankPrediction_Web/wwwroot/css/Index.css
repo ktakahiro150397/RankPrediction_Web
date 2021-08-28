@@ -1,4 +1,8 @@
-﻿.bg-sub-desc {
+﻿article{
+    color:white;
+}
+
+.bg-sub-desc {
 /*    background-color: ghostwhite;*/
     padding: 1em;
     border-radius: 0.5em;
@@ -16,6 +20,7 @@
     border-radius: 0.5em;
 }
 
+
 #bg-area{
     position:fixed;
     top:0;
@@ -24,15 +29,16 @@
     left:0;
     z-index:-1;
     overflow:hidden;
+    background:url("../pics/game_yatsuatari.png");
+    background-repeat:no-repeat;
 }
 
-#bg-area:before{
-    background-color:red;
-}
-
-#bg-img{
-    background-size:cover;
-    position:relative;
+#bg-area:after{
+    content:"";
+    display:block;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
 }
 
 /*#background-video {
