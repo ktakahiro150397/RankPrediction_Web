@@ -54,6 +54,7 @@
 	  <Folder Include="Models\ViewModels\" />
 	  <Folder Include="Models\DbContexts\" />
 	  <Folder Include="wwwroot\sozai\" />
+	  <Folder Include="wwwroot\pics\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />
@@ -67,5 +68,6 @@
 	  <Content Remove="wwwroot\sozai\twitter-logo-01282021\Logo blue.svg" />
 	  <Content Remove="wwwroot\sozai\twitter-logo-01282021\Logo white.svg" />
 	  <Content Remove="wwwroot\sozai\" />
+	  <Content Remove="wwwroot\pics\" />
 	</ItemGroup>
 </Project>

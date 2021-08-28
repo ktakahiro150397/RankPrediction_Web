@@ -16,3 +16,35 @@
     border-radius: 0.5em;
 }
 
+#bg-area{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:-1;
+    overflow:hidden;
+    background-color:cyan;
+}
+
+#bg-area:before{
+    background-color:red;
+}
+
+#bg-img{
+    background-size:cover;
+    position:relative;
+}
+
+/*#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;*/
+    /*縦横幅指定*/
+    /*width: 177.77777778vh;*/ /* 16:9 の幅→16 ÷ 9＝ 177.77% */
+    /*height: 56.25vw;*/ /* 16:9の幅 → 9 ÷ 16 = 56.25% */
+    /*min-height: 100%;
+    min-width: 100%;
+}*/
