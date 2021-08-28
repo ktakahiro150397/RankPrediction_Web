@@ -121,9 +121,21 @@ class mlforrank(object):
 		self.dataframe = dataframe
 		self.id = id #入力したユーザーのid
 		self.limit = 0.8 #正答率がこれ以下なら入ってきたまま返す
+		self.nsplit = 3 #cvとかgridとかでデータをスプリットする個数
 		self.C = 0.85
 		self.kernel = "rbf"
 		self.gamma = 0.01
+		self.userrank = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,-1]#計算するidのランク
+		self.rank_col_name = self.dataframe.columns.values[-1]#ランクが入っているcolの名前
+		print("rank conuts")
+		print(self.dataframe[self.rank_col_name].value_counts())
+		self.number_of_members_in_each_rank = self.dataframe[self.rank_col_name].value_counts().min()#データベースに入っているランクの中で一番少ないやつの頻度
+		self.do_grid = self.number_of_members_in_each_rank > self.nsplit + 10 #gridするか否か.T/F.+している数値はサンプル数に応じ変更する
+		self.do_split = self.number_of_members_in_each_rank > self.nsplit
+		self.do_est = self.number_of_members_in_each_rank >= self.nsplit
+		self.dfbool = self.dataframe[self.dataframe[self.rank_col_name] == self.userrank]#計算するidのランクと一致するrowのみで構成されるdf
+		self.unique = len(self.dfbool)<=1 #計算するidのランクがそいつだけしか無いか.T/F
+		print(self.unique)
 	def teature_extractor(self):
 		self.x = self.dataframe[self.dataframe["id"] != self.id].iloc[:,1:-1]#dataframeの最後のcol以外を説明変数としている
 		print(self.x)
@@ -131,16 +143,18 @@ class mlforrank(object):
 		print(self.y)
 	def test_extractor(self):
 		self.x_test = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,1:-1]#dataframeの最後を抜き出す
-		self.y_test = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,-1]
+		self.y_test = self.userrank		
 		print(self.x_test)
 	def cross_val(self):#cross validationのスコアを返す
-		skf = StratifiedKFold(shuffle=True, random_state=0, n_splits=3)
+		skf = StratifiedKFold(shuffle=True, random_state=0, n_splits=self.nsplit)
 		scores = cross_validate(self.clf,self.x,self.y.values.reshape(-1,), cv= skf, return_train_score=True)
 		#print(scores)
 		print(np.mean(scores["test_score"]))
 		return np.mean(scores["test_score"])
+	def fitting_score(self):#モデルで教師データを学習した時のスコアを返す
+		return self.clf.score(self.x, self.y)
 	def weight(self,unestimation):
-		d = [(-1, 98), (0, 844), (1, 1028)]
+		d = [(0, 98), (1, 844), (2, 1028)]
 		a, w = zip(*d)
 		#print(a, w)
 		w2 = np.array(w) / sum(w)
@@ -151,17 +165,31 @@ class mlforrank(object):
 		c = [ np.random.choice(a, p=w2) for i in range(sum(w)) ]
 		print(Counter(c))
 		"""
-		return unestimation+v
+		result = unestimation+v
+		if result>=22:
+			result = 21
+		elif result<=-1:
+			result = 0
+		return result
 	def estimator(self):
-		self.teature_extractor()
-		self.test_extractor()
-		self.clf = pickle.loads(py_model)
-		score = self.cross_val()#正答率のようなもの
-		if score < self.limit :
-			return self.weight(self.y_test)#重みのついたランダムを返す
+		if self.unique:
+			print(self.unique)
+			return self.weight(self.userrank)#重みのついたランダムを返す
 		else:
-			pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
-			return pred_y[0]
+			self.teature_extractor()
+			self.test_extractor()
+			self.clf = pickle.loads(py_model)
+			if self.do_split:
+				score = self.cross_val()#正答率のようなもの
+			elif self.do_est:
+				score = self.fitting_score()
+			else:
+				return self.weight(self.userrank)
+			if score < self.limit :
+				return self.weight(self.userrank)#重みのついたランダムを返す
+			else:
+				pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
+				return pred_y[0]
 		
 
 df=rank_score_data
