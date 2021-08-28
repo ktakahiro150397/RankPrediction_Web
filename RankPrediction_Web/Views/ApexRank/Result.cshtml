@@ -22,23 +22,56 @@
                 margin-bottom: 1rem;
             }
 
-        .rank-pic-div{
-            position:relative;
-            width:100%;
+        .rank-pic-div {
+            position: relative;
+            width: 100%;
         }
 
         .rank-pic {
             position: relative;
             top: 0%;
             left: 50%;
-            transform:translateX(-50%);
-            width:80%;
+            transform: translateX(-50%);
+            width: 80%;
         }
 
         .rank-desc {
-            text-align:center;
-            font-size:1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
         }
+
+        #lblRank{
+            position:absolute;
+            width:100%;
+            top:0;
+            left:0;
+            border-bottom:.5rem solid orange;
+
+        }
+
+        .rank-result {
+            position: relative;
+            display: inline-block;
+        }
+
+            .rank-result::after {
+                content: "";
+                position: absolute;
+                top: 2.1rem;
+                left: 0;
+                width: 100%;
+                background-color: orange;
+                /*opacity:0.9;*/
+                height: .5rem;
+                z-index: -1;
+                transform: scale(1,1);
+                transition: all .3s ease-in-out;
+            }
+
+/*            .rank-result:hover::after {
+                transform: scale(1, 1);
+            }*/
 
         @@media (min-width:575px) {
             .rank-pic {
@@ -51,15 +84,12 @@
             .btn-container {
                 width: 400px;
             }
+
             .rank-pic {
                 width: 40%;
                 height: auto;
             }
-
         }
-
-
-
     </style>
 
 }
@@ -68,16 +98,28 @@
 
     <section>
 
+        <p>
+            診断結果は...
+        </p>
+
         <div class="rank-pic-div">
             <img class="rank-pic" src=" @Model.PredictedResult.RankImageSrcString " />
         </div>
-        
-        <p class="rank-desc">
-            @Html.Label(Model.PredictedResult.PredictResult.RankNameJa) 相当でした！<br/>
-            @Html.Label(Model.PredictedResult.PredictResult.RankDescJa)
-        </p>
+
+        <div class="rank-desc">
+
+            <h1 class="rank-result">
+                @Model.PredictedResult.PredictResult.RankNameJa
+            </h1>
+            @*相当！*@
+            <p>
+                @Html.Label(Model.PredictedResult.PredictResult.RankDescJa)
+            </p>
+        </div>
 
     </section>
+
+    <hr />
 
     <section>
         <p>
@@ -97,4 +139,13 @@
 
 
 
+@section Scripts {
 
+<script>
+    var lblRank = document.getElementById("lblRank");
+
+    lblRank.classList.add("rank-result-underline-enable");
+
+</script>
+
+}
