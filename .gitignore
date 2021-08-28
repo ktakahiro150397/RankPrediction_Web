@@ -365,3 +365,4 @@ FodyWeavers.xsd
 .DS_Store
 .DS_Store
 RankPrediction_Web/Views/Shared/_Footer.cshtml
+RankPrediction_Web/.DS_Store
