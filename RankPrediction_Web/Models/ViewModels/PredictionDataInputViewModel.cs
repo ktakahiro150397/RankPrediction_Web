@@ -21,7 +21,7 @@ namespace RankPrediction_Web.Models
         public int? SelectedSeasonId { get; set; }
 
         [Required(ErrorMessage = "到達ランクを選択してください。")]
-        [Display(Name = "最高到達ランク")]
+        [Display(Name = "シーズン中最高到達ランク")]
         public int? SelectedRankId { get; set; }
 
         [Required(ErrorMessage = "{0}を入力してください。")]
