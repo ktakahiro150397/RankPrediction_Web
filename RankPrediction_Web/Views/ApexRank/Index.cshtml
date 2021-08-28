@@ -10,19 +10,6 @@
 
 @section bodycontainer {
 
-    <div id="bg-area" class="page-bg">
-         @*背景のループ動画表示エリア*@
-        <!--<video id="background-" muted autoplay loop>
-            <source src="~/pics/kings-canyon-12.mp4" type="video/mp4" />
-            Sorry, your browser doesn't support embedded video.
-        </video>-->
-        
-        @*<img id="bg-img" src="~/pics/game_yatsuatari.png" />*@
-        
-    </div>
-
-    
-
 }
 
 
@@ -43,23 +30,6 @@
             </div>
         </div>
     </section>
-    <!--
-    <section>
-        <div class="bg-sub-desc">
-            <h2>機械学習による予測</h2>
-            <p>
-                入力したステータスと近い他のプレーヤは、どのランクである場合が多いかをSVM(サポートベクターマシン)で分類しています。<br />
-                分類を行う機械学習の中で、SVMはよい精度を示すことが多いものです。<br />
-                SVMのカーネルには、所謂、非線形フィッティングを行えるカーネルを使っているため、<br />
-                「Apexが上手になったのにも関わらず、ゴールド帯からプラチナ帯に上がってダメージとキルレが落ちてしまった！」という場合でも実力が向上していることを見抜く事ができます。<br />
-                この性能を存分に引き出すためには、多くのデータが必要になります。<br />
-                ランクを推定するたびにそのデータを保存しているため、多くの人にこのサイトで遊んでいただけば、どんどんそれらしい結果が返ってくるようになります。<br />
-                データの収集にご協力をお願いします！<br />
-            </p>
-            <a class="btn btn-maincolor btn-small" asp-controller="ApexRank" asp-action="Input" onClickLoad>ランクを予測してみる</a>
-        </div>
-    </section>
-    -->
     <section>
         <div class="bg-sub-desc">
             <h2>実力が気になりませんか？</h2>
@@ -78,7 +48,7 @@
                 フレンドと一緒にランクを予測してみませんか？<br />
                 データが増えるほど正確な予測が可能になります！<br />
             </p>
-            @await Html.PartialAsync("_tweet", null)
+            @await Html.PartialAsync("_SNS", null)
 
         </div>
     </section>

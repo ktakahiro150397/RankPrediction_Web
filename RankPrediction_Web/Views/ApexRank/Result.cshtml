@@ -22,11 +22,44 @@
                 margin-bottom: 1rem;
             }
 
+        .rank-pic-div{
+            position:relative;
+            width:100%;
+        }
+
+        .rank-pic {
+            position: relative;
+            top: 0%;
+            left: 50%;
+            transform:translateX(-50%);
+            width:80%;
+        }
+
+        .rank-desc {
+            text-align:center;
+            font-size:1.5rem;
+        }
+
+        @@media (min-width:575px) {
+            .rank-pic {
+                width: 70%;
+                height: auto;
+            }
+        }
+
         @@media (min-width:768px) {
             .btn-container {
                 width: 400px;
             }
+            .rank-pic {
+                width: 40%;
+                height: auto;
+            }
+
         }
+
+
+
     </style>
 
 }
@@ -34,13 +67,15 @@
 <article>
 
     <section>
-        <p>あなたのランクは...</p>
 
-        <p>ここにランク画像を置く</p>
-
-        <p>@Html.Label(Model.RankDiscriptionstring)  </p>
-
-        <p>@Html.Label(Model.RankResultString)</p>
+        <div class="rank-pic-div">
+            <img class="rank-pic" src=" @Model.PredictedResult.RankImageSrcString " />
+        </div>
+        
+        <p class="rank-desc">
+            @Html.Label(Model.PredictedResult.PredictResult.RankNameJa) 相当でした！<br/>
+            @Html.Label(Model.PredictedResult.PredictResult.RankDescJa)
+        </p>
 
     </section>
 
@@ -48,13 +83,9 @@
         <p>
             データ入力のご協力ありがとうございました！<br />
             予測結果を共有してみませんか？<br />
+            @await Html.PartialAsync("_SNS", null)
         </p>
 
-        <div>
-            <p>
-                @await Html.PartialAsync("_tweet", null)
-            </p>
-        </div>
     </section>
 
 

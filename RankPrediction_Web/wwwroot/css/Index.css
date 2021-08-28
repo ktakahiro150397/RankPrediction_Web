@@ -1,7 +1,7 @@
-﻿article{
+﻿/*article{
     color:white;
 }
-
+*/
 .bg-sub-desc {
 /*    background-color: ghostwhite;*/
     padding: 1em;
@@ -21,7 +21,7 @@
 }
 
 
-#bg-area{
+/*#bg-area{
     position:fixed;
     top:0;
     right:0;
@@ -39,7 +39,7 @@
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.7);
-}
+}*/
 
 /*#background-video {
     position: absolute;
