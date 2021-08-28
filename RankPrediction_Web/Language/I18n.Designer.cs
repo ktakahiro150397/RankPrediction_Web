@@ -61,7 +61,7 @@ namespace RankPrediction_Web.Language {
         }
         
         /// <summary>
-        ///   Apex Legends ランク診断 に類似しているローカライズされた文字列を検索します。
+        ///   Apex Legends 実力診断 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SITE_TITLE {
             get {
