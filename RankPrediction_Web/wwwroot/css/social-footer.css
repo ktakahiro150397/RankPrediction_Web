@@ -1,0 +1,33 @@
+﻿.social-footer-container{
+    position:relative;
+    width:100%;
+    padding:0;
+}
+
+.social-footer-ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width:100%;
+    flex-wrap:wrap;
+}
+
+.social-footer-ul li {
+    margin:.8rem;
+}
+
+
+.social-footer-ul li a {
+    color: #CCC;
+    border: 1px solid #CCC;
+    padding:.5rem;
+    border-radius: 50%;
+}
+
+.social-footer-ul li i {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
