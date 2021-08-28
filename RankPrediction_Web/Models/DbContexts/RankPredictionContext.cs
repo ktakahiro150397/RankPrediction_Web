@@ -98,6 +98,16 @@ namespace RankPrediction_Web.Models.DbContexts
 
                 entity.Property(e => e.DisplaySeq).HasColumnName("display_seq");
 
+                entity.Property(e => e.RankDesc)
+                    .IsRequired()
+                    .HasColumnName("rank_desc")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.RankDescJa)
+                    .IsRequired()
+                    .HasColumnName("rank_desc_ja")
+                    .HasDefaultValueSql("('')");
+
                 entity.Property(e => e.RankName)
                     .IsRequired()
                     .HasMaxLength(32)
@@ -109,6 +119,8 @@ namespace RankPrediction_Web.Models.DbContexts
                     .HasMaxLength(128)
                     .HasColumnName("rank_name_ja")
                     .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.RankPic).HasColumnName("rank_pic");
             });
 
             modelBuilder.Entity<RankPyModel>(entity =>

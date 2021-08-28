@@ -16,6 +16,9 @@ namespace RankPrediction_Web.Models.DbContexts
         public string RankName { get; set; }
         public string RankNameJa { get; set; }
         public int DisplaySeq { get; set; }
+        public byte[] RankPic { get; set; }
+        public string RankDesc { get; set; }
+        public string RankDescJa { get; set; }
 
         public virtual ICollection<PredictionDatum> PredictionData { get; set; }
     }
