@@ -24,15 +24,14 @@ namespace RankPrediction_Web.Models
         {
             get
             {
-                // TODO : Rank Class kara gazou bukko nuku
-                return null;
+                return PredictResult.RankPic;
             }
         }
 
         /// <summary>
         /// 設定されているランク画像のBase64エンコード文字列を返します。設定されていない場合、空文字を返します。
         /// </summary>
-        public string RankPictureBase64String
+        private string RankPictureBase64String
         {
             get
             {
@@ -43,6 +42,21 @@ namespace RankPrediction_Web.Models
                 else
                 {
                     return Convert.ToBase64String(RankPicture);
+                }
+            }
+        }
+
+        public string RankImageSrcString
+        {
+            get
+            {
+                if(RankPictureBase64String == "")
+                {
+                    return "";
+                }
+                else
+                {
+                    return "data:image/png;base64," + RankPictureBase64String;
                 }
             }
         }
@@ -70,13 +84,17 @@ namespace RankPrediction_Web.Models
                             RankId = rank.RankId,
                             RankName = rank.RankName,
                             RankNameJa = rank.RankNameJa,
+                            RankDescJa = rank.RankDescJa,
+                            RankPic = rank.RankPic,
                             pyRankId = pyRank.Id
                         })
                     .OrderByDescending(item => item.pyRankId)
                     .Select(item => new Rank() {
                         RankId = item.RankId,
                         RankName = item.RankName,
-                        RankNameJa = item.RankNameJa
+                        RankNameJa = item.RankNameJa,
+                        RankDescJa = item.RankDescJa,
+                        RankPic = item.RankPic
                     })
                     .First();
             }
