@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SITE_TITLE" xml:space="preserve">
-    <value>Apex Legends ランク予測</value>
+    <value>Apex Legends ランク診断</value>
   </data>
 </root>
