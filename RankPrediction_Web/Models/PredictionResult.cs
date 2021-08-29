@@ -50,7 +50,7 @@ namespace RankPrediction_Web.Models
         {
             get
             {
-                if(RankPictureBase64String == "")
+                if (RankPictureBase64String == "")
                 {
                     return "";
                 }
@@ -70,9 +70,12 @@ namespace RankPrediction_Web.Models
         {
             _id = id;
 
-            if (dbContext.PyRankPredictions.Any(item => item.SourceDataId == _id && item.PredictResultRankId != null))
+            if (dbContext.PyRankPredictions.Any(
+                item => item.SourceDataId == _id &&
+                item.PredictResultRankId != null &&
+                item.PredictResultRankId != 22))
             {
-                // nullではない結果が存在する場合、その結果を取得する
+                // nullではなく、有効な予測結果が存在する場合、その結果を取得する
                 PredictResult = dbContext.PyRankPredictions
                     .Where(item => item.SourceDataId == _id && item.PredictResultRankId != null)
                     .Join(
@@ -89,7 +92,8 @@ namespace RankPrediction_Web.Models
                             pyRankId = pyRank.Id
                         })
                     .OrderByDescending(item => item.pyRankId)
-                    .Select(item => new Rank() {
+                    .Select(item => new Rank()
+                    {
                         RankId = item.RankId,
                         RankName = item.RankName,
                         RankNameJa = item.RankNameJa,
@@ -102,7 +106,7 @@ namespace RankPrediction_Web.Models
             {
                 //結果が存在しない場合、SPから取得する
 
-                if(dbContext.PredictionData.Any(item=> item.Id == _id))
+                if (dbContext.PredictionData.Any(item => item.Id == _id))
                 {
                     //対象のデータIDが存在する場合はSP実行
                     var execRawSql = "EXEC ml_predict.get_predict_result_by_id {0}";
@@ -115,7 +119,7 @@ namespace RankPrediction_Web.Models
                 {
                     //存在しないデータID
                     PredictResult = null;
-                    
+
                 }
             }
 
