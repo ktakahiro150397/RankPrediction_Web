@@ -12,6 +12,8 @@
     /*    background-color: ghostwhite;*/
     padding: 0.5em;
     border-radius: 0.5em;
+    margin: 3em auto 3em auto;
+    text-align: left;
 }
 
 .bg-notice {
@@ -56,7 +58,9 @@
 
 #top_img {
     margin: auto auto auto auto;
-    width: 45%;
+    width: 100%;
+    padding-right: 1em;
+    padding-left: 1em;
 }
 #top_img_bg {
     width: 100vw;
