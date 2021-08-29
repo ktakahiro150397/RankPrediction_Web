@@ -55,6 +55,15 @@
 }*/
 
 #top_img {
-    margin:auto auto 10em auto;
-    width:1000px;
+    margin: auto auto auto auto;
+    width: 45%;
+}
+#top_img_bg {
+    width: 100vw;
+    position: relative;
+    background-color: #d1d2d4;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
 }
