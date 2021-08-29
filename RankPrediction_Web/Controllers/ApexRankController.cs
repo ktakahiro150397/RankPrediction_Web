@@ -27,7 +27,6 @@ namespace RankPrediction_Web.Controllers
         [HttpGet]
         public IActionResult Input()
         {
-            var a = 4 / int.Parse("0");
 
             var vm = new PredictionDataInputViewModel
             {
