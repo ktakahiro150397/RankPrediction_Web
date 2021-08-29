@@ -55,6 +55,7 @@
 	  <Folder Include="Models\DbContexts\" />
 	  <Folder Include="wwwroot\sozai\" />
 	  <Folder Include="wwwroot\pics\" />
+	  <Folder Include="_Log\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />

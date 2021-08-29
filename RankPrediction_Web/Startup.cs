@@ -12,6 +12,7 @@ using RankPrediction_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using RankPrediction_Web.Models.DbContexts;
+using Microsoft.Extensions.Logging;
 
 namespace RankPrediction_Web
 {
@@ -39,7 +40,7 @@ namespace RankPrediction_Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +65,8 @@ namespace RankPrediction_Web
                     name: "default",
                     pattern: "{controller=ApexRank}/{action=Index}/{id?}");
             });
+
+            loggerFactory.AddProvider(new SystemLoggerProvider());
         }
     }
 }
