@@ -1,0 +1,53 @@
+﻿@model RankPrediction_Web.Models.ViewModels.ErrorViewModel
+
+@{ ViewData["Title"] = "エラーが発生しました";
+}
+
+@section css {
+
+    <style>
+        .span-sayingby {
+            position: relative;
+            left: 1rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+
+}
+
+<section>
+
+    <p>
+        処理中にエラーが発生しました。<br />
+        後で開発者が修正します m(_ _;)m<br />
+        10秒後にトップページへ戻ります...<br />
+    </p>
+
+    <a class="btn btn-small" asp-controller="ApexRank" asp-action="Index">トップへ戻る</a>
+
+    <hr />
+
+
+    @if (Model.Saying != null)
+    {
+        <p>
+            @Model.SayingStr<br />
+            <span class="span-sayingby">
+                — @Model.SayingByStr
+            </span>
+        </p>
+    }
+
+
+
+</section>
+
+@section Scripts {
+
+
+    <script>
+        //指定秒数後に、トップページへ遷移する
+        setTimeout("location.href = '../ApexRank'", 1000 * 10);
+    </script>
+
+} 
