@@ -25,12 +25,15 @@
 <body ontouchstart="">
     <div id="content-wrap">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg border-bottom box-shadow mb-0">
                 <div class="container">
                     <h3><a class="navbar-brand" id="header_txt" asp-area="" asp-controller="ApexRank" asp-action="Index" onClickLoad>Apex Legends 実力診断</a></h3>
-</div>
+                </div>
             </nav>
         </header>
+
+
+
         <div class="container" id="content-main">
             @RenderSection("bodycontainer", required: false)
             <main role="main" class="pb-3 bg-main">
