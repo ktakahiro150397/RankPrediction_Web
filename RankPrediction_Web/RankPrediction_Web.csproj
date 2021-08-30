@@ -24,6 +24,8 @@
 	  <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
 	  <None Remove="Models\ViewModels\" />
 	  <None Remove="Models\DbContexts\" />
+	  <None Remove="Views\RankChart\" />
+	  <None Remove="Models\ViewModels\Chart\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
@@ -56,6 +58,8 @@
 	  <Folder Include="wwwroot\sozai\" />
 	  <Folder Include="wwwroot\pics\" />
 	  <Folder Include="_Log\" />
+	  <Folder Include="Views\RankChart\" />
+	  <Folder Include="Models\ViewModels\Chart\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />
