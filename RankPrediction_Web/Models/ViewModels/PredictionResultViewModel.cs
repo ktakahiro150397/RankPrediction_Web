@@ -1,5 +1,6 @@
 ﻿using System;
 using RankPrediction_Web.Models.DbContexts;
+using RankPrediction_Web.Models.SnsShare;
 
 namespace RankPrediction_Web.Models.ViewModels
 {
@@ -9,6 +10,8 @@ namespace RankPrediction_Web.Models.ViewModels
 
 
         public PredictionResult PredictedResult { get; set; }
+
+        public SnsShareModel SnsShare { get; set; }
 
         /// <summary>
         /// 指定されたIDの結果を表示するViewModelを初期化します。
@@ -20,6 +23,12 @@ namespace RankPrediction_Web.Models.ViewModels
 
             //対象IDの予測結果を取得する
             PredictedResult = new PredictionResult(dbContext, _id);
+
+            if(PredictedResult != null)
+            {
+                //SNS共有は結果に応じたカスタム文言
+                SnsShare = new SnsShareModel("title", "shareText");
+            }
 
         }
 
