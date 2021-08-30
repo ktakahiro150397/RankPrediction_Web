@@ -19,7 +19,7 @@ namespace RankPrediction_Web.Models.SnsShare
 
             Twitter = new TwitterContents()
             {
-                LinkUrl = "www.google.com",
+                LinkUrl = "https://twitter.com/share?url=https://apexrankprediction.azurewebsites.net/&text=AIでAPEXの実力を診断してみよう&hashtags=APEX実力診断",
                 ShareTitle = title,
                 ShareText = shareText
             };
