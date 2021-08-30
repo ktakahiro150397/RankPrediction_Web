@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="~/css/loading.css" />
     <link rel="stylesheet" href="~/css/ibm-plex-sans-jp.css">
     <link rel="stylesheet" href="~/css/ibm-plex-sans-jp.min.css">
+    @*chart.js読み込み*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+            integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
     <style>
         body {
             font-family: 'IBM Plex Sans JP'
@@ -30,6 +35,19 @@
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg border-bottom box-shadow mb-0">
                 <div class="container">
                     <h3><a class="navbar-brand" id="header_txt" asp-area="" asp-controller="ApexRank" asp-action="Index" onClickLoad>Apex Legends 実力診断</a></h3>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RankChart" asp-action="Index">チャート</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </nav>
         </header>
