@@ -1,4 +1,6 @@
-﻿@section css {
+﻿@model RankPrediction_Web.Models.ViewModels.IndexViewModel
+
+@section css {
 
     <link rel="stylesheet" href="~/css/Index.css" />
 
@@ -56,7 +58,7 @@
                 フレンドと一緒に実力を診断してみませんか？<br />
                 ユーザーが増えれば増えるほど正確な診断が可能になります！<br />
             </p>
-            @await Html.PartialAsync("_SNS", null)
+            @await Html.PartialAsync("_SNS", Model)
 
         </div>
     </section>

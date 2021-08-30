@@ -7,14 +7,19 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RankPrediction_Web.Models.DbContexts;
 
-namespace RankPrediction_Web.Models
+namespace RankPrediction_Web.Models.ViewModels
 {
 
     /// <summary>
     /// 戦績データ入力に必要なデータを全て持つViewModel
     /// </summary>
-    public class PredictionDataInputViewModel
+    public class PredictionDataInputViewModel : LayoutViewModel
     {
+
+        public PredictionDataInputViewModel() : base()
+        {
+
+        }
 
         [Required(ErrorMessage = "{0}を選択してください。")]
         [Display(Name = "シーズン名")]

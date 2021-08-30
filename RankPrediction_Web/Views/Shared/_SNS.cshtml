@@ -1,24 +1,46 @@
-﻿<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
+﻿@model RankPrediction_Web.Models.ViewModels.LayoutViewModel
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
 <link rel="stylesheet" href="~/css/social-footer.css" />
 
 <div class="social-footer-ul">
-    
-    <a href="https://twitter.com/share?url=https://dev.twitter.com/web/tweet-button&text=Here is data-text attribute&hashtags=hashtags">
+
+    @*<a href="https://twitter.com/share?url=https://dev.twitter.com/web/tweet-button&text=Here is data-text attribute&hashtags=hashtags">
+            <i class="fab fa-twitter"></i>
+        </a>*@
+    <a href="@Model.SnsShare.Twitter.LinkUrl">
         <i class="fab fa-twitter"></i>
     </a>
+
+    @*<a href="https://www.facebook.com/sharer/sharer.php?u=https://apexrankprediction.azurewebsites.net/"
+           target="_blank"
+           rel="nofollow noopener noreferrer">
+            <i class="fab fa-facebook-f"></i>
+        </a>*@
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://apexrankprediction.azurewebsites.net/"
        target="_blank"
        rel="nofollow noopener noreferrer">
         <i class="fab fa-facebook-f"></i>
     </a>
+
     @*<a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a>*@
+    @*<a href="https://getpocket.com/edit?url=https://apexrankprediction.azurewebsites.net/"
+           target="_blank"
+           rel="nofollow noopener noreferrer">
+            <i class="fab fa-get-pocket"></i>
+        </a>*@
     <a href="https://getpocket.com/edit?url=https://apexrankprediction.azurewebsites.net/"
        target="_blank"
        rel="nofollow noopener noreferrer">
         <i class="fab fa-get-pocket"></i>
     </a>
+
+    @*<a href="javascript:displayNativeShareMenu();" shareLink>
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </a>*@
     <a href="javascript:displayNativeShareMenu();" shareLink>
         <i class="fa fa-share-alt" aria-hidden="true"></i>
     </a>
+
 
 </div>
