@@ -5,9 +5,9 @@ using RankPrediction_Web.Models.DbContexts;
 
 namespace RankPrediction_Web.Models.ViewModels
 {
-    public class ErrorViewModel
+    public class ErrorViewModel : LayoutViewModel
     {
-        public ErrorViewModel(RankPredictionContext db)
+        public ErrorViewModel(RankPredictionContext db):base()
         {
 
             Saying = db.Sayings.FromSqlRaw("SELECT TOP(1) * FROM [ml_predict].[sayings] ORDER BY NEWID() ")

@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace RankPrediction_Web.Models.ViewModels
 {
-    public class CalcViewModel
+    public class CalcViewModel : LayoutViewModel
     {
-        public CalcViewModel(RankPredictionContext db)
+        public CalcViewModel(RankPredictionContext db) : base()
         {
             Saying = db.Sayings.FromSqlRaw("SELECT TOP(1) * FROM [ml_predict].[sayings] ORDER BY NEWID() ")
                     .First();

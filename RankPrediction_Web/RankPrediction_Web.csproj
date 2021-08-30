@@ -24,6 +24,7 @@
 	  <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
 	  <None Remove="Models\ViewModels\" />
 	  <None Remove="Models\DbContexts\" />
+	  <None Remove="Models\SNS\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
@@ -56,6 +57,7 @@
 	  <Folder Include="wwwroot\sozai\" />
 	  <Folder Include="wwwroot\pics\" />
 	  <Folder Include="_Log\" />
+	  <Folder Include="Models\SnsShare\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />
