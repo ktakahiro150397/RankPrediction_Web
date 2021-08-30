@@ -26,6 +26,7 @@
 	  <None Remove="Models\DbContexts\" />
 	  <None Remove="Views\RankChart\" />
 	  <None Remove="Models\ViewModels\Chart\" />
+	  <None Remove="Models\SNS\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
@@ -60,6 +61,7 @@
 	  <Folder Include="_Log\" />
 	  <Folder Include="Views\RankChart\" />
 	  <Folder Include="Models\ViewModels\Chart\" />
+	  <Folder Include="Models\SnsShare\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />

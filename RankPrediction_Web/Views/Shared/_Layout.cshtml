@@ -1,5 +1,7 @@
 ﻿@using RankPrediction_Web.Language;
 
+@model RankPrediction_Web.Models.ViewModels.LayoutViewModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +64,7 @@
         <footer class="border-top modal-footer text-muted footer">
             <div class="container">
                 @*&copy; 2021 - Apexランク予測*@
-                @await Html.PartialAsync("_SNS", null)
+                @await Html.PartialAsync("_SNS",Model)
             </div>
         </footer>
     </div>
