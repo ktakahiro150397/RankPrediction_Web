@@ -10,20 +10,21 @@ namespace RankPrediction_Web.Models.ViewModels.Chart
         public ChartIndexViewModel(RankPredictionContext db) : base()
         {
 
-            RankAverageKillRatio = new ChartData();
-
-            var rankAverageKills =
-               db.PredictionData
-               .GroupBy(item => item.RankId)
-               .OrderBy(item => item.Key)
-               .Select(item => new { RankId = item.Key, KillRatioAverage = item.Average(elem => elem.KillDeathRatio) })
-               .ToList();
-
-
-            foreach(var elem in rankAverageKills)
+            RankAverageKillRatio = new ChartData()
             {
-                RankAverageKillRatio.data.Add(elem.KillRatioAverage.Value);
-            }
+                ChartLabel = "ランク別平均キルレシオ",
+                //ここでデータ取得処理
+                ChartValues =
+                   db.PredictionData
+                   .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                   .OrderBy(item => item.Key.RankId)
+                   .Select(item => new ChartValues()
+                   {
+                       Label = item.Key.RankNameJa,
+                       Value = item.Average(elem => elem.KillDeathRatio.Value)
+                   })
+                   .ToList()
+            };
 
         }
 
