@@ -18,6 +18,7 @@ test
 
     var ctx = document.getElementById("testChart");
 
+    //このデータの更新を行う？
     const data = [
         { x: 'ブロンズ', tier1: 100, tier2: 50, tier3: 50, tier4: 70 },
         { x: 'シルバー', tier1: 120, tier2: 50, tier3: 50, tier4: 70 },
@@ -67,15 +68,23 @@ test
                 mode: 'nearest'
             },
             scales: {
+                @*xAxes:{
+                    ticks: {                      // 目盛り
+                        fontColor: "red",             // 目盛りの色
+                        fontSize: 14                  // フォントサイズ
+                        }
+                },*@
                 x: {
+                    offset: true,
                     grid: {
                         color: 'red',
                         borderColor: 'grey',
                         tickColor: 'grey'
                     },
                     title: {
-                        display:true,
-                        text:"ランク"
+                        color: 'red',
+                        display: true,
+                        text: "ランク"
                     }
                 }
             }
