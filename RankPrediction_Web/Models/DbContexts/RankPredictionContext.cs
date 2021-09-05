@@ -20,7 +20,9 @@ namespace RankPrediction_Web.Models.DbContexts
         public virtual DbSet<PredictionDatum> PredictionData { get; set; }
         public virtual DbSet<PyRankPrediction> PyRankPredictions { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
+        public virtual DbSet<RankAmazonUrl> RankAmazonUrls { get; set; }
         public virtual DbSet<RankPyModel> RankPyModels { get; set; }
+        public virtual DbSet<RanksGeneral> RanksGenerals { get; set; }
         public virtual DbSet<Saying> Sayings { get; set; }
         public virtual DbSet<SeasonName> SeasonNames { get; set; }
 
@@ -123,6 +125,25 @@ namespace RankPrediction_Web.Models.DbContexts
                 entity.Property(e => e.RankPic).HasColumnName("rank_pic");
             });
 
+            modelBuilder.Entity<RankAmazonUrl>(entity =>
+            {
+                entity.ToTable("rank_amazon_url", "ml_predict");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AmazonUrl)
+                    .IsRequired()
+                    .HasColumnName("amazon_url");
+
+                entity.Property(e => e.RankGeneralId).HasColumnName("rank_general_id");
+
+                entity.HasOne(d => d.RankGeneral)
+                    .WithMany(p => p.RankAmazonUrls)
+                    .HasForeignKey(d => d.RankGeneralId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__rank_amaz__rank___17F790F9");
+            });
+
             modelBuilder.Entity<RankPyModel>(entity =>
             {
                 entity.HasKey(e => new { e.SeasonId, e.IsMatchcountsContain })
@@ -145,6 +166,18 @@ namespace RankPrediction_Web.Models.DbContexts
                     .HasForeignKey(d => d.SeasonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SEASON_ID");
+            });
+
+            modelBuilder.Entity<RanksGeneral>(entity =>
+            {
+                entity.ToTable("ranks_general", "ml_predict");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.RankName)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnName("rank_name");
             });
 
             modelBuilder.Entity<Saying>(entity =>

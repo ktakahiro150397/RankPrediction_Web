@@ -6,7 +6,7 @@ namespace RankPrediction_Web.Models.ViewModels
     /// <summary>
     /// レイアウトページのビューモデルを兼ねる基底クラス。
     /// </summary>
-    public abstract class LayoutViewModel
+    public class LayoutViewModel
     {
         public LayoutViewModel()
         {
