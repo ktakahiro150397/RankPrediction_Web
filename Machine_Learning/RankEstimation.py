@@ -10,7 +10,7 @@ import pandas as pd
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_validate, StratifiedKFold, GridSearchCV
 import pickle
-
+import time
 class mlforrank(object):
 	"""
 	grid search (cross_validation)でハイパーパラメータ達を決める
@@ -22,6 +22,8 @@ class mlforrank(object):
 	Falseなら保存してあるモデルを読み込む
 	"""
 	def __init__(self, dataframe, id):
+		init_start=time.time()
+
 		super(mlforrank, self).__init__()
 		self.dataframe = dataframe
 		self.id = id #入力したユーザーのid
@@ -41,6 +43,9 @@ class mlforrank(object):
 		self.dfbool = self.dataframe[self.dataframe[self.rank_col_name] == self.userrank]#計算するidのランクと一致するrowのみで構成されるdf
 		self.unique = len(self.dfbool)<=1 #計算するidのランクがそいつだけしか無いか.T/F
 		print(self.unique)
+		init_time=time.time()-init_start
+		print("init time:{}".format(init_time)+"[sec]")
+
 	def teature_extractor(self):
 		self.x = self.dataframe[self.dataframe["id"] != self.id].iloc[:,1:-1]#dataframeの最後のcol以外を説明変数としている
 		print(self.x)
@@ -50,14 +55,18 @@ class mlforrank(object):
 		self.x_test = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,1:-1]#dataframeの最後を抜き出す
 		self.y_test = self.userrank
 	def cross_val(self):#cross validationのスコアを返す
+		cv_start=time.time()
 		skf = StratifiedKFold(shuffle=True, random_state=0, n_splits=self.nsplit)
 		scores = cross_validate(self.clf,self.x,self.y.values.reshape(-1,), cv= skf, return_train_score=True)
 		#print(scores)
 		print(np.mean(scores["test_score"]))
+		cv_time=time.time()-cv_start
+		print("cv time:{}".format(cv_time)+"[sec]")
 		return np.mean(scores["test_score"])
 	def fitting_score(self):#モデルで教師データを学習した時のスコアを返す
 		return self.clf.score(self.x, self.y)
 	def grid(self):#ハイパーパラメタの決定
+		grid_start=time.time()
 		tuned_parameters=[{"C":[0.85,1,5,10],"kernel":[self.kernel],"gamma":[1,0.1,0.001,0.0001]}]
 		self.classifier = GridSearchCV(
 			SVC(),
@@ -70,7 +79,12 @@ class mlforrank(object):
 		self.C = self.classifier.best_params_['C']
 		self.kernel=self.classifier.best_params_['kernel']
 		self.gamma=self.classifier.best_params_['gamma']
+		grid_time=time.time()-grid_start
+		print("grid time:{}".format(grid_time)+"[sec]")
+
 	def weight(self,unestimation):
+		weight_start=time.time()
+
 		d = [(0, 98), (1, 844), (2, 1028)]
 		a, w = zip(*d)
 		#print(a, w)
@@ -87,6 +101,9 @@ class mlforrank(object):
 			result = 21
 		elif result<=-1:
 			result = 0
+		weight_time=time.time()-weight_start
+		print("weight time:{}".format(weight_time)+"[sec]")
+
 		return result
 		
 	def estimator(self):
