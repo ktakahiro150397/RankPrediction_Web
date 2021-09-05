@@ -12,6 +12,8 @@ namespace RankPrediction_Web.Models.SnsShare
     {
         public SnsShareContents()
         {
+            //シェアするベースURL。
+            ShareUrl = "https://apexrankprediction.azurewebsites.net";
         }
 
         /// <summary>
@@ -21,9 +23,7 @@ namespace RankPrediction_Web.Models.SnsShare
         {
             get
             {
-                return BaseUrl;
-
-
+                return "";
             }
         }
 
@@ -41,11 +41,6 @@ namespace RankPrediction_Web.Models.SnsShare
         /// 共有本文
         /// </summary>
         public string ShareText { get; set; }
-
-        /// <summary>
-        /// Twitter共有のベースとなるURL。
-        /// </summary>
-        private const string BaseUrl = "https://twitter.com/share";
 
 
     }

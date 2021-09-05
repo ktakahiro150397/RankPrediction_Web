@@ -19,23 +19,19 @@ namespace RankPrediction_Web.Models.SnsShare
 
             Twitter = new TwitterContents()
             {
-                //LinkUrl = "https://twitter.com/share?url=https://apexrankprediction.azurewebsites.net/&text=AIでAPEXの実力を診断してみよう&hashtags=APEX実力診断",
                 ShareTitle = title,
                 ShareText = shareText
             };
             FaceBook = new SnsShareContents()
             {
-                //LinkUrl = "www.google.com",
                 ShareTitle = title,
                 ShareText = shareText
             };
             OSNative = new SnsShareContents()
             {
-                //LinkUrl = "www.google.com",
                 ShareTitle = title,
                 ShareText = shareText
             };
-
         }
 
         /// <summary>
