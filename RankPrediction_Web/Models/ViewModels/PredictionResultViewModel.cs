@@ -24,8 +24,10 @@ namespace RankPrediction_Web.Models.ViewModels
 
             if(PredictedResult != null)
             {
-                //SNS共有は結果に応じたカスタム文言に修正する
-                SnsShare = new SnsShareModel("title", "shareText");
+                //SNS共有は結果に応じたカスタム文言にする
+                SnsShare = new SnsShareModel("AIでAPEXの実力を診断してみました！",
+                                             $"私の診断結果は「{PredictedResult.PredictResult.RankNameJa}」でした！");
+                SnsShare.Twitter.HashTags.Add(PredictedResult.PredictResult.RankNameJa);
             }
 
         }

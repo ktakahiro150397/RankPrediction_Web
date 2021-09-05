@@ -27,6 +27,7 @@
 	  <None Remove="Views\RankChart\" />
 	  <None Remove="Models\ViewModels\Chart\" />
 	  <None Remove="Models\SNS\" />
+	  <None Remove="Mono.HttpUtility" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />

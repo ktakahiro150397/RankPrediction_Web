@@ -6,7 +6,8 @@ namespace RankPrediction_Web.Models.SnsShare
         public SnsShareModel()
         {
             Twitter = new TwitterContents();
-            FaceBook = new SnsShareContents();
+            FaceBook = new FaceBookContents();
+            Pocket = new PocketContents();
             OSNative = new SnsShareContents();
         }
 
@@ -19,23 +20,29 @@ namespace RankPrediction_Web.Models.SnsShare
 
             Twitter = new TwitterContents()
             {
-                LinkUrl = "https://twitter.com/share?url=https://apexrankprediction.azurewebsites.net/&text=AIでAPEXの実力を診断してみよう&hashtags=APEX実力診断",
                 ShareTitle = title,
                 ShareText = shareText
             };
-            FaceBook = new SnsShareContents()
+            Twitter.HashTags.Add("APEX実力診断");
+            Twitter.HashTags.Add("ApexLegends");
+
+            FaceBook = new FaceBookContents()
             {
-                LinkUrl = "www.google.com",
-                ShareTitle = title,
-                ShareText = shareText
-            };
-            OSNative = new SnsShareContents()
-            {
-                LinkUrl = "www.google.com",
                 ShareTitle = title,
                 ShareText = shareText
             };
 
+            Pocket = new PocketContents()
+            {
+                ShareTitle = title,
+                ShareText = shareText
+            };
+
+            OSNative = new SnsShareContents()
+            {
+                ShareTitle = title,
+                ShareText = shareText
+            };
         }
 
         /// <summary>
@@ -46,7 +53,12 @@ namespace RankPrediction_Web.Models.SnsShare
         /// <summary>
         /// Facebookの共有データ。
         /// </summary>
-        public SnsShareContents FaceBook { get; set; }
+        public FaceBookContents FaceBook { get; set; }
+
+        /// <summary>
+        /// Pocketの共有データ。
+        /// </summary>
+        public PocketContents Pocket { get; set; }
 
         /// <summary>
         /// OS汎用共有の共有データ。
