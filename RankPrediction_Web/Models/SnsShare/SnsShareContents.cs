@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Collections.Specialized;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace RankPrediction_Web.Models.SnsShare
 {
@@ -16,19 +17,13 @@ namespace RankPrediction_Web.Models.SnsShare
         /// <summary>
         /// ボタンに割り当てるリンク先のURL。
         /// </summary>
-        public string LinkUrl {
+        public virtual string LinkUrl
+        {
             get
             {
+                return BaseUrl;
 
-                //var query = new HttpUtility.ParseQueryString("");
 
-
-                //var urlBuilder = new UriBuilder()
-                //{
-                //    Query =
-                //}
-
-                return "https://twitter.com/share?url=https://apexrankprediction.azurewebsites.net/&text=AIでAPEXの実力を診断してみよう&hashtags=APEX実力診断";
             }
         }
 
@@ -65,6 +60,11 @@ namespace RankPrediction_Web.Models.SnsShare
             HashTags = new List<string>();
         }
 
+        /// <summary>
+        /// Twitter共有のベースとなるURL。
+        /// </summary>
+        private const string BaseUrl = "https://twitter.com/share";
+
         public IList<string> HashTags { get; set; }
 
         public string HashTagsCommaSeparete
@@ -74,6 +74,27 @@ namespace RankPrediction_Web.Models.SnsShare
                 return String.Join(",", HashTags);
             }
         }
+
+        public override string LinkUrl
+        {
+            get
+            {
+                //クエリ文字列のディクショナリ
+                var queryDic = new Dictionary<string, string>()
+                {
+                    {"url",ShareUrl },
+                    {"text",  ShareTitle + "\n" + ShareText},
+                    {"hashtags", HashTagsCommaSeparete }
+                };
+
+
+                //クエリパラメータの追加
+                var uri = QueryHelpers.AddQueryString(BaseUrl, queryDic);
+
+                return new Uri(uri).ToString();
+            }
+        }
+
     }
 
 }
