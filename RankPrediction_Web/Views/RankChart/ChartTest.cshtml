@@ -1,0 +1,123 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+test
+
+<div id="chart-container" style="position:relative;width:90%;height:80vh;">
+    <canvas id="testChart" style="width:90%;height:60vh;"></canvas>
+</div>
+
+
+
+
+<script>
+
+    var ctx = document.getElementById("testChart");
+
+    //このデータの更新を行う？
+    const data = [
+        { x: 'ブロンズ', tier1: 100, tier2: 50, tier3: 50, tier4: 70 },
+        { x: 'シルバー', tier1: 120, tier2: 50, tier3: 50, tier4: 70 },
+        { x: 'ゴールド', tier1: 70, tier2: 50, tier3: 50, tier4: 70 },
+        { x: 'プラチナ', tier1: 140, tier2: 50, tier3: 50, tier4: 70 },
+        { x: 'ダイヤ', tier1: 110, tier2: 50, tier3: 50, tier4: 70 },
+        { x: 'マスター', tier1: 120 },
+        { x: 'プレデター', tier1: 100 },
+    ];
+    const cfg = {
+        type: 'bar',
+        data: {
+            @*labels: ['ブロンズ', 'シルバー', 'ゴールド', 'プラチナ', 'ダイヤ', 'マスター', 'プレデター'],*@
+            datasets: [{
+                label: '1',
+                data: data,
+                parsing: {
+                    yAxisKey: 'tier1'
+                },
+                order: 1
+            }, {
+                label: '2',
+                data: data,
+                parsing: {
+                    yAxisKey: 'tier2'
+                },
+                order: 2
+            }, {
+                label: '3',
+                data: data,
+                parsing: {
+                    yAxisKey: 'tier3'
+                },
+                order: 3
+            }, {
+                label: '4',
+                data: data,
+                parsing: {
+                    yAxisKey: 'tier4'
+                },
+                order: 4
+            }
+            ]
+        },
+        options: {
+            tooltips: {
+                mode: 'nearest'
+            },
+            scales: {
+                @*xAxes:{
+                    ticks: {                      // 目盛り
+                        fontColor: "red",             // 目盛りの色
+                        fontSize: 14                  // フォントサイズ
+                        }
+                },*@
+                x: {
+                    offset: true,
+                    grid: {
+                        color: 'red',
+                        borderColor: 'grey',
+                        tickColor: 'grey'
+                    },
+                    title: {
+                        color: 'red',
+                        display: true,
+                        text: "ランク"
+                    }
+                }
+            }
+        }
+    };
+
+    const chart = new Chart(ctx, cfg);
+        @*data: {
+            labels: ['Jan', 'Feb'],
+            datasets: [{
+                label: [ 'test' ],
+                data: [ 10,20 ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        }
+    })*@
+
+</script>

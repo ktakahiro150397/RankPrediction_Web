@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RankPrediction_Web.Models.ViewModels.Chart;
+using RankPrediction_Web.Models.ViewModels;
 using RankPrediction_Web.Models.DbContexts;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,5 +28,11 @@ namespace RankPrediction_Web.Controllers
             var vm = new ChartIndexViewModel(_context);
             return View(vm);
         }
+
+        public IActionResult ChartTest()
+        {
+            return View(new LayoutViewModel());
+        }
+
     }
 }
