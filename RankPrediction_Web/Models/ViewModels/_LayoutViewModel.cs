@@ -11,8 +11,6 @@ namespace RankPrediction_Web.Models.ViewModels
         public LayoutViewModel()
         {
             SnsShare = new SnsShareModel("AIでAPEXの実力を診断してみよう！", "秘められた実力が分かるかも！");
-            SnsShare.Twitter.HashTags.Add("APEX実力診断");
-            SnsShare.Twitter.HashTags.Add("ApexLegends");
         }
 
         /// <summary>

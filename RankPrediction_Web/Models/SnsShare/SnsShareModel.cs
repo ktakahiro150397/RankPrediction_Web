@@ -22,6 +22,9 @@ namespace RankPrediction_Web.Models.SnsShare
                 ShareTitle = title,
                 ShareText = shareText
             };
+            Twitter.HashTags.Add("APEX実力診断");
+            Twitter.HashTags.Add("ApexLegends");
+
             FaceBook = new SnsShareContents()
             {
                 ShareTitle = title,

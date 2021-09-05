@@ -38,9 +38,20 @@
     @*<a href="javascript:displayNativeShareMenu();" shareLink>
             <i class="fa fa-share-alt" aria-hidden="true"></i>
         </a>*@
-    @*<a href="javascript:displayNativeShareMenu();" shareLink>
+    <a href="javascript:displayNativeShareMenu();" shareLink>
         <i class="fa fa-share-alt" aria-hidden="true"></i>
-    </a>*@
+    </a>
 
 
 </div>
+
+<script>
+    //OS標準の共有メニューを開く関数
+    function displayNativeShareMenu() {
+        navigator.share({
+            url: @Model.SnsShare.OSNative.ShareUrl,
+            title: @Model.SnsShare.OSNative.ShareTitle,
+            text: @Model.SnsShare.OSNative.ShareText
+        })
+    }
+</script>
