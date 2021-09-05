@@ -17,15 +17,14 @@ namespace RankPrediction_Web.Models.SnsShare
         }
 
         /// <summary>
+        /// 共有ボタンのベースとなるURL。
+        /// </summary>
+        protected string BaseUrl { get; set; }
+
+        /// <summary>
         /// ボタンに割り当てるリンク先のURL。
         /// </summary>
-        public virtual string LinkUrl
-        {
-            get
-            {
-                return "";
-            }
-        }
+        public virtual string LinkUrl { get; }
 
         /// <summary>
         /// 共有するこのサイトへのURL。
@@ -42,7 +41,6 @@ namespace RankPrediction_Web.Models.SnsShare
         /// </summary>
         public string ShareText { get; set; }
 
-
     }
 
     /// <summary>
@@ -52,13 +50,9 @@ namespace RankPrediction_Web.Models.SnsShare
     {
         public TwitterContents() : base()
         {
+            BaseUrl = "https://twitter.com/share";
             HashTags = new List<string>();
         }
-
-        /// <summary>
-        /// Twitter共有のベースとなるURL。
-        /// </summary>
-        private const string BaseUrl = "https://twitter.com/share";
 
         public IList<string> HashTags { get; set; }
 
@@ -91,5 +85,32 @@ namespace RankPrediction_Web.Models.SnsShare
         }
 
     }
+
+    public class FaceBookContents : SnsShareContents
+    {
+
+        public FaceBookContents() : base()
+        {
+            BaseUrl = "https://www.facebook.com/sharer/sharer.php";
+        }
+
+        public override string LinkUrl
+        {
+            get
+            {
+                var queryDic = new Dictionary<string, string>()
+                {
+                    {"u",ShareUrl }
+                };
+
+                var uri = QueryHelpers.AddQueryString(BaseUrl, queryDic);
+
+                return new Uri(uri).ToString();
+            }
+        }
+
+
+    }
+
 
 }

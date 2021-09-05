@@ -6,7 +6,7 @@ namespace RankPrediction_Web.Models.SnsShare
         public SnsShareModel()
         {
             Twitter = new TwitterContents();
-            FaceBook = new SnsShareContents();
+            FaceBook = new FaceBookContents();
             OSNative = new SnsShareContents();
         }
 
@@ -25,7 +25,7 @@ namespace RankPrediction_Web.Models.SnsShare
             Twitter.HashTags.Add("APEX実力診断");
             Twitter.HashTags.Add("ApexLegends");
 
-            FaceBook = new SnsShareContents()
+            FaceBook = new FaceBookContents()
             {
                 ShareTitle = title,
                 ShareText = shareText
