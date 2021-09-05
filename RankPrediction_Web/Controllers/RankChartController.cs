@@ -34,5 +34,16 @@ namespace RankPrediction_Web.Controllers
             return View(new LayoutViewModel());
         }
 
+        public IActionResult ajaxTest()
+        {
+            return View(new LayoutViewModel());
+        }
+
+        public IActionResult ajaxTime()
+        {
+            return Json(new { ret = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") });
+        }
+
+
     }
 }

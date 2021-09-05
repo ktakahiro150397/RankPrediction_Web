@@ -1,0 +1,60 @@
+﻿
+<section>
+
+    <p>This page is loaded on @DateTime.Now</p>
+
+
+    <a asp-controller="RankChart" asp-action="ajaxTest" class="btn btn-small">Reload page</a>
+
+
+    <hr />
+
+    <a id="ajaxSend" class="btn btn-small">Ajax Send</a>
+    <div id="ajaxUpdateArea">
+        <p>Here is partial area : Loaded on <span id="ajaxTime"> @DateTime.Now</span></p>
+    </div>
+
+
+
+
+</section>
+
+
+
+<script>
+
+    document.getElementById("ajaxSend").addEventListener("click", onAjaxSendClick);
+
+    function onAjaxSendClick() {
+
+        //XMLHttpRequestオブジェクトの初期化
+        let httpRequest = new XMLHttpRequest();
+
+
+        httpRequest.onreadystatechange = function() {
+            //サーバーの応答時にどうするかをここに書く
+
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                // 全てが問題ない状態で、応答も返ってきています
+
+                if (httpRequest.status === 200) {
+                    alert(httpRequest.responseText);
+                    let data = JSON.parse(httpRequest.responseText);
+                    document.getElementById("ajaxTime").innerText = data['ret'];
+
+                } else {
+
+                }
+
+            } else {
+                // まだ準備ができていません
+            }
+
+        };
+
+
+        httpRequest.open("GET", "./ajaxTime");
+        httpRequest.send();
+
+    }
+</script>
