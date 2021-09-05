@@ -137,9 +137,9 @@ class mlforrank(object):
 				return pred_y[0]
 		
 def main():
-	df=pd.read_csv(r'Machine_Learning\test.csv')
+	df=pd.read_csv(r'Machine_Learning\test copy.csv')
 	print(df)
-	rank = mlforrank(df, 6)
+	rank = mlforrank(df, 0)
 	print(rank.estimator())
 if __name__ == '__main__':
 	main()
