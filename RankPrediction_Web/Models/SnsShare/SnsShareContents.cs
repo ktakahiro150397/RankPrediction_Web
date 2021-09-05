@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 
 namespace RankPrediction_Web.Models.SnsShare
 {
@@ -13,12 +14,31 @@ namespace RankPrediction_Web.Models.SnsShare
         }
 
         /// <summary>
-        /// リンク先のURL
+        /// ボタンに割り当てるリンク先のURL。
         /// </summary>
-        public string LinkUrl { get; set; }
+        public string LinkUrl {
+            get
+            {
+
+                //var query = new HttpUtility.ParseQueryString("");
+
+
+                //var urlBuilder = new UriBuilder()
+                //{
+                //    Query =
+                //}
+
+                return "https://twitter.com/share?url=https://apexrankprediction.azurewebsites.net/&text=AIでAPEXの実力を診断してみよう&hashtags=APEX実力診断";
+            }
+        }
 
         /// <summary>
-        /// タイトル
+        /// 共有するこのサイトへのURL。
+        /// </summary>
+        public string ShareUrl { get; set; }
+
+        /// <summary>
+        /// 共有タイトル
         /// </summary>
         public string ShareTitle { get; set; }
 
@@ -26,6 +46,11 @@ namespace RankPrediction_Web.Models.SnsShare
         /// 共有本文
         /// </summary>
         public string ShareText { get; set; }
+
+        /// <summary>
+        /// Twitter共有のベースとなるURL。
+        /// </summary>
+        private const string BaseUrl = "https://twitter.com/share";
 
 
     }
