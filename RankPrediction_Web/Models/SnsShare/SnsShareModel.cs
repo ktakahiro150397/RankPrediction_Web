@@ -7,6 +7,7 @@ namespace RankPrediction_Web.Models.SnsShare
         {
             Twitter = new TwitterContents();
             FaceBook = new FaceBookContents();
+            Pocket = new PocketContents();
             OSNative = new SnsShareContents();
         }
 
@@ -30,6 +31,13 @@ namespace RankPrediction_Web.Models.SnsShare
                 ShareTitle = title,
                 ShareText = shareText
             };
+
+            Pocket = new PocketContents()
+            {
+                ShareTitle = title,
+                ShareText = shareText
+            };
+
             OSNative = new SnsShareContents()
             {
                 ShareTitle = title,
@@ -45,7 +53,12 @@ namespace RankPrediction_Web.Models.SnsShare
         /// <summary>
         /// Facebookの共有データ。
         /// </summary>
-        public SnsShareContents FaceBook { get; set; }
+        public FaceBookContents FaceBook { get; set; }
+
+        /// <summary>
+        /// Pocketの共有データ。
+        /// </summary>
+        public PocketContents Pocket { get; set; }
 
         /// <summary>
         /// OS汎用共有の共有データ。

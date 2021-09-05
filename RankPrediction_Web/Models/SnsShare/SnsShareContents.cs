@@ -86,6 +86,9 @@ namespace RankPrediction_Web.Models.SnsShare
 
     }
 
+    /// <summary>
+    /// Facebook共有に使用するデータを表します。
+    /// </summary>
     public class FaceBookContents : SnsShareContents
     {
 
@@ -112,5 +115,30 @@ namespace RankPrediction_Web.Models.SnsShare
 
     }
 
+    /// <summary>
+    /// Pocket共有に使用するデータを表します。
+    /// </summary>
+    public class PocketContents : SnsShareContents
+    {
+        public PocketContents() : base()
+        {
+            BaseUrl = "https://getpocket.com/edit";
+        }
 
+        public override string LinkUrl
+        {
+            get
+            {
+                var queryDic = new Dictionary<string, string>()
+                {
+                    {"url",ShareUrl }
+                };
+
+                var uri = QueryHelpers.AddQueryString(BaseUrl, queryDic);
+
+                return new Uri(uri).ToString();
+            }
+        }
+    }
 }
+

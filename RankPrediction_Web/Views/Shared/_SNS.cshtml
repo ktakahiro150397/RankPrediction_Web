@@ -5,9 +5,6 @@
 
 <div class="social-footer-ul">
 
-    @*<a href="https://twitter.com/share?url=https://dev.twitter.com/web/tweet-button&text=Here is data-text attribute&hashtags=hashtags">
-            <i class="fab fa-twitter"></i>
-        </a>*@
     <a href="@Model.SnsShare.Twitter.LinkUrl" target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
     </a>
@@ -16,32 +13,18 @@
            target="_blank"
            rel="nofollow noopener noreferrer">
             <i class="fab fa-facebook-f"></i>
-        </a>
-    @*<a href="https://www.facebook.com/sharer/sharer.php?u=https://apexrankprediction.azurewebsites.net/"
-       target="_blank"
-       rel="nofollow noopener noreferrer">
-        <i class="fab fa-facebook-f"></i>
-    </a>*@
+    </a>
 
     @*<a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a>*@
-    @*<a href="https://getpocket.com/edit?url=https://apexrankprediction.azurewebsites.net/"
+    <a href="@Model.SnsShare.Pocket.LinkUrl"
            target="_blank"
            rel="nofollow noopener noreferrer">
             <i class="fab fa-get-pocket"></i>
-        </a>*@
-    @*<a href="https://getpocket.com/edit?url=https://apexrankprediction.azurewebsites.net/"
-       target="_blank"
-       rel="nofollow noopener noreferrer">
-        <i class="fab fa-get-pocket"></i>
-    </a>*@
-
-    @*<a href="javascript:displayNativeShareMenu();" shareLink>
-            <i class="fa fa-share-alt" aria-hidden="true"></i>
-        </a>*@
+        </a>
+   
     <a href="javascript:displayNativeShareMenu();" shareLink>
         <i class="fa fa-share-alt" aria-hidden="true"></i>
     </a>
-
 
 </div>
 
@@ -49,9 +32,9 @@
     //OS標準の共有メニューを開く関数
     function displayNativeShareMenu() {
         navigator.share({
-            url: @Model.SnsShare.OSNative.ShareUrl,
-            title: @Model.SnsShare.OSNative.ShareTitle,
-            text: @Model.SnsShare.OSNative.ShareText
+            url: "@Model.SnsShare.OSNative.ShareUrl",
+            title: "@Model.SnsShare.OSNative.ShareTitle",
+            text: "@Model.SnsShare.OSNative.ShareText"
         })
     }
 </script>
