@@ -46,8 +46,21 @@
 
 
     <script>
+
+        //ドメインとページを分離する正規表現
+        let pageReg = /(https:\/\/.+?\/)(.+)/;
+
+        //現在URL
+        let currentUrl = location.href;
+
+        //マッチ
+        let matchResult = currentUrl.match(pageReg);
+
+        //ドメイン名以降のページ名を削除する
+        let topUrl = currentUrl.replace(matchResult[2], "");
+
         //指定秒数後に、トップページへ遷移する
-        setTimeout("location.href = '../ApexRank'", 1000 * 10);
+        setTimeout(`location.href = "${topUrl}"`, 1000 * 10);
     </script>
 
 } 
