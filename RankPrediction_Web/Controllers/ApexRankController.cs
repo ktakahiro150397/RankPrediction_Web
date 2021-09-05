@@ -89,7 +89,7 @@ namespace RankPrediction_Web.Controllers
 #else
             //URLパラメータが存在しない場合トップ画面へ
             if(!id.HasValue){
-                return View("Index", "ApexRank");
+                return RedirectToAction("Index","ApexRank");
             }
 #endif
 
@@ -110,7 +110,7 @@ namespace RankPrediction_Web.Controllers
             //URLパラメータが存在しない場合トップページに戻す
             if(!id.HasValue)
             {
-                return View("Index", "ApexRank");
+                return RedirectToAction("Index", "ApexRank");
             }
 
             //指定IDの予測結果VMを取得
@@ -120,7 +120,7 @@ namespace RankPrediction_Web.Controllers
             if(resultVm.PredictedResult.PredictResult == null)
             {
                 //存在しないID・予測に失敗している場合はトップに戻す
-                return View("Index", "ApexRank");
+                return RedirectToAction("Index", "ApexRank");
             }
             return View(resultVm);
         }
