@@ -44,6 +44,21 @@ namespace RankPrediction_Web.Controllers
             return Json(new { ret = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") });
         }
 
+        public IActionResult ajaxChart(string param)
+        {
+
+            if(param == "1")
+            {
+            return Json(new { ajaxRet = new int[] { 1,2,3} });
+                
+            }
+            else
+            {
+            return Json(new { ajaxRet = new int[] { 6,5,4} });
+
+            }
+        }
+
 
     }
 }
