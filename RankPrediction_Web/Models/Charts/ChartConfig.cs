@@ -40,6 +40,13 @@ namespace RankPrediction_Web.Models.Charts
         [JsonPropertyName("data")]
         public ChartConfigData Data { get; set; }
 
+        /// <summary>
+        /// チャートのオプションデータ。
+        /// </summary>
+        [JsonPropertyName("options")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ChartConfigOption Options { get; set; }
+
     }
 
     /// <summary>
@@ -75,8 +82,26 @@ namespace RankPrediction_Web.Models.Charts
         public DataSetItem()
         {
             //Data = new List<int>();
-            //BackGroundColor = new List<string>();
-            //BorderColor = new List<string>();
+            BackGroundColor = new List<string>()
+            {
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+            };
+            BorderColor = new List<string>()
+            {
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(255, 159, 64, 1)",
+            };
         }
 
         /// <summary>
@@ -107,4 +132,28 @@ namespace RankPrediction_Web.Models.Charts
         public IList<string> BorderColor { get; set; }
 
     }
+
+    public class ChartConfigOption
+    {
+        public ChartConfigOption()
+        {
+        }
+
+        public ChartConfigOption(IList<int> data)
+        {
+            Scales = new
+            {
+                y = new
+                {
+                    min = 0,
+                    max = data.Max() + 10
+                }
+            };
+        }
+
+        [JsonPropertyName("scales")]
+        public object Scales { get; set; }
+
+    }
+
 }

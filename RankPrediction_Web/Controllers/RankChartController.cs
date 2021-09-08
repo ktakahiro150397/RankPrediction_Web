@@ -90,6 +90,7 @@ namespace RankPrediction_Web.Controllers
                     }
                 };
 
+                chartData.Config.Options = new ChartConfigOption(chartData.Config.Data.DataSets[0].Data);
             }
 
             //            string json = //get some json from your DB
