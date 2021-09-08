@@ -15,19 +15,19 @@ namespace RankPrediction_Web.Models.Charts
         /// 設定されているチャートのコンフィグ情報全体を、Json形式の文字列として返します。
         /// </summary>
         /// <returns></returns>
-        string GetChartConfigResponse();
+        public string GetChartConfigResponse();
 
         /// <summary>
         /// 設定されているデータの情報を、Json形式の文字列として返します。
         /// </summary>
         /// <returns></returns>
-        string GetChartDataResponse();
+        public string GetChartDataResponse();
 
         /// <summary>
         /// 設定されているデータセットの情報を、Json形式の文字列として返します。
         /// </summary>
         /// <returns></returns>
-        string GetChartDataSetsResponse();
+        public string GetChartDataSetsResponse();
 
     }
 }

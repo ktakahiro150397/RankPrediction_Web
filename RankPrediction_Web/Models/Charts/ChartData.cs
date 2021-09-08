@@ -10,9 +10,9 @@ namespace RankPrediction_Web.Models.Charts
     /// <summary>
     /// チャートデータを表す基底クラス。
     /// </summary>
-    public abstract class ChartData : IChartData
+    public class ChartJsData : IChartData
     {
-        private ChartData()
+        public ChartJsData()
         {
             Config = new ChartConfig();
         }
@@ -21,7 +21,7 @@ namespace RankPrediction_Web.Models.Charts
         /// チャートを表示するコンフィグオブジェクト。
         /// チャートの種類・データを含んでいます。
         /// </summary>
-        protected ChartConfig Config { get; set; }
+        public ChartConfig Config { get; set; }
 
         string IChartData.GetChartConfigResponse()
         {
@@ -39,4 +39,5 @@ namespace RankPrediction_Web.Models.Charts
             return JsonSerializer.Serialize(Config.Data.DataSets);
         }
     }
+
 }

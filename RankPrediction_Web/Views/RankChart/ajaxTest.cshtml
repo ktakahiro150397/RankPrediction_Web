@@ -109,10 +109,10 @@
 
                 if (httpRequest.status === 200) {
 
-                    @*alert(httpRequest.responseText);*@
-                    let data = JSON.parse(httpRequest.responseText);
+                    alert(httpRequest.responseText);
+                    let cfg = JSON.parse(httpRequest.responseText);
 
-                    chart.data.datasets[0].data = data.ajaxRet;
+                    chart.config._config = cfg;
                     chart.update();
 
 

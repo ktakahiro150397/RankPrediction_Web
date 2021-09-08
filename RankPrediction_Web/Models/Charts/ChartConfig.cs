@@ -74,10 +74,17 @@ namespace RankPrediction_Web.Models.Charts
     {
         public DataSetItem()
         {
-            Data = new List<int>();
-            BackGroundColor = new List<string>();
-            BorderColor = new List<string>();
+            //Data = new List<int>();
+            //BackGroundColor = new List<string>();
+            //BorderColor = new List<string>();
         }
+
+        /// <summary>
+        /// チャートのラベルを表します。
+        /// </summary>
+        [JsonPropertyName("label")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string Label { get; set; }
 
         /// <summary>
         /// チャートに表示する値を表します。
@@ -96,7 +103,7 @@ namespace RankPrediction_Web.Models.Charts
         /// チャートグラフの枠色を文字列で指定します。
         /// </summary>
         [JsonPropertyName("borderColor")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public IList<string> BorderColor { get; set; }
 
     }
