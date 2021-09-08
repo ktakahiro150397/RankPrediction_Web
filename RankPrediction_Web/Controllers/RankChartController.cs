@@ -57,6 +57,9 @@ namespace RankPrediction_Web.Controllers
             return Json(new { ajaxRet = new int[] { 6,5,4} });
 
             }
+
+//            string json = //get some json from your DB
+//return new ContentResult { Content = json, ContentType = "application/json" };
         }
 
 
