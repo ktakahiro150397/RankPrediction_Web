@@ -30,6 +30,50 @@ namespace RankPrediction_Web.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        public IActionResult RankToChart()
+        {
+            return View(new RankToChartViewModel());
+        }
+
+        /// <summary>
+        /// チャートデータのJsonオブジェクトを返却
+        /// </summary>
+        /// <param name="chartparam"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult RetrieveChartData(string chartparam)
+        {
+
+            //パラメータの解析
+            //TODO enum.ToStringとchartparamをぶち当てる
+
+            //試しにやってみる
+            var chartData = new ChartJsData();
+            chartData.Config.Data.Labels = new List<string>()
+                {
+                    "This","Is","param=1"
+                };
+
+            chartData.Config.Data.DataSets = new List<DataSetItem>() {
+                    new DataSetItem()
+                    {
+                        Data = new List<int>()
+                        {
+                            1,2,3
+                        }
+                    }
+                };
+
+            //結果の返却
+            return new ContentResult
+            {
+                Content = ((IChartData)chartData).GetChartConfigResponse(),
+                ContentType = "application/json"
+            };
+        }
+
+
         public IActionResult ChartTest()
         {
             return View(new LayoutViewModel());
