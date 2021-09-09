@@ -84,7 +84,10 @@
                 @RenderBody()
             </main>
         </div>
-
+        <script type="text/javascript">
+            var nend_params = { "media": 69303, "site": 350782, "spot": 1041495, "type": 1, "oriented": 1 };
+        </script>
+        <script type="text/javascript" src="https://js1.nend.net/js/nendAdLoader.js"></script>
         <footer class="border-top modal-footer text-muted footer">
             <div class="container">
                 @*&copy; 2021 - Apexランク予測*@
@@ -98,5 +101,6 @@
     <script src="~/js/loading.js" asp-append-version="true"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script type="text/javascript" src="https://js1.nend.net/js/nendAdLoader.js"></script>
 </body>
 </html>
