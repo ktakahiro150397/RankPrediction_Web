@@ -18,7 +18,7 @@
     "RankPrediction_Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "./RankChart/ChartTest",
+      "launchUrl": "./RankChart/ajaxtest",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

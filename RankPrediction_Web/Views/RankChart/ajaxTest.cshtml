@@ -1,0 +1,132 @@
+﻿
+<section>
+
+    <p>This page is loaded on @DateTime.Now</p>
+
+
+    <a asp-controller="RankChart" asp-action="ajaxTest" class="btn btn-small">Reload page</a>
+
+
+    <hr />
+
+    <a id="ajaxSend" class="btn btn-small">Ajax Send</a>
+    <div id="ajaxUpdateArea">
+        <p>Here is partial area : Loaded on <span id="ajaxTime"> @DateTime.Now</span></p>
+    </div>
+
+    <hr />
+
+    <p>チャート部分</p>
+    <select id="chartChange">
+        <option value="1">グラフ1</option>
+        <option value="2">グラフ2</option>
+    </select>
+    @*<a id="chartChange" class="btn btn-small">チャート更新</a>*@
+    <div id="chart-container" style="position:relative;width:90%;height:80vh;">
+        <canvas id="testChart"></canvas>
+    </div>
+
+
+</section>
+
+
+
+<script>
+
+    document.getElementById("ajaxSend").addEventListener("click", onAjaxSendClick);
+    document.getElementById("chartChange").addEventListener("change", onChartChangeClick);
+
+    //初期チャート表示
+    var ctx = document.getElementById("testChart").getContext("2d");
+
+    let initData = {
+        labels: ['A', 'B', 'C'],
+        datasets: [{
+            data: [1, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 159, 64, 1)'
+            ]
+        }
+        ]
+
+    }
+
+
+    var cfg = {
+        type: 'bar',
+        data: initData
+    }
+
+    var chart = new Chart(ctx, cfg);
+
+    function onAjaxSendClick() {
+
+        //XMLHttpRequestオブジェクトの初期化
+        let httpRequest = new XMLHttpRequest();
+
+
+        httpRequest.onreadystatechange = function () {
+            //サーバーの応答時にどうするかをここに書く
+
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                // 全てが問題ない状態で、応答も返ってきています
+
+                if (httpRequest.status === 200) {
+                    alert(httpRequest.responseText);
+                    let data = JSON.parse(httpRequest.responseText);
+                    document.getElementById("ajaxTime").innerText = data['ret'];
+
+                } else {
+
+                }
+
+            } else {
+                // まだ準備ができていません
+            }
+
+        };
+
+        
+        httpRequest.open("GET", "./ajaxTime");
+        httpRequest.send();
+
+    }
+
+    function onChartChangeClick() {
+
+        let httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+
+                if (httpRequest.status === 200) {
+
+                    @*alert(httpRequest.responseText);*@
+                    let cfg = JSON.parse(httpRequest.responseText);
+
+                    chart.config._config = cfg;
+                    chart.update();
+
+
+
+                }
+
+            } else {
+
+            }
+        }
+
+        let select = document.getElementById("chartChange");
+
+        httpRequest.open("GET", `./ajaxChart?param=${select.value}`);
+        httpRequest.send();
+
+    }</script>
