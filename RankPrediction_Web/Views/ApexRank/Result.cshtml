@@ -127,6 +127,14 @@
         var nend_params = { "media": 69303, "site": 350782, "spot": 1041490, "type": 10, "oriented": 1 };
     </script>
     <section>
+        <p>
+            データ入力お疲れ様でした。<br />
+            診断結果を共有してみませんか？<br />
+            @await Html.PartialAsync("_SNS", Model)
+        </p>
+
+    </section>
+    <section>
         <h2>
             より高みを目指すために...
         </h2>
@@ -192,14 +200,7 @@
         </div>
     </section>
 
-    <section>
-        <p>
-            データ入力のご協力ありがとうございました！<br />
-            診断結果を共有してみませんか？<br />
-            @await Html.PartialAsync("_SNS", Model)
-        </p>
 
-    </section>
 
 
     <div class="btn-container">

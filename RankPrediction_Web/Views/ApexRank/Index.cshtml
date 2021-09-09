@@ -45,6 +45,7 @@
 
                     <div class="col-sm">
 
+                        
                     </div>
                 </div>
                 <div class="row py-3">
@@ -77,10 +78,10 @@
                             そこで実力の指標を与える別のアプローチとして、
                             機械学習による診断を使ってみましょう。
                             医療の世界では病気の診断に機械学習が盛んに用いられています。
-                            年齢・性別・身長・体重など様々な体に関する情報で機械学習を行い、
-                            その人が高血圧になる可能性を算出しています                  
-                                <a href="#cite">[1]</a>。<!--tooltips を置く-->
-                            もちろん見つけられる症状は高血圧だけではありません。
+                            例えば、年齢・性別・身長・体重など体に関する様々な情報で機械学習を行い、
+                            その人が高血圧になる可能性を算出することができます
+                            <a href="#cite">[1]</a>。<!--tooltips を置く-->
+                            もちろん高血圧の判定だけに使われているわけではありません。機械学習により、COVID-19感染者の重症・重篤化を予測する早期スクリーニングシステムが作られています<a href="#cite">[2]</a>。
                             機械学習は人間が外から見るだけでは到底見つけられないようなものを
                             見つけることができるのです。
                         </p>
@@ -136,7 +137,7 @@
                             <h3>このサイトを共有</h3>
                             <p>
                                 フレンドと一緒に実力を診断してみませんか？<br />
-                                ユーザーが増えれば増えるほど正確な診断が可能になります！<br />
+                                ユーザーが増えれば増えるほど正確な診断が可能になります。<br />
                             </p>
                             @await Html.PartialAsync("_SNS", Model)
 
@@ -163,8 +164,8 @@
                     <h3>
                         <a name="cite">参考文献</a>
                     </h3>
-                        [1]<a href="https://www.healthknowledge.org.uk/e-learning/statistical-methods/specialists/logistic-regression">HealthKnowledge  "Logistic regression"</a>
-                   
+                        [1]<a href="https://www.healthknowledge.org.uk/e-learning/statistical-methods/specialists/logistic-regression" target="_blank" rel="nofollow noopener noreferrer">HealthKnowledge  "Logistic regression"</a><br />
+                        [2]<a href="https://hbr.org/2020/04/how-hospitals-are-using-ai-to-battle-covid-19" target="_blank" rel="nofollow noopener noreferrer">How Hospitals Are Using AI to Battle Covid-19</a>
                     
                 </div>
             </section>
