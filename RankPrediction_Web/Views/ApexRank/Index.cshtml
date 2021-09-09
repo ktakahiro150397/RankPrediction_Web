@@ -26,85 +26,128 @@
 
             @*サイトの趣旨を説明する*@
             <section>
-                <div class="bg-main-desc mt-5">
-                    <h1>AIでAPEXの実力を診断</h1>
+                <div class="row py-3">
+                    <div class="col-sm">
+                        <div class="bg-main-desc mt-5">
+                            <h1>AIでAPEXの実力を診断</h1>
 
-                    <p>
-                        あなたは初心者？それとも上級者？<br />
-                        キルレ・平均ダメージから実力を診断しよう！<br />
-                    </p>
+                            <p>
+                                あなたは初心者？それとも上級者？<br />
+                                キルレ・平均ダメージから実力を診断しよう！<br />
+                            </p>
 
-                    <div>
-                        <a class="btn btn-maincolor" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
+                            <div>
+                                <a class="btn btn-maincolor" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm">
+
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-sm">
+                        <div class="bg-sub-desc">
+
+
+                            <h2>実力が気になりませんか？</h2>
+                            <p>
+                                多くの人にとってランクマッチは実力の指標になるでしょう。
+                                しかし一部のプレイヤーは、ソロで挑んでいたり、
+                                いつものメンバーが実は相性が良くなかったりと、
+                                ゲームを始める前から潜在的に不利な状況に置かれ、
+                                実力に見合ったランクになっていない可能性があります。
+                                Apexのランクマッチはチームプレイが出来るかどうかでランクが決まるためです。
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="text-center">
+                            <img src="~/sozai/Index/octane-squad-jump.jpg.adapt.crop16x9.818p.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-3">
+
+                    <div class="col-sm order-md-2">
+                        <p>
+                            そこで実力の指標を与える別のアプローチとして、
+                            機械学習による診断を使ってみましょう。
+                            医療の世界では病気の診断に機械学習が盛んに用いられています。
+                            年齢・性別・身長・体重など様々な体に関する情報で機械学習を行い、
+                            その人が高血圧になる可能性を算出しています                  
+                                <a href="#cite">[1]</a>。<!--tooltips を置く-->
+                            もちろん見つけられる症状は高血圧だけではありません。
+                            機械学習は人間が外から見るだけでは到底見つけられないようなものを
+                            見つけることができるのです。
+                        </p>
+                    </div>
+                    <div class="col-sm order-md-1">
+                        <div class="text-center">
+                            <img src="~/sozai/Index/wattson-shush.jpg.adapt.crop16x9.818p.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-sm">
+                        <p>
+                            ゲームにおいてはどうでしょう。
+                            同じアナロジーでゲームの実力に関する様々な情報を
+                            入力すれば実力が判明するはずです。
+                            ランクが低くあまり上手に見えないプレイヤーも、実は最初から不利な状況で戦っていて、
+                            実力に見合ったランクがついていないだけである。
+                            ということを見抜けるかもしれません。
+                            では、彼らが普通の環境にあるプレイヤーと同じ実力で、
+                            どこまでRP(ランクポイント)を伸ばすことができるだろうか。
+                            このような if を機械学習が可能にします。
+                            ゴールドから這い上がれないプラチナ相当のプレイヤー。プラチナでどうしても勝てないダイヤ相当のプレイヤー。
+                            そういったプレイヤーの真の実力を明らかにできるかもしれません。
+                        </p>
+                    </div>
+                    <div class="col-sm">
+                        <div class="text-center">
+                            <img src="~/sozai/Index/shugou.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="row py-2">
+                    <div class="col-sm">
+                        <p>
+                            あなたの戦績から、その実力で到達できるかもしれないランクを診断してみませんか？ <br />
+                            これからランクマッチをプレーしていく上で一つの目安となるでしょう。<br />
+                            もしかしたら、マスターやプレデターは意外と近いかもしれません。<br />
+                        </p>
+                        <a class="btn btn-maincolor btn-small" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
+
+                    </div>
+                    <div class="col-sm">
+
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-sm">
+                        <div class="bg-sub-desc">
+                            <h3>このサイトを共有</h3>
+                            <p>
+                                フレンドと一緒に実力を診断してみませんか？<br />
+                                ユーザーが増えれば増えるほど正確な診断が可能になります！<br />
+                            </p>
+                            @await Html.PartialAsync("_SNS", Model)
+
+                        </div>
+                    </div>
+                    <div class="col-sm">
+
                     </div>
                 </div>
             </section>
-            <section>
-                <div class="bg-sub-desc">
 
-
-                    <h2>実力が気になりませんか？</h2>
-                    <p>
-                        多くの人にとってランクマッチは実力の指標になるでしょう。
-                        しかし一部のプレイヤーは、ソロで挑んでいたり、
-                        いつものメンバーが実は相性が良くなかったりと、
-                        ゲームを始める前から潜在的に不利な状況に置かれ、
-                        実力に見合ったランクになっていない可能性があります。
-                        Apexのランクマッチはチームプレイが出来るかどうかでランクが決まるためです。
-                    </p>
-                    <div class="text-center">
-                        <img src="~/sozai/Index/octane-squad-jump.jpg.adapt.crop16x9.818p.jpg" alt="" class="img-fluid">
-                    </div>
-                    <p>
-                        そこで実力の指標を与える別のアプローチとして、
-                        機械学習による診断を使ってみましょう。
-                        医療の世界では病気の診断に機械学習が盛んに用いられています。
-                        年齢・性別・身長・体重など様々な体に関する情報で機械学習を行い、
-                        その人が高血圧になる可能性を算出しています<a href="#cite">[1]</a>。
-                        もちろん見つけられる症状は高血圧だけではありません。
-                        機械学習は外から人間が見るだけでは到底見つけられないようなものを
-                        見つけることができるのです。
-                    </p>
-                    <div class="text-center">
-                        <img src="~/sozai/Index/wattson-shush.jpg.adapt.crop16x9.818p.jpg" alt="" class="img-fluid">
-                    </div>
-                    <p>
-                        ゲームにおいてはどうでしょう。
-                        同じアナロジーでゲームの実力に関する様々な情報を
-                        入力すれば実力が判明するはずです。
-                        ランクが低くあまり上手に見えないプレイヤーも、実は最初から不利な状況で戦っていて、
-                        実力に見合ったランクがついていないだけである。
-                        ということを見抜けるかもしれません。
-                        では、彼らが普通の環境にあるプレイヤーと同じ実力で、
-                        どこまでRP(ランクポイント)を伸ばすことができるだろうか。
-                        このような if を機械学習が可能にします。
-                        ゴールドから這い上がれないプラチナ相当のプレイヤー。プラチナでどうしても勝てないダイヤ相当のプレイヤー。
-                        そういったプレイヤーの真の実力を明らかにできるかもしれません。
-                    </p>
-                    <div class="text-center">
-                        <img src="~/sozai/Index/shugou.jpg" alt="" class="img-fluid">
-                    </div>
-                    <p>
-                        あなたの戦績から、その実力で到達できるかもしれないランクを診断してみませんか？ <br />
-                        これからランクマッチをプレーしていく上で一つの目安となるでしょう。<br />
-                        もしかしたら、マスターやプレデターは意外と近いかもしれません。<br />
-                    </p>
-
-                    <a class="btn btn-maincolor btn-small" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
-                </div>
-            </section>
-
-            <section>
-                <div class="bg-sub-desc">
-                    <h3>このサイトを共有</h3>
-                    <p>
-                        フレンドと一緒に実力を診断してみませんか？<br />
-                        ユーザーが増えれば増えるほど正確な診断が可能になります！<br />
-                    </p>
-                    @await Html.PartialAsync("_SNS", Model)
-
-                </div>
-            </section>
             <script type="text/javascript">
                 var nend_params = { "media": 69303, "site": 350782, "spot": 1041490, "type": 10, "oriented": 1 };
             </script>
