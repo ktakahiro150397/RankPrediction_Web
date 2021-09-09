@@ -19,63 +19,160 @@
 <div class="text-center" id="top_img_bg">
     <img src="~/sozai/EtXheooUUA8CO1c.png" alt="" class="img-fluid" id="top_img">
 </div>
-<article>
-
-    @*サイトの趣旨を説明する*@
-    <section>
-        <div class="bg-main-desc mt-5">
-            <h1>AIでAPEXの実力を診断</h1>
-
-            <p>
-                あなたは初心者？それとも上級者？<br />
-                キルレ・平均ダメージから実力を診断しよう！<br />
-            </p>
-
-            <div>
-                <a class="btn btn-maincolor" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="bg-sub-desc">
 
 
-            <h2>実力が気になりませんか？</h2>
-            <p>
-                Apexはチームプレイが出来るかどうかでランクが決まります。<br />
-                しかし、危機的な局面を切り抜けるには個人の実力もまた必要になります。<br />
-                あなたの戦績から、その実力で到達できるかもしれないランクを診断してみませんか？<br />
-                より高ランクを目指すための一つの目安となるでしょう。<br />
-                もしかしたら、マスターやプレデターは意外と近いかもしれません。<br />
-            </p>
-            <a class="btn btn-maincolor btn-small" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
-        </div>
-    </section>
 
-    <section>
-        <div class="bg-sub-desc">
-            <h3>このサイトを共有</h3>
-            <p>
-                フレンドと一緒に実力を診断してみませんか？<br />
-                ユーザーが増えれば増えるほど正確な診断が可能になります！<br />
-            </p>
-            @await Html.PartialAsync("_SNS", Model)
+        <article>
 
-        </div>
-    </section>
+            @*サイトの趣旨を説明する*@
+            <section>
+                <div class="row py-3">
+                    <div class="col-sm">
+                        <div class="bg-main-desc mt-5">
+                            <h1>AIでAPEXの実力を診断</h1>
 
-    <section>
-        <div class="bg-notice">
-            <h3>注意事項</h3>
-            <p>
-                データを入力する際は、可能な限り正確に入力してください。<br />
-                正確な診断には正確なデータが必要です。<br />
-                皆さんから入力された戦績データから、機械学習を使って診断を行います。<br />
-                また、データが集まるまでは不正確な結果になりやすくなります。<br />
-            </p>
+                            <p>
+                                あなたは初心者？それとも上級者？<br />
+                                キルレ・平均ダメージから実力を診断しよう！<br />
+                            </p>
 
-        </div>
-    </section>
+                            <div>
+                                <a class="btn btn-maincolor" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm">
+
+                        
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-sm">
+                        <div class="bg-sub-desc">
 
 
-</article>
+                            <h2>実力が気になりませんか？</h2>
+                            <p>
+                                多くの人にとってランクマッチは実力の指標になるでしょう。
+                                しかし一部のプレイヤーは、ソロで挑んでいたり、
+                                いつものメンバーが実は相性が良くなかったりと、
+                                ゲームを始める前から潜在的に不利な状況に置かれ、
+                                実力に見合ったランクになっていない可能性があります。
+                                Apexのランクマッチはチームプレイが出来るかどうかでランクが決まるためです。
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="text-center">
+                            <img src="~/sozai/Index/octane-squad-jump.jpg.adapt.crop16x9.818p.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-3">
+
+                    <div class="col-sm order-md-2">
+                        <p>
+                            そこで実力の指標を与える別のアプローチとして、
+                            機械学習による診断を使ってみましょう。
+                            医療の世界では病気の診断に機械学習が盛んに用いられています。
+                            例えば、年齢・性別・身長・体重など体に関する様々な情報で機械学習を行い、
+                            その人が高血圧になる可能性を算出することができます
+                            <a href="#cite">[1]</a>。<!--tooltips を置く-->
+                            もちろん高血圧の判定だけに使われているわけではありません。機械学習により、COVID-19感染者の重症・重篤化を予測する早期スクリーニングシステムが作られています<a href="#cite">[2]</a>。
+                            機械学習は人間が外から見るだけでは到底見つけられないようなものを
+                            見つけることができるのです。
+                        </p>
+                    </div>
+                    <div class="col-sm order-md-1">
+                        <div class="text-center">
+                            <img src="~/sozai/Index/wattson-shush.jpg.adapt.crop16x9.818p.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row py-2">
+                    <div class="col-sm">
+                        <p>
+                            ゲームにおいてはどうでしょう。
+                            同じアナロジーでゲームの実力に関する様々な情報を
+                            入力すれば実力が判明するはずです。
+                            ランクが低くあまり上手に見えないプレイヤーも、実は最初から不利な状況で戦っていて、
+                            実力に見合ったランクがついていないだけである。
+                            ということを見抜けるかもしれません。
+                            では、彼らが普通の環境にあるプレイヤーと同じ実力で、
+                            どこまでRP(ランクポイント)を伸ばすことができるだろうか。
+                            このような if を機械学習が可能にします。
+                            ゴールドから這い上がれないプラチナ相当のプレイヤー。プラチナでどうしても勝てないダイヤ相当のプレイヤー。
+                            そういったプレイヤーの真の実力を明らかにできるかもしれません。
+                        </p>
+                    </div>
+                    <div class="col-sm">
+                        <div class="text-center">
+                            <img src="~/sozai/Index/shugou.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="row py-2">
+                    <div class="col-sm">
+                        <p>
+                            あなたの戦績から、その実力で到達できるかもしれないランクを診断してみませんか？ <br />
+                            これからランクマッチをプレーしていく上で一つの目安となるでしょう。<br />
+                            もしかしたら、マスターやプレデターは意外と近いかもしれません。<br />
+                        </p>
+                        <a class="btn btn-maincolor btn-small" asp-controller="ApexRank" asp-action="Input" onClickLoad>実力を診断してみる</a>
+
+                    </div>
+                    <div class="col-sm">
+
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-sm">
+                        <div class="bg-sub-desc">
+                            <h3>このサイトを共有</h3>
+                            <p>
+                                フレンドと一緒に実力を診断してみませんか？<br />
+                                ユーザーが増えれば増えるほど正確な診断が可能になります。<br />
+                            </p>
+                            @await Html.PartialAsync("_SNS", Model)
+
+                        </div>
+                    </div>
+                    <div class="col-sm">
+
+                    </div>
+                </div>
+            </section>
+
+            <script type="text/javascript">
+                var nend_params = { "media": 69303, "site": 350782, "spot": 1041490, "type": 10, "oriented": 1 };
+            </script>
+            <section>
+                <div class="bg-notice">
+                    <h3>注意事項</h3>
+                    <p>
+                        データを入力する際は、可能な限り正確に入力してください。<br />
+                        正確な診断には正確なデータが必要です。<br />
+                        皆さんから入力された戦績データから、機械学習を使って診断を行います。<br />
+                        また、データが集まるまでは不正確な結果となる場合があります。<br />
+                    </p>
+                    <h3>
+                        <a name="cite">参考文献</a>
+                    </h3>
+                        [1]<a href="https://www.healthknowledge.org.uk/e-learning/statistical-methods/specialists/logistic-regression" target="_blank" rel="nofollow noopener noreferrer">HealthKnowledge  "Logistic regression"</a><br />
+                        [2]<a href="https://hbr.org/2020/04/how-hospitals-are-using-ai-to-battle-covid-19" target="_blank" rel="nofollow noopener noreferrer">How Hospitals Are Using AI to Battle Covid-19</a>
+                    
+                </div>
+            </section>
+
+
+        </article>
+
+
+
+
