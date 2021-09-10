@@ -47,30 +47,32 @@ namespace RankPrediction_Web.Controllers
 
             //パラメータの解析
             //TODO enum.ToStringとchartparamをぶち当てる
-
-            //試しにやってみる
-            var chartData = new ChartJsData();
-            chartData.Config.Data.Labels = new List<string>()
-                {
-                    "This","Is","param=1"
-                };
-
-            chartData.Config.Data.DataSets = new List<DataSetItem>() {
-                    new DataSetItem()
-                    {
-                        Data = new List<int>()
-                        {
-                            1,2,3
-                        }
-                    }
-                };
-
-            //結果の返却
-            return new ContentResult
+            object chartTypeParse;
+            if (Enum.TryParse(typeof(ChartDisplayData), chartparam, out chartTypeParse))
             {
-                Content = ((IChartData)chartData).GetChartConfigResponse(),
-                ContentType = "application/json"
-            };
+                //ChartTypeの取得に成功
+                IChartData chartData = new ChartDataRepository(_context).RetrieveChartDataByChartType((ChartDisplayData)chartTypeParse);
+
+                if (chartData == null)
+                {
+                    //名称が存在しない
+                    return View(new RankToChartViewModel());
+                }
+                else
+                {
+                    //結果の返却
+                    return new ContentResult
+                    {
+                        Content = chartData.GetChartConfigResponse(),
+                        ContentType = "application/json"
+                    };
+                }
+            }
+            else
+            {
+                //名称が存在しない
+                return View(new RankToChartViewModel());
+            }
         }
 
 
