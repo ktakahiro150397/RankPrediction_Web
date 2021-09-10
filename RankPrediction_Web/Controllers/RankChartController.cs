@@ -46,7 +46,7 @@ namespace RankPrediction_Web.Controllers
         {
 
             //パラメータの解析
-            //TODO enum.ToStringとchartparamをぶち当てる
+            //enum.ToStringとchartparamをぶち当てる
             object chartTypeParse;
             if (Enum.TryParse(typeof(ChartDisplayData), chartparam, out chartTypeParse))
             {
@@ -111,7 +111,7 @@ namespace RankPrediction_Web.Controllers
                 chartData.Config.Data.DataSets = new List<DataSetItem>() {
                     new DataSetItem()
                     {
-                        Data = new List<int>()
+                        Data = new List<double>()
                         {
                             1,2,3
                         }
@@ -129,7 +129,7 @@ namespace RankPrediction_Web.Controllers
                 chartData.Config.Data.DataSets = new List<DataSetItem>() {
                     new DataSetItem()
                     {
-                        Data = new List<int>()
+                        Data = new List<double>()
                         {
                             3,4,2
                         }

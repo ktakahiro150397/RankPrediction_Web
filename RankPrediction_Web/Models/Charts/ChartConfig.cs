@@ -115,7 +115,7 @@ namespace RankPrediction_Web.Models.Charts
         /// チャートに表示する値を表します。
         /// </summary>
         [JsonPropertyName("data")]
-        public IList<int> Data { get; set; }
+        public IList<double> Data { get; set; }
 
         /// <summary>
         /// チャートグラフの背景色を文字列で指定します。
@@ -139,7 +139,7 @@ namespace RankPrediction_Web.Models.Charts
         {
         }
 
-        public ChartConfigOption(IList<int> data)
+        public ChartConfigOption(IList<double> data)
         {
             Scales = new
             {

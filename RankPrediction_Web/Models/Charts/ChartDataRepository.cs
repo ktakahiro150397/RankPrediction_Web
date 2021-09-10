@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RankPrediction_Web.Models.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace RankPrediction_Web.Models.Charts
 {
@@ -41,19 +42,109 @@ namespace RankPrediction_Web.Models.Charts
             }
         }
 
+        /// <summary>
+        /// ランクに対するキルレシオのデータを返します。
+        /// </summary>
+        /// <returns></returns>
         private IChartData GetRankToAverageKillRatio()
         {
-            throw new NotImplementedException();
+            //ランクに対する平均キルレシオデータの取得
+            var rankToAveKillRatio =
+                _db
+                .PredictionData
+                .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                .Select(item => new
+                {
+                    RankLabel = item.Key.RankNameJa,
+                    Value = item.Average(elem => elem.KillDeathRatio)
+                })
+                .ToList();
+
+            //返却データの生成
+            var retData = new ChartJsData();
+
+            retData.Config.ChartTypeValue = ChartType.bar;
+
+            //ラベルを設定
+            retData.Config.Data.Labels = rankToAveKillRatio.Select(item => item.RankLabel).ToList();
+
+            //データを設定
+            retData.Config.Data.DataSets.Add(
+                new DataSetItem()
+                {
+                    Data = rankToAveKillRatio.Select(item => item.Value.Value).ToList()
+                }
+            );
+
+            return retData;
+
         }
 
         private IChartData GetRankToAverageDamage()
         {
-            throw new NotImplementedException();
+            //ランクに対する平均ダメージデータの取得
+            var rankToAveKillRatio =
+                _db
+                .PredictionData
+                .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                .Select(item => new
+                {
+                    RankLabel = item.Key.RankNameJa,
+                    Value = item.Average(elem => elem.AverageDamage)
+                })
+                .ToList();
+
+            //返却データの生成
+            var retData = new ChartJsData();
+
+            retData.Config.ChartTypeValue = ChartType.bar;
+
+            //ラベルを設定
+            retData.Config.Data.Labels = rankToAveKillRatio.Select(item => item.RankLabel).ToList();
+
+            //データを設定
+            retData.Config.Data.DataSets.Add(
+                new DataSetItem()
+                {
+                    Data = rankToAveKillRatio.Select(item => item.Value.Value).ToList()
+                }
+            );
+
+            return retData;
         }
 
         private IChartData GetRankToAverageMatchCount()
         {
-            throw new NotImplementedException();
+            //ランクに対する平均マッチ数データの取得
+            var rankToAveKillRatio =
+                _db
+                .PredictionData
+                .Where(item => item.MatchCounts != -1)
+                .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                .Select(item => new
+                {
+                    RankLabel = item.Key.RankNameJa,
+                    Value = item.Average(elem => elem.MatchCounts)
+                })
+                .ToList();
+
+            //返却データの生成
+            var retData = new ChartJsData();
+
+            retData.Config.ChartTypeValue = ChartType.bar;
+
+            //ラベルを設定
+            retData.Config.Data.Labels = rankToAveKillRatio.Select(item => item.RankLabel).ToList();
+
+            //データを設定
+            retData.Config.Data.DataSets.Add(
+                new DataSetItem()
+                {
+                    Data = (IList<double>)rankToAveKillRatio.Select(item => item.Value.Value).ToList()
+                }
+            );
+
+            return retData;
         }
 
 

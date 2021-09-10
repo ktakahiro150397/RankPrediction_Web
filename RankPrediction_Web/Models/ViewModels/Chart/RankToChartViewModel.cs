@@ -14,7 +14,7 @@ namespace RankPrediction_Web.Models.ViewModels.Chart
             {
                 {ChartDisplayData.RankToAverageDamage,"平均ダメージ" },
                 {ChartDisplayData.RankToAverageKillRatio,"平均キルレシオ" },
-                {ChartDisplayData.RankToAverageMatchCount,"平均ダメージ" },
+                {ChartDisplayData.RankToAverageMatchCount,"平均マッチ数" },
             };
         }
 
