@@ -30,6 +30,52 @@ namespace RankPrediction_Web.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        public IActionResult RankToChart()
+        {
+            return View(new RankToChartViewModel());
+        }
+
+        /// <summary>
+        /// チャートデータのJsonオブジェクトを返却
+        /// </summary>
+        /// <param name="chartparam"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult RetrieveChartData(string chartparam)
+        {
+
+            //パラメータの解析
+            //enum.ToStringとchartparamをぶち当てる
+            object chartTypeParse;
+            if (Enum.TryParse(typeof(ChartDisplayData), chartparam, out chartTypeParse))
+            {
+                //ChartTypeの取得に成功
+                IChartData chartData = new ChartDataRepository(_context).RetrieveChartDataByChartType((ChartDisplayData)chartTypeParse);
+
+                if (chartData == null)
+                {
+                    //名称が存在しない
+                    return View(new RankToChartViewModel());
+                }
+                else
+                {
+                    //結果の返却
+                    return new ContentResult
+                    {
+                        Content = chartData.GetChartConfigResponse(),
+                        ContentType = "application/json"
+                    };
+                }
+            }
+            else
+            {
+                //名称が存在しない
+                return View(new RankToChartViewModel());
+            }
+        }
+
+
         public IActionResult ChartTest()
         {
             return View(new LayoutViewModel());
@@ -65,7 +111,7 @@ namespace RankPrediction_Web.Controllers
                 chartData.Config.Data.DataSets = new List<DataSetItem>() {
                     new DataSetItem()
                     {
-                        Data = new List<int>()
+                        Data = new List<double>()
                         {
                             1,2,3
                         }
@@ -83,7 +129,7 @@ namespace RankPrediction_Web.Controllers
                 chartData.Config.Data.DataSets = new List<DataSetItem>() {
                     new DataSetItem()
                     {
-                        Data = new List<int>()
+                        Data = new List<double>()
                         {
                             3,4,2
                         }

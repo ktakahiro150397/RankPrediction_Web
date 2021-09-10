@@ -9,7 +9,7 @@ namespace RankPrediction_Web.Models.Charts
     /// <summary>
     /// チャートデータを表すクラスが実装するインターフェース。
     /// </summary>
-    interface IChartData
+    public interface IChartData
     {
         /// <summary>
         /// 設定されているチャートのコンフィグ情報全体を、Json形式の文字列として返します。
