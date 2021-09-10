@@ -21,8 +21,6 @@
         ランクごとに、選択したデータの統計を表示します。
     </p>
 
-    <hr/>
-
     <select id="chartDataSelect">
         @foreach (var elem in Model.DisplayChartDataList)
         {
@@ -30,10 +28,14 @@
         }
     </select>
 
+    <hr />
+
+
+
     <div id="divChart">
         <canvas id="chartCanvas"></canvas>
     </div>
-    
+
 </section>
 
 

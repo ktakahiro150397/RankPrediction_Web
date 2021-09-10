@@ -17,6 +17,7 @@ namespace RankPrediction_Web.Models.Charts
         {
             ChartTypeValue = ChartType.bar;
             Data = new ChartConfigData();
+            Options = new ChartConfigOption();
         }
 
         /// <summary>
@@ -137,6 +138,13 @@ namespace RankPrediction_Web.Models.Charts
     {
         public ChartConfigOption()
         {
+            Plugins = new
+            {
+                legend = new
+                {
+                    display = false
+                }
+            };
         }
 
         public ChartConfigOption(IList<double> data)
@@ -153,6 +161,9 @@ namespace RankPrediction_Web.Models.Charts
 
         [JsonPropertyName("scales")]
         public object Scales { get; set; }
+
+        [JsonPropertyName("plugins")]
+        public object Plugins { get; set; }
 
     }
 
