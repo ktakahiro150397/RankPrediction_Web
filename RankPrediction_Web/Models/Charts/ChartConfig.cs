@@ -145,6 +145,9 @@ namespace RankPrediction_Web.Models.Charts
                     display = false
                 }
             };
+            MaintainAspectRatio = false;
+            Responsive = true;
+
         }
 
         public ChartConfigOption(IList<double> data)
@@ -165,6 +168,11 @@ namespace RankPrediction_Web.Models.Charts
         [JsonPropertyName("plugins")]
         public object Plugins { get; set; }
 
+        [JsonPropertyName("maintainAspectRatio")]
+        public bool MaintainAspectRatio { get; set; }
+
+        [JsonPropertyName("responsive")]
+        public bool Responsive { get; set; }
     }
 
 }
