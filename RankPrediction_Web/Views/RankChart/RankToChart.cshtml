@@ -7,10 +7,30 @@
 @section css{
 
 <style>
-    #divChart{
+    .chart-pos{
         position:relative;
         width:90%;
         height:calc(75vh - 3rem);
+    }
+
+    .chart-loading-pos {
+        position:relative;
+        margin:0;
+    }
+
+    #load-icon-div {
+        position: absolute;
+        top: -1.8rem;
+        left: 10rem;
+        height: 1.8rem;
+        width: 1.8rem;
+    }
+
+    #loading-desc{
+        position:absolute;
+        top:-1.5rem;
+        left:11.5rem;
+
     }
 </style>
 
@@ -21,16 +41,28 @@
         ランクごとに、選択したデータの統計を表示します。
     </p>
 
-    <select id="chartDataSelect">
-        @foreach (var elem in Model.DisplayChartDataList)
-        {
-            <option value="@elem.Key">@elem.Value</option>
-        }
-    </select>
+    <div>
+
+        <select id="chartDataSelect">
+            @foreach (var elem in Model.DisplayChartDataList)
+            {
+                <option value="@elem.Key">@elem.Value</option>
+            }
+        </select>
+
+        <div id="chart-loading-div" class="chart-loading-pos">
+            <span id="chartLoadIcon">
+                @await Html.PartialAsync("_LoadingIcon", null)
+            </span>
+            <span id="loading-desc">読み込んでいます…</span>
+        </div>
+        
+
+    </div>
 
     <hr />
 
-    <div id="divChart">
+    <div id="divChart" class="chart-pos">
         <canvas id="chartCanvas"></canvas>
     </div>
 
