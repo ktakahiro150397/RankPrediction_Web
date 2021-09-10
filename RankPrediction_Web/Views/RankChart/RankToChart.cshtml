@@ -70,20 +70,27 @@
 
 
 <script>
+
     //初期チャート表示
     let ctx = document.getElementById("chartCanvas").getContext("2d");
     var chart = new Chart(ctx, { type: 'bar', data: null });
 
     window.onload = function () {
+
         //イベント設定
         document.getElementById("chartDataSelect").addEventListener("change", onChartDataSelectChange);
 
         //初期データ取得
         onChartDataSelectChange();
+
     }
 
     //表示データ更新
     function onChartDataSelectChange() {
+
+        //ロードアイコンの表示
+        let loadDiv = document.getElementById("chart-loading-div");
+        loadDiv.style.visibility = "visible";
 
         //XMLHttpRequestの設定
         let httpRequest = new XMLHttpRequest();
@@ -98,6 +105,9 @@
 
                     chart.config._config = cfg;
                     chart.update();
+
+                    //ロードアイコンの非表示
+                    loadDiv.style.visibility = "hidden";
 
                 } else {
                     console.log(`httpRequest.statusが${httpRequest.status}でした。`);
