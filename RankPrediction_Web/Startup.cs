@@ -42,7 +42,11 @@ namespace RankPrediction_Web
 
             //外部認証Configurationの追加
             services.AddAuthentication()
-                    .AddSteam();
+                    .AddSteam(options =>
+                    {
+                        options.CallbackPath = new Microsoft.AspNetCore.Http.PathString("/Login/Welcome");
+                        options.ApplicationKey = "A03F81037033B61CEAC131267532DA07";
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

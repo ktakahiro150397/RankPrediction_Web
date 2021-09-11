@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RankPrediction_Web.Models.ViewModels;
 using RankPrediction_Web.Models.ViewModels.Login;
@@ -14,6 +15,8 @@ namespace RankPrediction_Web.Controllers
     public class LoginController : Controller
     {
         // GET: /<controller>/
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
 
@@ -41,9 +44,24 @@ namespace RankPrediction_Web.Controllers
             return Challenge(
                    new AuthenticationProperties
                    {
-                       RedirectUri  = "/"
+                       RedirectUri  = "/Login/welcome"
                    },
                    provider);
+        }
+
+        [HttpGet("~/Login/signout"), HttpPost("~/Login/signout")]
+        public IActionResult SignOutCurrentUser()
+        {
+            // Instruct the cookies middleware to delete the local cookie created
+            // when the user agent is redirected from the external identity provider
+            // after a successful authentication flow (e.g Google or Facebook).
+            return SignOut(new AuthenticationProperties { RedirectUri = "/Login/welcome" },
+                CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        public IActionResult Welcome()
+        {
+            return View(new LayoutViewModel());
         }
 
 

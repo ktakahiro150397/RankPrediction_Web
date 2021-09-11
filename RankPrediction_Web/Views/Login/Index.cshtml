@@ -9,7 +9,7 @@
 
         @foreach(var scheme in Model.AuthenticationSchemes.OrderBy(p => p.DisplayName))
             {
-                <form action="/Index" method="post">
+                <form action="/Login/Index" method="post">
                     <input type="hidden" name="Provider" value="@scheme.Name" />
                     <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
 
