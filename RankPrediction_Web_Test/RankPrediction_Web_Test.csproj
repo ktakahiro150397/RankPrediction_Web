@@ -13,6 +13,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="2.2.3" />
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
     <PackageReference Include="Mono.HttpUtility" Version="1.0.0.1" />
+    <PackageReference Include="AspNet.Security.OpenId" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
     <None Remove="Mono.HttpUtility" />
     <None Remove="Models\" />
     <None Remove="Models\SnsShare\" />
+    <None Remove="AspNet.Security.OpenId" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
