@@ -16,6 +16,7 @@ namespace RankPrediction_Web.Models
         /// 指定IDデータを元に、予測したランク結果を返します。
         /// </summary>
         public Rank PredictResult { get; set; }
+        public RankAmazonUrl AmazonUrl { get; set; }
 
         /// <summary>
         /// ランク画像を表すバイト配列。
@@ -99,6 +100,13 @@ namespace RankPrediction_Web.Models
                         RankNameJa = item.RankNameJa,
                         RankDescJa = item.RankDescJa,
                         RankPic = item.RankPic
+                    })
+                    .First();
+                AmazonUrl = dbContext.RankAmazonUrls
+                    .Where(item => item.RankGeneralId == PredictResult.RankId/4+1)// /4+1でrankidとamazon rank_general_idを対応づけ
+                    .Select(item => new RankAmazonUrl()
+                    {
+                        AmazonUrl = item.AmazonUrl
                     })
                     .First();
             }
