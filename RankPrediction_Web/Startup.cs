@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using RankPrediction_Web.Models.DbContexts;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 namespace RankPrediction_Web
 {
@@ -37,6 +39,10 @@ namespace RankPrediction_Web
 
             services.AddDbContext<RankPredictionContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("dbml")));
+
+            //外部認証Configurationの追加
+            services.AddAuthentication()
+                    .AddSteam();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +62,8 @@ namespace RankPrediction_Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseAuthorization();
 

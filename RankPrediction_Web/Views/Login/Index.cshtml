@@ -1,4 +1,5 @@
-﻿
+﻿@model RankPrediction_Web.Models.ViewModels.Login.LoginIndexViewModel
+
 <article>
     <p>
         入力情報を記憶するには、ログインしてください。
@@ -6,7 +7,19 @@
 
     <section>
 
-        <a asp-controller="Login" asp-action="SteamLogin">Steamでログイン</a>
+        @foreach(var scheme in Model.AuthenticationSchemes.OrderBy(p => p.DisplayName))
+            {
+                <form action="/Index" method="post">
+                    <input type="hidden" name="Provider" value="@scheme.Name" />
+                    <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+
+                    <button class="btn btn-lg btn-success m-1" type="submit">
+                        Connect using @scheme.DisplayName
+                    </button>
+                </form>
+            }
+
+        @*<a asp-controller="Login" asp-action="SteamLogin">Steamでログイン</a>*@
 
 
     </section>

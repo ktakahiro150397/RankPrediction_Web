@@ -16,6 +16,7 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
 		<PackageReference Include="AspNet.Security.OpenId" Version="5.0.0" />
+		<PackageReference Include="AspNet.Security.OpenId.Steam" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<DotNetCilToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
@@ -31,6 +32,9 @@
 	  <None Remove="Mono.HttpUtility" />
 	  <None Remove="Views\Login\" />
 	  <None Remove="AspNet.Security.OpenId" />
+	  <None Remove="AspNet.Security.OpenId.Steam" />
+	  <None Remove="Models\ViewModels\Login\" />
+	  <None Remove="Extensions\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
@@ -67,6 +71,8 @@
 	  <Folder Include="Models\ViewModels\Chart\" />
 	  <Folder Include="Models\SnsShare\" />
 	  <Folder Include="Views\Login\" />
+	  <Folder Include="Models\ViewModels\Login\" />
+	  <Folder Include="Extensions\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />
