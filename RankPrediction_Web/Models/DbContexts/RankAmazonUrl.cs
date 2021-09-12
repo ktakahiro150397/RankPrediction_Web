@@ -10,6 +10,8 @@ namespace RankPrediction_Web.Models.DbContexts
         public int Id { get; set; }
         public int RankGeneralId { get; set; }
         public string AmazonUrl { get; set; }
+        public string ItemName { get; set; }
+        public string Introduction { get; set; }
 
         public virtual RanksGeneral RankGeneral { get; set; }
     }

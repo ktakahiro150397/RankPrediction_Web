@@ -34,6 +34,10 @@
     padding-bottom:1rem;
 }
 
+.under-line {
+    background: linear-gradient(transparent 80%, #ffcc99 0%);
+}
+
 @media (min-width:575px) {
     #top_img {
         width: 400px;
