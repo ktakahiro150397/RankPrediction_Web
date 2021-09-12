@@ -135,13 +135,23 @@ namespace RankPrediction_Web.Models.DbContexts
                     .IsRequired()
                     .HasColumnName("amazon_url");
 
+                entity.Property(e => e.Introduction)
+                    .IsRequired()
+                    .HasColumnName("introduction")
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.ItemName)
+                    .IsRequired()
+                    .HasColumnName("item_name")
+                    .HasDefaultValueSql("('')");
+
                 entity.Property(e => e.RankGeneralId).HasColumnName("rank_general_id");
 
                 entity.HasOne(d => d.RankGeneral)
                     .WithMany(p => p.RankAmazonUrls)
                     .HasForeignKey(d => d.RankGeneralId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__rank_amaz__rank___17F790F9");
+                    .HasConstraintName("FK__rank_amaz__rank___2739D489");
             });
 
             modelBuilder.Entity<RankPyModel>(entity =>
