@@ -38,9 +38,6 @@ namespace RankPrediction_Web.Controllers
                 return BadRequest();
             }
 
-
-
-
             return Challenge(
                    new AuthenticationProperties
                    {

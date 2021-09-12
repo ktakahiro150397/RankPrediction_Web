@@ -35,6 +35,7 @@
 	  <None Remove="AspNet.Security.OpenId.Steam" />
 	  <None Remove="Models\ViewModels\Login\" />
 	  <None Remove="Extensions\" />
+	  <None Remove="Models\Authentication\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="wwwroot\css\Index.css" />
@@ -73,6 +74,7 @@
 	  <Folder Include="Views\Login\" />
 	  <Folder Include="Models\ViewModels\Login\" />
 	  <Folder Include="Extensions\" />
+	  <Folder Include="Models\Authentication\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\loading.css" />
