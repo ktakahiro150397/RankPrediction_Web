@@ -13,6 +13,7 @@ namespace RankPrediction_Web.Models.ViewModels
         {
             SnsShare = new SnsShareModel("AIでAPEXの実力を診断してみよう！", "秘められた実力が分かるかも！");
 
+            
             User = new AuthenticatedUser();
         }
 
