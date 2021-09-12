@@ -44,7 +44,7 @@ namespace RankPrediction_Web.Controllers
             return Challenge(
                    new AuthenticationProperties
                    {
-                       RedirectUri  = "/Login/welcome"
+                       RedirectUri="/Login/Welcome"
                    },
                    provider);
         }

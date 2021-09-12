@@ -41,16 +41,23 @@ namespace RankPrediction_Web
                 options => options.UseSqlServer(Configuration.GetConnectionString("dbml")));
 
             //外部認証Configurationの追加
-            services.AddAuthentication()
+            services.AddAuthentication(options =>
+                    {
+                        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    })
+                    .AddCookie(options =>
+                    {
+                        //options.LoginPath = "/Login";
+                        //options.LogoutPath = "/Login/signout";
+                    })
                     .AddSteam(options =>
                     {
-                        options.CallbackPath = new Microsoft.AspNetCore.Http.PathString("/Login/Welcome");
                         options.ApplicationKey = "A03F81037033B61CEAC131267532DA07";
                     });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -69,7 +76,7 @@ namespace RankPrediction_Web
 
             app.UseAuthorization();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
