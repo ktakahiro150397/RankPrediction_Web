@@ -141,7 +141,12 @@
         var nend_params = { "media": 69303, "site": 350782, "spot": 1041490, "type": 10, "oriented": 1 };
     </script>
     <p>
-        @Model.PredictedResult.AmazonUrl.AmazonUrl
+        @{ foreach (var str in Model.PredictedResult.AmazonUrl)
+            {
+                str.AmazonUrl;
+            }
+            
+        }
     </p>
     <section>
         <h3>

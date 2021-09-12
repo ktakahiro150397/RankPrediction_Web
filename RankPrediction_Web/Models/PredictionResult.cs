@@ -15,8 +15,8 @@ namespace RankPrediction_Web.Models
         /// <summary>
         /// 指定IDデータを元に、予測したランク結果を返します。
         /// </summary>
+        public List<RankAmazonUrl> AmazonUrl { get; set; }
         public Rank PredictResult { get; set; }
-        public RankAmazonUrl AmazonUrl { get; set; }
 
         /// <summary>
         /// ランク画像を表すバイト配列。
@@ -108,7 +108,7 @@ namespace RankPrediction_Web.Models
                     {
                         AmazonUrl = item.AmazonUrl
                     })
-                    .First();
+                    .ToList();
             }
             else
             {
