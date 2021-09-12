@@ -15,6 +15,7 @@ namespace RankPrediction_Web.Models
         /// <summary>
         /// 指定IDデータを元に、予測したランク結果を返します。
         /// </summary>
+        public List<RankAmazonUrl> AmazonUrl { get; set; }
         public Rank PredictResult { get; set; }
 
         /// <summary>
@@ -101,6 +102,14 @@ namespace RankPrediction_Web.Models
                         RankPic = item.RankPic
                     })
                     .First();
+                AmazonUrl = dbContext.RankAmazonUrls
+                    .Where(item => item.RankGeneralId == (PredictResult.RankId/4)+1)// /4+1でrankidとamazon rank_general_idを対応づけ
+                    .Select(item => new RankAmazonUrl()
+                    {
+                        AmazonUrl = item.AmazonUrl,
+                        Introduction = item.Introduction
+                    })
+                    .ToList();
             }
             else
             {
