@@ -103,10 +103,11 @@ namespace RankPrediction_Web.Models
                     })
                     .First();
                 AmazonUrl = dbContext.RankAmazonUrls
-                    .Where(item => item.RankGeneralId == PredictResult.RankId/4+1)// /4+1でrankidとamazon rank_general_idを対応づけ
+                    .Where(item => item.RankGeneralId == (PredictResult.RankId/4)+1)// /4+1でrankidとamazon rank_general_idを対応づけ
                     .Select(item => new RankAmazonUrl()
                     {
-                        AmazonUrl = item.AmazonUrl
+                        AmazonUrl = item.AmazonUrl,
+                        Introduction = item.Introduction
                     })
                     .ToList();
             }

@@ -141,89 +141,27 @@
 
 
     @* @foreachでURLデータをループし、<p>タグ出力を繰り返す *@
-    @foreach (var item in Model.PredictedResult.AmazonUrl)
-    {
-        <p>
-            @item.AmazonUrl
-        </p>
-    }
+    <section>
 
 
-    @* @{ ... } はC#コードを実行するだけなので画面への出力には使えない *@
-    @* エラーは"str.AmazonUrl"がプロパティなのに割り当てたりメソッドに渡されてないから *@
-    @*<p>
-            @{ foreach (var str in Model.PredictedResult.AmazonUrl)
-                {
-                    str.AmazonUrl;
-                }
+        <dev class="container">
+            <h3>
+                あなたにおすすめのデバイスは...
+            </h3>
+
+            @foreach (var item in Model.PredictedResult.AmazonUrl)
+            {
+                <div class="row">
+                    <div class="col-sm-5">
+                        <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="@item.AmazonUrl"></iframe>
+                    </div>
+                    <div class="col-sm-7">
+                        <p>@item.Introduction</p>
+                    </div>
+                </div><hr />
 
             }
-        </p>*@
-
-    <section>
-        <h3>
-            より高みを目指すために...
-        </h3>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5">
-                    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=wagashimgmg-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07F5TK7SG&linkId=21762db6e699b3aeb578032ce6e18d71"></iframe>
-                </div>
-                <div class="col-sm-7">
-                    <p>マウスでゲームをするには必要なことがいくつかあります。まずはマウス加速を切ること。次にマウスパッドを買うこと。マウスパッドは種類が多く、簡単に沼にはまりますが、これを買えばとりあえず満足できます。</p>
-                </div>
-            </div><hr />
-            <div class="row">
-
-                <div class="col-sm-5">
-                    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=wagashimgmg-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B08CKZNCPP&linkId=c0ce8738691151f443b11316086ce1c2"></iframe>
-
-                </div>
-                <div class="col-sm-7">
-                    <p>
-                        どんなマウスでもゲームは出来ます。しかし、大事な場面、たった一発のウィングマンで勝敗が決まる場面でマウスの差が如実に現れます。マウス沼に片足を突っ込み、軽さは正義ということを学んだゲーマーは多いと思います。
-                        このマウスは正義です。
-                    </p>
-                </div>
-
-            </div><hr />
-            <div class="row">
-
-                <div class="col-sm-5">
-                    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=wagashimgmg-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B01GHUA3XA&linkId=58e89c183edd0207d5af53f25e6fc3f3"></iframe>
-
-                </div>
-                <div class="col-sm-7">
-                    <p>
-                        チームワークが大事なゲームでは当然ボイスチャットが大事。そしてボイスチャットにおいて当然音質が大事。マイクにはある程度のお金を出しましょう。自分にリターンがないように思えますが、音質が悪いとチームメイトの集中力が削がれます。
-                        チームとして戦闘力を上げるなら良いマイクが必要です。このマイクはあくまで一例です。しかし、これで文句を言われることはありません。PS4でも使用できます。
-                    </p>
-                </div>
-
-            </div><hr />
-
-            <div class="row">
-
-                <div class="col-sm-5">
-                    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=wagashimgmg-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B095Y9JQGR&linkId=c9b1129aca8405a57f268fcc55e93aba"></iframe>
-
-                </div>
-                <div class="col-sm-7">
-                    <p>最高のデバイスがプレイヤーを最高へと導く</p>
-                </div>
-
-            </div><hr />
-            <div class="row">
-
-                <div class="col-sm-5">
-                    <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=wagashimgmg-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B08V5HPXVY&linkId=a588309d50024abf03557185ea32350c"></iframe>
-                </div>
-                <div class="col-sm-7">
-                    <p>クールなクリップを最強のCPUでサクッと編集しましょう</p>
-                </div>
-
-            </div><hr />
-        </div>
+        </dev>
     </section>
 
     <div class="btn-container">
@@ -231,16 +169,16 @@
         <a class="btn btn-small" asp-controller="ApexRank" asp-action="Index">トップへ戻る</a>
     </div>
 </article>
+   
 
 
+    @section Scripts {
 
-@section Scripts {
+        <script>
+            var lblRank = document.getElementById("lblRank");
 
-<script>
-    var lblRank = document.getElementById("lblRank");
+            lblRank.classList.add("rank-result-underline-enable");
 
-    lblRank.classList.add("rank-result-underline-enable");
+        </script>
 
-</script>
-
-}
+    }
