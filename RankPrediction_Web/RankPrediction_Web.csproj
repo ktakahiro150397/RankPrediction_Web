@@ -30,6 +30,7 @@
 	  <None Remove="Mono.HttpUtility" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Include="Views\affi\amazon.cshtml" />
 	  <None Include="wwwroot\css\Index.css" />
 	  <None Include="wwwroot\sozai\Apex Legends Screenshot 2021.08.24 - 21.30.49.74.png" />
 	  <None Include="wwwroot\sozai\EtXheooUUA8CO1c.png" />
@@ -55,8 +56,6 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Models\ViewModels\" />
-	  <Folder Include="Models\DbContexts\" />
 	  <Folder Include="wwwroot\sozai\" />
 	  <Folder Include="wwwroot\pics\" />
 	  <Folder Include="_Log\" />
@@ -65,6 +64,7 @@
 	  <Folder Include="Models\SnsShare\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Remove="Views\affi\amazon.cshtml" />
 	  <Content Remove="wwwroot\css\loading.css" />
 	  <Content Remove="wwwroot\sozai\Apex Legends Screenshot 2021.08.24 - 21.30.49.74.png" />
 	  <Content Remove="wwwroot\sozai\EtXheooUUA8CO1c.png" />
