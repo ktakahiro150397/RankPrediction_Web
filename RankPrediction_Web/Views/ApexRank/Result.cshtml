@@ -137,17 +137,29 @@
         </p>
     </section>
 
-    <script type="text/javascript">
-        var nend_params = { "media": 69303, "site": 350782, "spot": 1041490, "type": 10, "oriented": 1 };
-    </script>
-    <p>
-        @{ foreach (var str in Model.PredictedResult.AmazonUrl)
-            {
-                str.AmazonUrl;
+    <script type="text/javascript">var nend_params = { "media": 69303, "site": 350782, "spot": 1041490, "type": 10, "oriented": 1 };</script>
+
+
+    @* @foreachでURLデータをループし、<p>タグ出力を繰り返す *@
+    @foreach (var item in Model.PredictedResult.AmazonUrl)
+    {
+        <p>
+            @item.AmazonUrl
+        </p>
+    }
+
+
+    @* @{ ... } はC#コードを実行するだけなので画面への出力には使えない *@
+    @* エラーは"str.AmazonUrl"がプロパティなのに割り当てたりメソッドに渡されてないから *@
+    @*<p>
+            @{ foreach (var str in Model.PredictedResult.AmazonUrl)
+                {
+                    str.AmazonUrl;
+                }
+
             }
-            
-        }
-    </p>
+        </p>*@
+
     <section>
         <h3>
             より高みを目指すために...
