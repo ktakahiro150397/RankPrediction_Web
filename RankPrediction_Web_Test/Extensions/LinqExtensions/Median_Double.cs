@@ -34,7 +34,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
         public void Median_double_2()
         {
             IEnumerable<double> target = new List<double>() { 1.0D, 2.0D, 3.0D, 4.0D };
-            double expected = (2 + 3) / 2;
+            double expected = (2D + 3D) / 2;
 
             double actual = target.Median();
 

@@ -41,8 +41,6 @@ namespace RankPrediction_Web.Extensions
                 return sortedSeq[retSeq];
             }
 
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -62,7 +60,23 @@ namespace RankPrediction_Web.Extensions
             }
 
 
-            throw new NotImplementedException();
+            //対象のシーケンスを昇順にソート
+            var sortedSeq = src.OrderBy(item => item).ToArray();
+
+            //シーケンスの数に応じて処理を分岐
+            if (sortedSeq.Count() % 2 == 0)
+            {
+                //偶数個
+                var retSeq = sortedSeq.Count() / 2;
+                return (sortedSeq[retSeq - 1] + sortedSeq[retSeq]) / 2;
+            }
+            else
+            {
+                //奇数個
+                var retSeq = sortedSeq.Count() / 2;
+                return sortedSeq[retSeq];
+            }
+
         }
 
     }
