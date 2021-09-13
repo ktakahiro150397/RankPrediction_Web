@@ -70,6 +70,7 @@ namespace RankPrediction_Web.Models
         public PredictionResult(RankPredictionContext dbContext, int id)
         {
             _id = id;
+            AmazonUrl = new List<RankAmazonUrl>();
 
             if (dbContext.PyRankPredictions.Any(
                 item => item.SourceDataId == _id &&
