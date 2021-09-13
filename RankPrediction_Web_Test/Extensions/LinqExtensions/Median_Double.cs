@@ -72,5 +72,107 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
 
         }
 
+        /// <summary>
+        /// 偶数個のシーケンス_double型
+        /// </summary>
+        [TestMethod]
+        public void Median_double_5()
+        {
+            IEnumerable<double> target = new List<double>() { 3.2D };
+            double expected = 3.2D;
+
+            double actual = target.Median();
+
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
+        /// <summary>
+        /// 偶数個のシーケンス_double型
+        /// </summary>
+        [TestMethod]
+        public void Median_double_6()
+        {
+            IEnumerable<double> target = new List<double>() { 2D, 5D };
+            double expected = (2D + 5D) / 2D;
+
+            double actual = target.Median();
+
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
+        /// <summary>
+        /// セレクタ関数を通じて中央値を取得
+        /// </summary>
+        [TestMethod]
+        public void Median_double_7()
+        {
+            IEnumerable<double> target = new List<double>() { 1.3, 2, 7, 4.5, 2.9 };
+            double expected = 2.9;
+
+            var valueClass = new Median_ValueClass<double>(target);
+
+            double actual = valueClass.ValueList.Median(item => item.Value);
+
+            Assert.AreEqual(expected, actual);
+
+
+
+        }
+
+        /// <summary>
+        /// セレクタ関数を通じて中央値を取得
+        /// </summary>
+        [TestMethod]
+        public void Median_double_8()
+        {
+            IEnumerable<double> target = new List<double>() { 1.3, 2, 4.5, 2.9 };
+            double expected = (2 + 2.9) / 2;
+
+            var valueClass = new Median_ValueClass<double>(target);
+
+            double actual = valueClass.ValueList.Median(item => item.Value);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// セレクタ関数を通じて中央値を取得
+        /// </summary>
+        [TestMethod]
+        public void Median_double_9()
+        {
+            IEnumerable<double> target = new List<double>() { 3.2D };
+            double expected = 3.2D;
+
+            var valueClass = new Median_ValueClass<double>(target);
+
+            double actual = valueClass.ValueList.Median(item => item.Value);
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        /// <summary>
+        /// セレクタ関数を通じて中央値を取得
+        /// </summary>
+        [TestMethod]
+        public void Median_double_10()
+        {
+            IEnumerable<double> target = new List<double>() { 2D, 5D };
+            double expected = (2D + 5D) / 2D;
+
+            var valueClass = new Median_ValueClass<double>(target);
+
+            double actual = valueClass.ValueList.Median(item => item.Value);
+
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
     }
 }

@@ -43,6 +43,7 @@ namespace RankPrediction_Web.Extensions
 
         }
 
+        
         /// <summary>
         /// 対象のシーケンスから、中央値を計算します。
         /// </summary>
@@ -77,6 +78,30 @@ namespace RankPrediction_Web.Extensions
                 return sortedSeq[retSeq];
             }
 
+        }
+
+        /// <summary>
+        /// 対象のシーケンスから、セレクタ関数を通じて取得した値の中央値を取得します。
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static double Median<T>(this IEnumerable<T> src, Func<T, int> selector)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 対象のシーケンスから、セレクタ関数を通じて取得した値の中央値を取得します。
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static double Median<T>(this IEnumerable<T> src, Func<T, double> selector)
+        {
+
+            throw new NotImplementedException();
         }
 
     }

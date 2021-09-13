@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RankPrediction_Web.Models.DbContexts;
 using Microsoft.EntityFrameworkCore;
+using RankPrediction_Web.Extensions;
 
 namespace RankPrediction_Web.Models.Charts
 {
