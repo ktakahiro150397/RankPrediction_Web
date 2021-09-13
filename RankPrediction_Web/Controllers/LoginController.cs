@@ -41,18 +41,31 @@ namespace RankPrediction_Web.Controllers
             return Challenge(
                    new AuthenticationProperties
                    {
-                       RedirectUri="/Login/Welcome"
+                       RedirectUri="/Login/Proc"
                    },
                    provider);
         }
 
-        [HttpGet("~/Login/signout"), HttpPost("~/Login/signout")]
+        /// <summary>
+        /// ログインチャレンジ後、ユーザーの存在をチェックします。
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("~/Login/Proc")]
+        public IActionResult CheckExistance()
+        {
+
+            //TODO ここでチェックする
+
+            return RedirectToAction("Welcome", "Login");
+        }
+
+        [HttpGet("~/Login/Logout"), HttpPost("~/Login/Logout")]
         public IActionResult SignOutCurrentUser()
         {
             // Instruct the cookies middleware to delete the local cookie created
             // when the user agent is redirected from the external identity provider
             // after a successful authentication flow (e.g Google or Facebook).
-            return SignOut(new AuthenticationProperties { RedirectUri = "/Login/welcome" },
+            return SignOut(new AuthenticationProperties { RedirectUri = "/Login" },
                 CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
