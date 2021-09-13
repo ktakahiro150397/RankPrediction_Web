@@ -72,5 +72,38 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
 
 
         }
+
+        /// <summary>
+        /// 偶数個のシーケンス_int型
+        /// </summary>
+        [TestMethod]
+        public void Median_int_5()
+        {
+            IEnumerable<int> target = new List<int>() { 3 };
+            double expected = 3;
+
+            double actual = target.Median();
+
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
+        /// <summary>
+        /// 偶数個のシーケンス_int型
+        /// </summary>
+        [TestMethod]
+        public void Median_int_6()
+        {
+            IEnumerable<int> target = new List<int>() { 2,5 };
+            double expected = (2D + 5D) / 2D;
+
+            double actual = target.Median();
+
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
     }
 }

@@ -24,6 +24,22 @@ namespace RankPrediction_Web.Extensions
                 throw new InvalidOperationException("Can't calculate median from blank sequence");
             }
 
+            //対象のシーケンスを昇順にソート
+            var sortedSeq = src.OrderBy(item => item).ToArray();
+
+            //シーケンスの数に応じて処理を分岐
+            if(sortedSeq.Count() % 2 == 0)
+            {
+                //偶数個
+                var retSeq = sortedSeq.Count() / 2;
+                return ((double)sortedSeq[retSeq - 1] + (double)sortedSeq[retSeq]) / 2;
+            }
+            else
+            {
+                //奇数個
+                var retSeq = sortedSeq.Count() / 2;
+                return sortedSeq[retSeq];
+            }
 
 
             throw new NotImplementedException();
