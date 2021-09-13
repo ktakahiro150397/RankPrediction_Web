@@ -14,7 +14,7 @@ namespace RankPrediction_Web.Extensions
         public static double Median(this IEnumerable<int> src)
         {
 
-            if(src == null)
+            if (src == null)
             {
                 throw new InvalidOperationException("Can't calculate median from null sequence");
             }
@@ -28,7 +28,7 @@ namespace RankPrediction_Web.Extensions
             var sortedSeq = src.OrderBy(item => item).ToArray();
 
             //シーケンスの数に応じて処理を分岐
-            if(sortedSeq.Count() % 2 == 0)
+            if (sortedSeq.Count() % 2 == 0)
             {
                 //偶数個
                 var retSeq = sortedSeq.Count() / 2;
@@ -43,7 +43,7 @@ namespace RankPrediction_Web.Extensions
 
         }
 
-        
+
         /// <summary>
         /// 対象のシーケンスから、中央値を計算します。
         /// </summary>
@@ -88,8 +88,14 @@ namespace RankPrediction_Web.Extensions
         /// <returns></returns>
         public static double Median<T>(this IEnumerable<T> src, Func<T, int> selector)
         {
+            var intSrc = new int[src.Count()];
 
-            throw new NotImplementedException();
+            foreach (var item in src.Select((item, i) => new { Value = item, Seq = i }))
+            {
+                intSrc[item.Seq] = selector(item.Value);
+            }
+
+            return intSrc.Median();
         }
 
         /// <summary>
@@ -100,8 +106,14 @@ namespace RankPrediction_Web.Extensions
         /// <returns></returns>
         public static double Median<T>(this IEnumerable<T> src, Func<T, double> selector)
         {
+            var intSrc = new double[src.Count()];
 
-            throw new NotImplementedException();
+            foreach (var item in src.Select((item, i) => new { Value = item, Seq = i }))
+            {
+                intSrc[item.Seq] = selector(item.Value);
+            }
+
+            return intSrc.Median();
         }
 
     }

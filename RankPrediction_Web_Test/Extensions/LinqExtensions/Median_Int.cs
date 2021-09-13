@@ -132,7 +132,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
         public void Median_int_8()
         {
             IEnumerable<int> target = new List<int>() { 3, 2, 4, 1 };
-            double expected = 3D;
+            double expected = (2D + 3D) / 2D;
 
             var valueClass = new Median_ValueClass<int>(target);
 
