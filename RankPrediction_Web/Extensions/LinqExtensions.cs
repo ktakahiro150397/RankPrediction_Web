@@ -13,6 +13,19 @@ namespace RankPrediction_Web.Extensions
         /// <returns></returns>
         public static double Median(this IEnumerable<int> src)
         {
+
+            if(src == null)
+            {
+                throw new InvalidOperationException("Can't calculate median from null sequence");
+            }
+
+            if (src.Count() == 0)
+            {
+                throw new InvalidOperationException("Can't calculate median from blank sequence");
+            }
+
+
+
             throw new NotImplementedException();
         }
 
@@ -22,6 +35,17 @@ namespace RankPrediction_Web.Extensions
         /// <returns></returns>
         public static double Median(this IEnumerable<double> src)
         {
+            if (src == null)
+            {
+                throw new InvalidOperationException("Can't calculate median from null sequence");
+            }
+
+            if (src.Count() == 0)
+            {
+                throw new InvalidOperationException("Can't calculate median from blank sequence");
+            }
+
+
             throw new NotImplementedException();
         }
 
