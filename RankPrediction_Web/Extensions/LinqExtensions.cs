@@ -11,7 +11,7 @@ namespace RankPrediction_Web.Extensions
         /// 対象のシーケンスから、中央値を計算します。
         /// </summary>
         /// <returns></returns>
-        public static double Median(this IEnumerable<int> src)
+        public static double Median(this IEnumerable<int?> src)
         {
 
             if (src == null)
@@ -38,7 +38,7 @@ namespace RankPrediction_Web.Extensions
             {
                 //奇数個
                 var retSeq = sortedSeq.Count() / 2;
-                return sortedSeq[retSeq];
+                return (double)sortedSeq[retSeq];
             }
 
         }
@@ -48,7 +48,7 @@ namespace RankPrediction_Web.Extensions
         /// 対象のシーケンスから、中央値を計算します。
         /// </summary>
         /// <returns></returns>
-        public static double Median(this IEnumerable<double> src)
+        public static double Median(this IEnumerable<double?> src)
         {
             if (src == null)
             {
@@ -69,13 +69,13 @@ namespace RankPrediction_Web.Extensions
             {
                 //偶数個
                 var retSeq = sortedSeq.Count() / 2;
-                return (sortedSeq[retSeq - 1] + sortedSeq[retSeq]) / 2;
+                return (double)((sortedSeq[retSeq - 1] + sortedSeq[retSeq]) / 2);
             }
             else
             {
                 //奇数個
                 var retSeq = sortedSeq.Count() / 2;
-                return sortedSeq[retSeq];
+                return (double)sortedSeq[retSeq];
             }
 
         }
@@ -88,7 +88,7 @@ namespace RankPrediction_Web.Extensions
         /// <returns></returns>
         public static double? Median<T>(this IEnumerable<T> src, Func<T, int?> selector)
         {
-            var intSrc = new int[src.Count()];
+            var intSrc = new int?[src.Count()];
 
             foreach (var item in src.Select((item, i) => new { Value = item, Seq = i }))
             {
@@ -106,7 +106,7 @@ namespace RankPrediction_Web.Extensions
         /// <returns></returns>
         public static double? Median<T>(this IEnumerable<T> src, Func<T, double?> selector)
         {
-            var srcArray = new double[src.Count()];
+            var srcArray = new double?[src.Count()];
 
             foreach (var item in src.Select((item, i) => new { Value = item, Seq = i }))
             {

@@ -18,7 +18,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
         [TestMethod]
         public void Median_int_Blank_Sequence()
         {
-            IEnumerable<int> target = new List<int>();
+            IEnumerable<int?> target = new List<int?>();
 
             var ex = Assert.ThrowsException<InvalidOperationException>(() => target.Median());
 
@@ -32,7 +32,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
         [TestMethod]
         public void Median_int_null_Sequence()
         {
-            IEnumerable<int> target = null;
+            IEnumerable<int?> target = null;
 
             var ex = Assert.ThrowsException<InvalidOperationException>(() => target.Median());
 
@@ -46,7 +46,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
         [TestMethod]
         public void Median_double_Blank_Sequence()
         {
-            IEnumerable<double> target = new List<double>();
+            IEnumerable<double?> target = new List<double?>();
 
             var ex = Assert.ThrowsException<InvalidOperationException>(() => target.Median());
 
@@ -60,7 +60,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
         [TestMethod]
         public void Median_double_null_Sequence()
         {
-            IEnumerable<double> target = null;
+            IEnumerable<double?> target = null;
 
             var ex = Assert.ThrowsException<InvalidOperationException>(() => target.Median());
 
