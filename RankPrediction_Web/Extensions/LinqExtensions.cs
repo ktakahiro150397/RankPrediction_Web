@@ -86,7 +86,7 @@ namespace RankPrediction_Web.Extensions
         /// <param name="src"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static double Median<T>(this IEnumerable<T> src, Func<T, int?> selector)
+        public static double? Median<T>(this IEnumerable<T> src, Func<T, int?> selector)
         {
             var intSrc = new int[src.Count()];
 
@@ -104,16 +104,16 @@ namespace RankPrediction_Web.Extensions
         /// <param name="src"></param>
         /// <param name="selector"></param>
         /// <returns></returns>
-        public static double Median<T>(this IEnumerable<T> src, Func<T, double?> selector)
+        public static double? Median<T>(this IEnumerable<T> src, Func<T, double?> selector)
         {
-            var intSrc = new double[src.Count()];
+            var srcArray = new double[src.Count()];
 
             foreach (var item in src.Select((item, i) => new { Value = item, Seq = i }))
             {
-                intSrc[item.Seq] = selector(item.Value).Value;
+                srcArray[item.Seq] = selector(item.Value).Value;
             }
 
-            return intSrc.Median();
+            return srcArray.Median();
         }
 
     }

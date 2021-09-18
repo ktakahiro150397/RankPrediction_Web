@@ -117,7 +117,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
 
             double expected = 3D;
 
-            double actual = valueClass.ValueList.Median(item => item.Value);
+            double? actual = valueClass.ValueList.Median(item => item.Value);
 
             Assert.AreEqual(expected, actual);
 
@@ -136,7 +136,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
 
             var valueClass = new Median_ValueClass<int>(target);
 
-            double actual = valueClass.ValueList.Median(item => item.Value);
+            double? actual = valueClass.ValueList.Median(item => item.Value);
 
             Assert.AreEqual(expected, actual);
         }
@@ -152,7 +152,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
 
             var valueClass = new Median_ValueClass<int>(target);
 
-            double actual = valueClass.ValueList.Median(item => item.Value);
+            double? actual = valueClass.ValueList.Median(item => item.Value);
 
             Assert.AreEqual(expected, actual);
 
@@ -169,7 +169,7 @@ namespace RankPrediction_Web_Test.Extensions.LinqExtensions
 
             var valueClass = new Median_ValueClass<int>(target);
 
-            double actual = valueClass.ValueList.Median(item => item.Value);
+            double? actual = valueClass.ValueList.Median(item => item.Value);
 
             Assert.AreEqual(expected, actual);
 
