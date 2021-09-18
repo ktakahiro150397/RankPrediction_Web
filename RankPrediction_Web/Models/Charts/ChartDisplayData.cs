@@ -12,19 +12,19 @@ namespace RankPrediction_Web.Models.Charts
     public enum ChartDisplayData
     {
         /// <summary>
-        /// ランクに対する平均キルレシオ
+        /// ランクに対するキルレシオの中央値
         /// </summary>
-        RankToAverageKillRatio = 1,
+        RankToMedianKillRatio = 1,
 
         /// <summary>
-        /// ランクに対する平均ダメージ
+        /// ランクに対するダメージの中央値
         /// </summary>
-        RankToAverageDamage = 2,
+        RankToMedianDamage = 2,
 
         /// <summary>
-        /// ランクに対する平均ゲーム数
+        /// ランクに対するゲーム数の中央値
         /// </summary>
-        RankToAverageMatchCount = 3,
+        RankToMedianMatchCount = 3,
 
     }
 
