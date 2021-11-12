@@ -25,11 +25,13 @@ class mlforrank(object):
 		super(mlforrank, self).__init__()
 		self.dataframe = dataframe
 		self.id = id #入力したユーザーのid
-		self.limit = 0.8 #正答率がこれ以下なら入ってきたまま返す
-		self.nsplit = 3 #cvとかgridとかでデータをスプリットする個数
+		self.limit = 0.1 #正答率がこれ以下なら入ってきたまま返す
+		self.nsplit = 1 #cvとかgridとかでデータをスプリットする個数
 		self.C = 0.85
 		self.kernel = "rbf"
 		self.gamma = 0.01
+		self.q1 = 0.025 #下側の外れ値をどれだけ省くか
+		self.q2 = 0.975 #上側の外れ値をどれだけ省くか。上位 (1-q2)*100 % のデータを外れ値として省く
 		self.userrank = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,-1]#計算するidのランク
 		self.norank = self.userrank == 22
 		self.rank_col_name = self.dataframe.columns.values[-1]#ランクが入っているcolの名前
@@ -43,10 +45,21 @@ class mlforrank(object):
 		self.unique = len(self.dfbool)<=1 #計算するidのランクがそいつだけしか無いか.T/F
 		print(self.unique)
 	def teature_extractor(self):
+		for i in self.dataframe.columns.values[1:-2]:
+			self.flier(i)
+		print("外れ値削除後")
+		print(self.dataframe)
 		self.x = self.dataframe[self.dataframe["id"] != self.id].iloc[:,1:-1]#dataframeの最後のcol以外を説明変数としている
 		print(self.x)
 		self.y = self.dataframe[self.dataframe["id"] != self.id].iloc[:,[-1]]#最後のcolはランクラベル
 		print(self.y)
+	def flier(self,key):#外れ値削除
+		q1 = self.dataframe[key].quantile(self.q1)
+		q2 = self.dataframe[key].quantile(self.q2)
+		max = q2
+		min = q1
+		self.dataframe = self.dataframe[(self.dataframe[key] < max)]
+		self.dataframe = self.dataframe[(self.dataframe[key] > min)]
 	def test_extractor(self):
 		self.x_test = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,1:-1]#dataframeの最後を抜き出す
 		self.y_test = self.userrank
@@ -94,12 +107,17 @@ class mlforrank(object):
 		if self.unique and not self.norank:#ユニークでランクを入力されているやつ
 			print(self.unique)
 			return self.weight(self.userrank)#重みのついたランダムを返す
-
-		self.teature_extractor()
-		self.test_extractor()
-		if self.norank:	
-			with open('model.pickle','rb') as f:
-				self.clf = pickle.load(f)
+		else:
+			self.test_extractor()
+			self.teature_extractor()
+			if self.do_grid:
+				self.grid()
+				self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
+				with open('model.pickle','wb') as f:
+					pickle.dump(self.clf,f)
+			else:
+				with open('model.pickle','rb') as f:
+					self.clf = pickle.load(f)
 			self.clf.fit(self.x,self.y.values.reshape(-1,))
 			pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
 			print("predicted!!!!!")
@@ -132,7 +150,7 @@ class mlforrank(object):
 def main():
 	df=pd.read_csv(r'Machine_Learning\test.csv')
 	print(df)
-	rank = mlforrank(df, 15)
+	rank = mlforrank(df, 1)
 	print(rank.estimator())
 if __name__ == '__main__':
 	main()
