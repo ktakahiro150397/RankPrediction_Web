@@ -22,6 +22,7 @@ namespace RankPrediction_Web.Models.DbContexts
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<RankAmazonUrl> RankAmazonUrls { get; set; }
         public virtual DbSet<RankPyModel> RankPyModels { get; set; }
+        public virtual DbSet<RankRelation> RankRelations { get; set; }
         public virtual DbSet<RanksGeneral> RanksGenerals { get; set; }
         public virtual DbSet<Saying> Sayings { get; set; }
         public virtual DbSet<SeasonName> SeasonNames { get; set; }
@@ -178,6 +179,29 @@ namespace RankPrediction_Web.Models.DbContexts
                     .HasConstraintName("FK_SEASON_ID");
             });
 
+            modelBuilder.Entity<RankRelation>(entity =>
+            {
+                entity.ToTable("rank_relation", "ml_predict");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.RankGeneralId).HasColumnName("rank_general_id");
+
+                entity.Property(e => e.RankId).HasColumnName("rank_id");
+
+                entity.HasOne(d => d.RankGeneral)
+                    .WithMany(p => p.RankRelations)
+                    .HasForeignKey(d => d.RankGeneralId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__rank_rela__rank___32AB8735");
+
+                entity.HasOne(d => d.Rank)
+                    .WithMany(p => p.RankRelations)
+                    .HasForeignKey(d => d.RankId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__rank_rela__rank___31B762FC");
+            });
+
             modelBuilder.Entity<RanksGeneral>(entity =>
             {
                 entity.ToTable("ranks_general", "ml_predict");
@@ -188,6 +212,12 @@ namespace RankPrediction_Web.Models.DbContexts
                     .IsRequired()
                     .HasMaxLength(128)
                     .HasColumnName("rank_name");
+
+                entity.Property(e => e.RankNameJa)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnName("rank_name_ja")
+                    .HasDefaultValueSql("('')");
             });
 
             modelBuilder.Entity<Saying>(entity =>

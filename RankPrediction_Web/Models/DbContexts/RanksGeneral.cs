@@ -10,11 +10,14 @@ namespace RankPrediction_Web.Models.DbContexts
         public RanksGeneral()
         {
             RankAmazonUrls = new HashSet<RankAmazonUrl>();
+            RankRelations = new HashSet<RankRelation>();
         }
 
         public int Id { get; set; }
         public string RankName { get; set; }
+        public string RankNameJa { get; set; }
 
         public virtual ICollection<RankAmazonUrl> RankAmazonUrls { get; set; }
+        public virtual ICollection<RankRelation> RankRelations { get; set; }
     }
 }
