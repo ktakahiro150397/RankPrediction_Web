@@ -104,7 +104,19 @@ namespace RankPrediction_Web.Models
                     })
                     .First();
                 AmazonUrl = dbContext.RankAmazonUrls
-                    .Where(item => item.RankGeneralId == (PredictResult.RankId/4)+1)// /4+1でrankidとamazon rank_general_idを対応づけ
+                    .Join(
+                        dbContext.RankRelations,
+                        amazon => amazon.RankGeneralId,
+                        rank => rank.RankGeneralId,
+                        (amazon, rank) => new
+                        {
+                            RanksGeneralId=amazon.RankGeneralId,
+                            RankId= rank.RankId,
+                            AmazonUrl=amazon.AmazonUrl,
+                            Introduction = amazon.Introduction
+                        }
+                    )
+                    .Where(item => item.RankId == PredictResult.RankId)
                     .Select(item => new RankAmazonUrl()
                     {
                         AmazonUrl = item.AmazonUrl,
@@ -123,7 +135,26 @@ namespace RankPrediction_Web.Models
                     var predictRes = dbContext.Ranks.FromSqlRaw(execRawSql, id).ToList();
 
                     PredictResult = predictRes.FirstOrDefault();
-
+                    AmazonUrl = dbContext.RankAmazonUrls
+                        .Join(
+                            dbContext.RankRelations,
+                            amazon => amazon.RankGeneralId,
+                            rank => rank.RankGeneralId,
+                            (amazon, rank) => new
+                            {
+                                RanksGeneralId = amazon.RankGeneralId,
+                                RankId = rank.RankId,
+                                AmazonUrl = amazon.AmazonUrl,
+                                Introduction = amazon.Introduction
+                            }
+                        )
+                        .Where(item => item.RankId == PredictResult.RankId)
+                        .Select(item => new RankAmazonUrl()
+                        {
+                            AmazonUrl = item.AmazonUrl,
+                            Introduction = item.Introduction
+                        })
+                        .ToList();
                 }
                 else
                 {
