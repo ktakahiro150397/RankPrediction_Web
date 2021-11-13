@@ -26,12 +26,12 @@ class mlforrank(object):
 		self.dataframe = dataframe
 		self.id = id #入力したユーザーのid
 		self.limit = 0.1 #正答率がこれ以下なら入ってきたまま返す
-		self.nsplit = 1 #cvとかgridとかでデータをスプリットする個数
-		self.C = 0.85
+		self.nsplit = 2 #cvとかgridとかでデータをスプリットする個数
+		self.C = 1000
 		self.kernel = "rbf"
-		self.gamma = 0.01
-		self.q1 = 0.025 #下側の外れ値をどれだけ省くか
-		self.q2 = 0.975 #上側の外れ値をどれだけ省くか。上位 (1-q2)*100 % のデータを外れ値として省く
+		self.gamma = "scale"
+		self.q1 = 0.04 #下側の外れ値をどれだけ省くか
+		self.q2 = 0.92 #上側の外れ値をどれだけ省くか。上位 (1-q2)*100 % のデータを外れ値として省く
 		self.userrank = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,-1]#計算するidのランク
 		self.norank = self.userrank == 22
 		self.rank_col_name = self.dataframe.columns.values[-1]#ランクが入っているcolの名前
@@ -45,21 +45,24 @@ class mlforrank(object):
 		self.unique = len(self.dfbool)<=1 #計算するidのランクがそいつだけしか無いか.T/F
 		print(self.unique)
 	def teature_extractor(self):
+		rank_id_list=self.dataframe['rank_id'].unique()
 		for i in self.dataframe.columns.values[1:-2]:
-			self.flier(i)
+			for rank in rank_id_list:
+				self.flier(i, rank)
 		print("外れ値削除後")
 		print(self.dataframe)
 		self.x = self.dataframe[self.dataframe["id"] != self.id].iloc[:,1:-1]#dataframeの最後のcol以外を説明変数としている
 		print(self.x)
 		self.y = self.dataframe[self.dataframe["id"] != self.id].iloc[:,[-1]]#最後のcolはランクラベル
 		print(self.y)
-	def flier(self,key):#外れ値削除
-		q1 = self.dataframe[key].quantile(self.q1)
-		q2 = self.dataframe[key].quantile(self.q2)
+	def flier(self,key, rank):#外れ値削除
+		dfa = self.dataframe[self.dataframe["rank_id"]==rank]
+		q1 = dfa[key].quantile(self.q1)
+		q2 = dfa[key].quantile(self.q2)
 		max = q2
 		min = q1
-		self.dataframe = self.dataframe[(self.dataframe[key] < max)]
-		self.dataframe = self.dataframe[(self.dataframe[key] > min)]
+		self.dataframe = self.dataframe[(self.dataframe["rank_id"]!=rank) | ((self.dataframe[key] <= max) & (self.dataframe["rank_id"]==rank))]
+		self.dataframe = self.dataframe[(self.dataframe["rank_id"]!=rank) | ((self.dataframe[key] >= min) & (self.dataframe["rank_id"]==rank))]
 	def test_extractor(self):
 		self.x_test = self.dataframe[self.dataframe["id"] == self.id].iloc[-1,1:-1]#dataframeの最後を抜き出す
 		self.y_test = self.userrank
@@ -107,39 +110,37 @@ class mlforrank(object):
 		if self.unique and not self.norank:#ユニークでランクを入力されているやつ
 			print(self.unique)
 			return self.weight(self.userrank)#重みのついたランダムを返す
-		else:
-			self.test_extractor()
-			self.teature_extractor()
-			if self.do_grid:
-				self.grid()
-				self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
-				with open('model.pickle','wb') as f:
-					pickle.dump(self.clf,f)
-			else:
-				with open('model.pickle','rb') as f:
-					self.clf = pickle.load(f)
+		self.test_extractor()
+		self.teature_extractor()
+		if self.norank:	
+			with open('model.pickle','rb') as f:
+				self.clf = pickle.load(f)
 			self.clf.fit(self.x,self.y.values.reshape(-1,))
 			pred_y = self.clf.predict(self.x_test.values.reshape([1,-1]))
 			print("predicted!!!!!")
+			score = self.fitting_score()
+			print(score)
 			return pred_y[0]
 
 		if self.do_grid:
+			print("grid enable")
 			self.grid()
 			self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
+			print(self.C, self.kernel, self.gamma)
 			with open('model.pickle','wb') as f:
 				pickle.dump(self.clf,f)
 		else:
-			with open('model.pickle','rb') as f:
-				self.clf = pickle.load(f)
+			print("grid disable")
+			self.clf = SVC(C=self.C, kernel=self.kernel, gamma=self.gamma)
 		self.clf.fit(self.x,self.y.values.reshape(-1,))
 
 		if self.do_split:
+			print("cv enable")
 			score = self.cross_val()#正答率のようなもの
 		elif self.do_est:
 			score = self.fitting_score()
 		else :
 			return self.weight(self.userrank)
-		print(score)
 		if score < self.limit :
 			return self.weight(self.userrank)#重みのついたランダムを返す
 		else:
@@ -148,9 +149,9 @@ class mlforrank(object):
 			return pred_y[0]
 
 def main():
-	df=pd.read_csv(r'Machine_Learning\test.csv')
+	df=pd.read_csv(r'Machine_Learning\1114.csv', )
 	print(df)
-	rank = mlforrank(df, 1)
+	rank = mlforrank(df, 1204)
 	print(rank.estimator())
 if __name__ == '__main__':
 	main()
