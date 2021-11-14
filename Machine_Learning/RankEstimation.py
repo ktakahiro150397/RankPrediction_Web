@@ -57,7 +57,8 @@ class mlforrank(object):
 		sc = StandardScaler()
 		new_cols = [col for col in self.dataframe.columns if not (col == "id" or col == "rank_id" or col == "is_party")]
 		def_cols = [col for col in self.dataframe.columns if col == "id" or col == "rank_id" or col == "is_party"]
-		std = sc.fit_transform(self.dataframe[new_cols])
+		sc.fit(self.dataframe[new_cols][self.dataframe["id"] != self.id])
+		std = sc.transform(self.dataframe[new_cols])
 		dfa = pd.DataFrame(std, columns=new_cols)
 		dfb = pd.concat([self.dataframe[def_cols].reset_index(drop=True), dfa], axis = 1)
 		self.dataframe = dfb.reindex(columns = self.dataframe.columns)
