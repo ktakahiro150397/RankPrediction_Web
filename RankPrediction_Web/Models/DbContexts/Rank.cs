@@ -10,6 +10,7 @@ namespace RankPrediction_Web.Models.DbContexts
         public Rank()
         {
             PredictionData = new HashSet<PredictionDatum>();
+            RankRelations = new HashSet<RankRelation>();
         }
 
         public int RankId { get; set; }
@@ -21,5 +22,6 @@ namespace RankPrediction_Web.Models.DbContexts
         public string RankDescJa { get; set; }
 
         public virtual ICollection<PredictionDatum> PredictionData { get; set; }
+        public virtual ICollection<RankRelation> RankRelations { get; set; }
     }
 }

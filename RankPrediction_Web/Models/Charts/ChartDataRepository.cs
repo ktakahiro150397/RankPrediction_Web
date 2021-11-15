@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RankPrediction_Web.Models.DbContexts;
 using Microsoft.EntityFrameworkCore;
+using RankPrediction_Web.Extensions;
 
 namespace RankPrediction_Web.Models.Charts
 {
@@ -31,32 +32,43 @@ namespace RankPrediction_Web.Models.Charts
 
             switch (type)
             {
-                case ChartDisplayData.RankToAverageKillRatio:
-                    return GetRankToAverageKillRatio();
-                case ChartDisplayData.RankToAverageDamage:
-                    return GetRankToAverageDamage();
-                case ChartDisplayData.RankToAverageMatchCount:
-                    return GetRankToAverageMatchCount();
+                case ChartDisplayData.RankToMedianKillRatio:
+                    return GetRankToMedianKillRatio();
+                case ChartDisplayData.RankToMedianDamage:
+                    return GetRankToMedianDamage();
+                case ChartDisplayData.RankToMedianMatchCount:
+                    return GetRankToMedianMatchCount();
                 default:
                     return null;
             }
         }
 
         /// <summary>
-        /// ランクに対するキルレシオのデータを返します。
+        /// ランクに対するキルレシオの中央値データを返します。
         /// </summary>
         /// <returns></returns>
-        private IChartData GetRankToAverageKillRatio()
+        private IChartData GetRankToMedianKillRatio()
         {
-            //ランクに対する平均キルレシオデータの取得
+            //ランクに対するキルレシオデータの取得
             var rankToAveKillRatio =
                 _db
                 .PredictionData
-                .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                .Join(
+                    _db.Ranks,
+                    pred => pred.RankId,
+                    rank => rank.RankId,
+                    (pred,rank) => new
+                    {
+                        RankId = rank.RankId,
+                        RankName = rank.RankNameJa,
+                        KillDeathRatio = pred.KillDeathRatio
+                    })
+                .AsEnumerable()
+                .GroupBy(item => new { item.RankId, item.RankName })
                 .Select(item => new
                 {
-                    RankLabel = item.Key.RankNameJa,
-                    Value = item.Average(elem => elem.KillDeathRatio)
+                    RankLabel = item.Key.RankName,
+                    Value = item.Median(elem => elem.KillDeathRatio)
                 })
                 .ToList();
 
@@ -80,17 +92,32 @@ namespace RankPrediction_Web.Models.Charts
 
         }
 
-        private IChartData GetRankToAverageDamage()
+        /// <summary>
+        /// ランクに対するダメージの中央値データを返します。
+        /// </summary>
+        /// <returns></returns>
+        private IChartData GetRankToMedianDamage()
         {
-            //ランクに対する平均ダメージデータの取得
+            //ランクに対するダメージデータの取得
             var rankToAveKillRatio =
                 _db
                 .PredictionData
-                .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                .Join(
+                    _db.Ranks,
+                    pred => pred.RankId,
+                    rank => rank.RankId,
+                    (pred, rank) => new
+                    {
+                        RankId = rank.RankId,
+                        RankName = rank.RankNameJa,
+                        AverageDamage = pred.AverageDamage
+                    })
+                .AsEnumerable()
+                .GroupBy(item => new { item.RankId, item.RankName })
                 .Select(item => new
                 {
-                    RankLabel = item.Key.RankNameJa,
-                    Value = item.Average(elem => elem.AverageDamage)
+                    RankLabel = item.Key.RankName,
+                    Value = item.Median(elem => elem.AverageDamage)
                 })
                 .ToList();
 
@@ -113,18 +140,33 @@ namespace RankPrediction_Web.Models.Charts
             return retData;
         }
 
-        private IChartData GetRankToAverageMatchCount()
+        /// <summary>
+        /// ランクに対するマッチ数の中央値データを返します。
+        /// </summary>
+        /// <returns></returns>
+        private IChartData GetRankToMedianMatchCount()
         {
-            //ランクに対する平均マッチ数データの取得
+            //ランクに対するマッチ数データの取得
             var rankToAveKillRatio =
                 _db
                 .PredictionData
                 .Where(item => item.MatchCounts != -1)
-                .GroupBy(item => new { item.RankId, item.Rank.RankNameJa })
+                .Join(
+                    _db.Ranks,
+                    pred => pred.RankId,
+                    rank => rank.RankId,
+                    (pred, rank) => new
+                    {
+                        RankId = rank.RankId,
+                        RankName = rank.RankNameJa,
+                        MatchCounts = pred.MatchCounts
+                    })
+                .AsEnumerable()
+                .GroupBy(item => new { item.RankId, item.RankName })
                 .Select(item => new
                 {
-                    RankLabel = item.Key.RankNameJa,
-                    Value = item.Average(elem => elem.MatchCounts)
+                    RankLabel = item.Key.RankName,
+                    Value = item.Median(elem => elem.MatchCounts)
                 })
                 .ToList();
 

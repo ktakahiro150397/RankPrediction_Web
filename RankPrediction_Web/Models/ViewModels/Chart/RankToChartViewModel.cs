@@ -12,12 +12,12 @@ namespace RankPrediction_Web.Models.ViewModels.Chart
         {
             DisplayChartDataList = new Dictionary<ChartDisplayData, string>
             {
-                {ChartDisplayData.RankToAverageDamage,"平均ダメージ" },
-                {ChartDisplayData.RankToAverageKillRatio,"平均キルレシオ" },
-                {ChartDisplayData.RankToAverageMatchCount,"平均マッチ数" },
+                {ChartDisplayData.RankToMedianDamage,"平均ダメージの中央値" },
+                {ChartDisplayData.RankToMedianKillRatio,"キルレシオの中央値" },
+                {ChartDisplayData.RankToMedianMatchCount,"マッチ数の中央値" },
             };
         }
-
+            
         /// <summary>
         /// チャート選択ドロップダウンに割り当てるデータ。
         /// </summary>
