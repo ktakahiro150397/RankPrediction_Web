@@ -3,6 +3,15 @@ import numpy as np
 import pandas as pd
 
 def plotter(df, key):
+    config = {
+    "lines.linestyle":"dotted",
+    "lines.linewidth":10,
+    "xtick.labelbottom":True,
+    "ytick.labelleft":False,
+    "ytick.labelleft":True,
+    "font.size": 12
+}
+    plt.rcParams.update(config)
     boxplot = df.boxplot(column=[key], by="rank_id")
     boxplot.plot()
     
@@ -21,7 +30,7 @@ def flier(df, rank, key):
     return df
 
 def main():
-    df=pd.read_csv(r'Machine_Learning\1114.csv')
+    df=pd.read_csv(r'Machine_Learning\1115.csv')
     keylist=['average_damage','kill_death_ratio', 'match_counts']
     rank_id_list=df['rank_id'].unique()
     print(rank_id_list)

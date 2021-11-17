@@ -45,8 +45,21 @@ class mlforrank(object):
 		self.norank = self.userrank == 22
 		self.rank_col_name = self.dataframe.columns.values[-1]#ランクが入っているcolの名前
 		print("rank conuts")
-		print(self.dataframe[self.rank_col_name].value_counts())
-		self.number_of_members_in_each_rank = self.dataframe[self.rank_col_name].value_counts().min()#データベースに入っているランクの中で一番少ないやつの頻度
+		count_df = self.dataframe[self.rank_col_name].value_counts()
+		print(count_df)
+		res = count_df.index[count_df > 1]#データ数が1個以上のランクのリスト
+		print(res)
+		que = "("
+		for re in res:
+			que = que+ "rank_id == " + str(re) + " or "
+		que = que + "id == "+ str(self.id) + ")"
+		print(que)
+		self.dataframe = self.dataframe.query(que)
+		print("rank conuts")
+		count_df = self.dataframe[self.rank_col_name].value_counts()
+		print(count_df)
+		self.number_of_members_in_each_rank = count_df.min()#データベースに入っているランクの中で一番少ないやつの頻度.0は省く
+		print("min: {}".format(self.number_of_members_in_each_rank))
 		self.do_grid = self.number_of_members_in_each_rank > self.nsplit + 1 #gridするか否か.T/F.+している数値はサンプル数に応じ変更する
 		self.do_split = self.number_of_members_in_each_rank > self.nsplit
 		self.do_est = self.number_of_members_in_each_rank >= self.nsplit
@@ -58,6 +71,7 @@ class mlforrank(object):
 		new_cols = [col for col in self.dataframe.columns if not (col == "id" or col == "rank_id" or col == "is_party")]
 		def_cols = [col for col in self.dataframe.columns if col == "id" or col == "rank_id" or col == "is_party"]
 		sc.fit(self.dataframe[new_cols][self.dataframe["id"] != self.id])
+		print(self.dataframe[new_cols][self.dataframe["id"] != self.id])
 		std = sc.transform(self.dataframe[new_cols])
 		dfa = pd.DataFrame(std, columns=new_cols)
 		dfb = pd.concat([self.dataframe[def_cols].reset_index(drop=True), dfa], axis = 1)
