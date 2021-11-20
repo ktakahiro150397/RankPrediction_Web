@@ -64,6 +64,7 @@ namespace RankPrediction_Web.Models.Charts
                         KillDeathRatio = pred.KillDeathRatio
                     })
                 .AsEnumerable()
+                .OrderBy(item => item.RankId)
                 .GroupBy(item => new { item.RankId, item.RankName })
                 .Select(item => new
                 {
@@ -113,6 +114,7 @@ namespace RankPrediction_Web.Models.Charts
                         AverageDamage = pred.AverageDamage
                     })
                 .AsEnumerable()
+                .OrderBy(item => item.RankId)
                 .GroupBy(item => new { item.RankId, item.RankName })
                 .Select(item => new
                 {
@@ -162,6 +164,7 @@ namespace RankPrediction_Web.Models.Charts
                         MatchCounts = pred.MatchCounts
                     })
                 .AsEnumerable()
+                .OrderBy(item => item.RankId)
                 .GroupBy(item => new { item.RankId, item.RankName })
                 .Select(item => new
                 {
@@ -182,7 +185,7 @@ namespace RankPrediction_Web.Models.Charts
             retData.Config.Data.DataSets.Add(
                 new DataSetItem()
                 {
-                    Data = (IList<double>)rankToAveKillRatio.Select(item => item.Value.Value).ToList()
+                    Data = rankToAveKillRatio.Select(item => item.Value.Value).ToList()
                 }
             );
 
